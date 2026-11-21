@@ -6,7 +6,7 @@ Tiene dos partes:
 
 | Ruta | Qué es |
 |---|---|
-| `/` | **Presentación simplificada**: 10 escenas con fondo claro y un bovino 3D animado. Usa los mismos datos de V27, explicados sin tecnicismos. |
+| `/` | **Presentación de sustentación**: 27 escenas animadas y clicables en 5 bloques (Apertura, Fundamentos, Metodología, Tecnología, Cierre) con fondo claro y un bovino 3D. Incluye árbol del problema, línea de tiempo del estado del arte, la metodología explicada (Tabla 1 con el porqué de cada decisión), las decisiones técnicas con su alternativa descartada y una biblioteca de 71 referencias con enlaces reales. Teclas: ← → avanzar · `M` índice · `R` referencias · `N` notas del expositor · `F` pantalla completa · `S` simulador. |
 | `/experience/` | **NASOID RANCH — Biometric Experience**: finca 3D tipo videojuego. Caminas con un operario, te acercas a un bovino, fotografías su hocico y ves cómo NASOID lo identifica. |
 
 La versión académica (`NASOID_Sustentacion`) no se modificó.
@@ -18,6 +18,8 @@ Requisitos: Node.js 20 o superior.
 ```bash
 npm install
 npm start            # compila y abre http://localhost:4174
+# En el computador, los botones «PDF local» abren los PDF de la carpeta ReferenciasV21
+# si está junto a la carpeta del proyecto (o un nivel más arriba).
 # o, para desarrollo:
 npm run dev          # http://localhost:5174
 ```

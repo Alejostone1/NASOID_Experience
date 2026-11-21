@@ -4,23 +4,31 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NASOID — Identificación biométrica naso-labial en bovinos</title>
-  <meta name="description" content="Presentación del proyecto NASOID (UCP 2026) y acceso al simulador NASOID RANCH." />
+  <meta name="description" content="Sustentación del proyecto NASOID (UCP 2026): problema, estado del arte, metodología de la investigación, tecnología y simulador NASOID RANCH." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%235f7352'/%3E%3Cellipse cx='22' cy='34' rx='6' ry='8' fill='%23f6f2e8'/%3E%3Cellipse cx='42' cy='34' rx='6' ry='8' fill='%23f6f2e8'/%3E%3C/svg%3E" />
 </head>
 <body class="pres">
   <canvas id="bg" aria-hidden="true"></canvas>
   <div class="wash"></div>
-  <div class="prog" id="prog"></div>
+  <div id="segs" class="segs"></div>
   <header class="topbar">
-    <a class="brand" href="#nasoid"><span class="mark"></span>NASOID</a>
-    <div class="top-right"><a class="btn" href="experience/">Simulador <kbd>S</kbd></a><button class="btn ghost" id="full" title="Pantalla completa (F)">Pantalla completa</button></div>
+    <div class="brand-wrap"><a class="brand" href="#nasoid"><span class="mark"></span>NASOID</a><span class="block-lbl" id="block"></span></div>
+    <div class="top-right">
+      <a class="btn sim" href="experience/">Simulador <kbd>S</kbd></a>
+      <button class="ibtn wide-btn" id="b-refs" title="Biblioteca de referencias (R)"></button>
+      <button class="ibtn" id="b-index" title="Índice (M)"></button>
+      <button class="ibtn" id="b-notes" title="Notas del expositor (N)"></button>
+      <button class="ibtn" id="b-full" title="Pantalla completa (F)"></button>
+    </div>
   </header>
   <main id="slides"></main>
   <footer class="bottombar">
     <div class="spk" id="speaker"></div>
-    <div id="dots"></div>
     <div class="nav"><span id="count" class="mono"></span><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
   </footer>
+  <div id="index" class="overlay hidden"></div>
+  <aside id="notes" class="notes hidden"></aside>
+  <aside id="biblio" class="biblio hidden"></aside>
   <div id="veil"></div>
   <script type="module" src="/src/presentation/main.js"></script>
 </body>
