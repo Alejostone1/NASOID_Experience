@@ -1,0 +1,2564 @@
+[
+ {
+  "id": "r01",
+  "apa": "Awad, A. I. (2016). From classical methods to animal biometrics: A review on cattle identification and tracking. Computers and Electronics in Agriculture, 123, 423-435. https://doi.org/10.1016/j.compag.2016.03.014",
+  "cite": "Awad, 2016",
+  "url": "https://doi.org/10.1016/j.compag.2016.03.014",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   },
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 1,
+   "titulo": "From classical methods to animal biometrics: A review on cattle identification and tracking",
+   "autor": "Awad, A. I.",
+   "anio": "2016",
+   "tipo": "Paper",
+   "abstract": "Revisión de los métodos de identificación y seguimiento de ganado: de los clásicos (aretes, hierro, tatuaje, métodos electrónicos) a la biometría animal. Señala que los métodos clásicos sufren pérdidas, duplicación y fraude, y que los rasgos biométricos (huella del hocico, iris, retina) son únicos, inalterables y de bajo costo.",
+   "palabras": "Identificación de ganado; seguimiento de ganado; biometría; huella del hocico; patrones del iris; patrones vasculares de la retina",
+   "vi": [
+    "Métodos clásicos de identificación (arete, hierro, tatuaje)",
+    "Métodos electrónicos (RFID)",
+    "Rasgos biométricos (hocico, iris, retina)"
+   ],
+   "vd": "Confiabilidad de la identificación y el seguimiento del ganado",
+   "aporte": "Y — fundamento de la identificación individual (6.2.1)"
+  },
+  "pdf": {
+   "file": "01 - Awad (2016) (IDENTIFICACION ANIMAL) (resumen).pdf",
+   "label": "resumen",
+   "cat": "IDENTIFICACION ANIMAL"
+  }
+ },
+ {
+  "id": "r02",
+  "apa": "Barry, B., Gonzales-Barron, U. A., McDonnell, K., Butler, F., y Ward, S. (2007). Using muzzle pattern recognition as a biometric approach for cattle identification. Transactions of the ASABE, 50(3), 1073-1080. https://doi.org/10.13031/2013.23121",
+  "cite": "Barry et al., 2007",
+  "url": "https://doi.org/10.13031/2013.23121",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.7",
+    "title": "Protocolo de captura y calendario de sesiones"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 2,
+   "titulo": "Using muzzle pattern recognition as a biometric approach for cattle identification",
+   "autor": "Barry, B., Gonzales-Barron, U. A., McDonnell, K., Butler, F., y Ward, S.",
+   "anio": "2007",
+   "tipo": "Paper",
+   "abstract": "Evalúa el patrón del hocico como identificador biométrico de bovinos, primero con huellas de tinta y luego con imágenes digitales. Con análisis de componentes principales (PCA) y distancia euclidiana sobre imágenes de 29 bovinos, logra altas tasas de reconocimiento y concluye que la imagen digital es más simple que la tinta.",
+   "palabras": "Biometría; trazabilidad bovina; identificación; análisis de imágenes; hocico; reconocimiento",
+   "vi": [
+    "Medio de captura (huella de tinta o imagen digital)",
+    "Número de imágenes de entrenamiento por animal",
+    "Método de comparación (PCA y distancia euclidiana)"
+   ],
+   "vd": "Tasa de reconocimiento individual del bovino",
+   "aporte": "Y — antecedente histórico del patrón naso-labial (6.1)"
+  },
+  "pdf": {
+   "file": "02 - Barry et al. (2007) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r03",
+  "apa": "BC, L., Chaudhary, D. S., y Nepal, S. (2026). Open-set cattle muzzle identification: A leakage-controlled benchmark and evaluation protocol [Preprint, sin revisión por pares]. arXiv. arXiv:2608.28663. https://arxiv.org/abs/2608.28663",
+  "cite": "BC et al., 2026",
+  "url": "https://arxiv.org/abs/2608.28663",
+  "kind": "arxiv",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 3,
+   "titulo": "Open-set cattle muzzle identification: A leakage-controlled benchmark and evaluation protocol",
+   "autor": "BC, L., Chaudhary, D. S., y Nepal, S.",
+   "anio": "2026",
+   "tipo": "Paper",
+   "abstract": "Replantea la biometría del hocico como identificación de conjunto abierto: el sistema debe rechazar animales no registrados e inscribir nuevos sin reentrenar. Propone un protocolo de evaluación que controla la fuga de datos (particiones por identidad, umbral calibrado aparte, eliminación de duplicados e intervalos bootstrap).",
+   "palabras": "Reconocimiento de mundo abierto; inscripción biométrica; ganadería de precisión; reidentificación animal; evaluación con control de fuga de datos",
+   "vi": [
+    "Base pública de 268 bovinos de engorde (249 tras depurar la base; 4.643 imágenes); vectores de características con un modelo híbrido CNN–ViT y con MegaDescriptor-L; galería de referencia, umbral calibrado con datos separados de los de prueba y registro de animales nuevos sin reentrenar (más de 91 % en el primer intento con una imagen y 97,3 % con ocho)."
+   ],
+   "vd": "Identificación en conjunto abierto: reconocer a los bovinos registrados y rechazar a los que no lo están.",
+   "aporte": "X₅ — umbral y decisión «no concluyente»; evaluación sin fuga"
+  },
+  "pdf": {
+   "file": "03 - BC et al. (2026) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r04",
+  "apa": "Bradbury, J., Frostig, R., Hawkins, P., Johnson, M. J., Leary, C., Maclaurin, D., Necula, G., Paszke, A., VanderPlas, J., Wanderman-Milne, S., y Zhang, Q. (2018). JAX: Composable transformations of Python+NumPy programs [Software]. GitHub. https://github.com/jax-ml/jax",
+  "cite": "Bradbury et al., 2018",
+  "url": "https://github.com/jax-ml/jax",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 4,
+   "titulo": "JAX: Composable transformations of Python+NumPy programs",
+   "autor": "Bradbury, J., Frostig, R., Hawkins, P., Johnson, M. J., Leary, C., Maclaurin, D., Necula, G., Paszke, A., VanderPlas, J., Wanderman-Milne, S., y Zhang, Q.",
+   "anio": "2018",
+   "tipo": "Software (repositorio GitHub)",
+   "abstract": "Repositorio oficial de JAX, biblioteca de Python que transforma programas NumPy: diferenciación automática, vectorización y compilación JIT para CPU, GPU y TPU. Es uno de los motores de cálculo que puede usar Keras 3.",
+   "palabras": "JAX; Python; NumPy; compilación JIT; diferenciación automática",
+   "vi": [
+    "Transformaciones de funciones (grad, jit, vmap)",
+    "Compilador XLA",
+    "Plataforma de cómputo (CPU, GPU, TPU)"
+   ],
+   "vd": "Rendimiento de los programas numéricos en Python",
+   "aporte": "X₄ — motor de cálculo de Keras en CPU"
+  },
+  "pdf": {
+   "file": "04 - Bradbury et al. (2018) - JAX (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r05",
+  "apa": "Chollet, F. (2016, 11 de abril). Introducing Keras 1.0. The Keras Blog. https://blog.keras.io/introducing-keras-10.html",
+  "cite": "Chollet, 2016",
+  "url": "https://blog.keras.io/introducing-keras-10.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 5,
+   "titulo": "Introducing Keras 1.0",
+   "autor": "Chollet, F.",
+   "anio": "2016",
+   "tipo": "Blog técnico",
+   "abstract": "Anuncio de Keras 1.0 por su creador. Presenta Keras como biblioteca de aprendizaje profundo en Python, simple, modular y extensible, y describe la nueva API funcional y su compatibilidad con varios motores.",
+   "palabras": "Keras; aprendizaje profundo; Python; API funcional",
+   "vi": [
+    "API de construcción de modelos (secuencial y funcional)",
+    "Motor de cálculo (backend)"
+   ],
+   "vd": "Facilidad para construir y ejecutar redes neuronales",
+   "aporte": "X₄ — origen de Keras"
+  },
+  "pdf": {
+   "file": "05 - Chollet (2016) - Introducing Keras 1.0 (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r06",
+  "apa": "Congreso de la República de Colombia. (2004, 21 de octubre). Ley 914 de 2004, por la cual se crea el Sistema Nacional de Identificación e Información de Ganado Bovino. Diario Oficial n.º 45.714. https://sidn.ramajudicial.gov.co/SIDN/NORMATIVA/TEXTOS_COMPLETOS/7_LEYES/LEYES%202004/Ley%20914%20de%202004.pdf",
+  "cite": "Congreso de la República de Colombia, 2004",
+  "url": "https://sidn.ramajudicial.gov.co/SIDN/NORMATIVA/TEXTOS_COMPLETOS/7_LEYES/LEYES%202004/Ley%20914%20de%202004.pdf",
+  "kind": "pdf-web",
+  "sections": [
+   {
+    "num": "2",
+    "title": "Planteamiento del problema"
+   },
+   {
+    "num": "3",
+    "title": "Justificación de la investigación"
+   },
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   }
+  ],
+  "ficha": {
+   "ficha": 6,
+   "titulo": "Ley 914 de 2004, por la cual se crea el Sistema Nacional de Identificación e Información de Ganado Bovino",
+   "autor": "Congreso de la República de Colombia",
+   "anio": "2004",
+   "tipo": "Norma (ley de Colombia)",
+   "abstract": "Crea el Sistema Nacional de Identificación e Información de Ganado Bovino (SINIGAN) para registrar la información de cada bovino y sus productos desde el nacimiento hasta el consumo, como base de la trazabilidad.",
+   "palabras": "SINIGAN; identificación bovina; trazabilidad; registro ganadero",
+   "vi": [
+    "Identificación individual del bovino",
+    "Registro de información y movimientos",
+    "Entidades responsables del sistema"
+   ],
+   "vd": "Trazabilidad del ganado bovino en Colombia",
+   "aporte": "Y — marco normativo de la identificación (6.2.1)"
+  },
+  "pdf": {
+   "file": "06 - Congreso de Colombia (2004) - Ley 914 (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r07",
+  "apa": "Congreso de la República de Colombia. (2013, 15 de julio). Ley 1659 de 2013, por la cual se crea el Sistema Nacional de Identificación, Información y Trazabilidad Animal. Diario Oficial n.º 48.852. https://apps.procuraduria.gov.co/gd_734/docs/l1659013.html",
+  "cite": "Congreso de la República de Colombia, 2013",
+  "url": "https://apps.procuraduria.gov.co/gd_734/docs/l1659013.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "2",
+    "title": "Planteamiento del problema"
+   },
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   }
+  ],
+  "ficha": {
+   "ficha": 7,
+   "titulo": "Ley 1659 de 2013, por la cual se crea el Sistema Nacional de Identificación, Información y Trazabilidad Animal",
+   "autor": "Congreso de la República de Colombia",
+   "anio": "2013",
+   "tipo": "Norma (ley de Colombia)",
+   "abstract": "Crea el Sistema Nacional de Identificación, Información y Trazabilidad Animal, integra el SINIGAN y asigna al Ministerio de Agricultura y al ICA la responsabilidad de los objetivos sanitarios.",
+   "palabras": "Trazabilidad animal; identificación; ICA; sanidad animal",
+   "vi": [
+    "Identificación de los animales",
+    "Registro de eventos sanitarios y movimientos",
+    "Autoridades responsables (MADR, ICA)"
+   ],
+   "vd": "Trazabilidad animal con fines sanitarios",
+   "aporte": "Y — marco normativo de la identificación (6.2.1)"
+  },
+  "pdf": {
+   "file": "07 - Congreso de Colombia (2013) - Ley 1659 (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r08",
+  "apa": "Cover, T. M., y Hart, P. E. (1967). Nearest neighbor pattern classification. IEEE Transactions on Information Theory, 13(1), 21-27. https://doi.org/10.1109/TIT.1967.1053964",
+  "cite": "Cover y Hart, 1967",
+  "url": "https://doi.org/10.1109/TIT.1967.1053964",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 8,
+   "titulo": "Nearest neighbor pattern classification",
+   "autor": "Cover, T. M., y Hart, P. E.",
+   "anio": "1967",
+   "tipo": "Paper",
+   "abstract": "Presenta la regla del vecino más próximo, que asigna a una muestra la clase de la muestra ya clasificada más cercana. Demuestra que, con muchas muestras, su error es como máximo el doble del error mínimo posible (Bayes).",
+   "palabras": "Vecino más próximo; clasificación de patrones; probabilidad de error; regla de decisión",
+   "vi": [
+    "Distancia entre la muestra y los ejemplos registrados",
+    "Número de muestras de referencia",
+    "Número de clases"
+   ],
+   "vd": "Probabilidad de error de la clasificación",
+   "aporte": "X₅ — regla 1-NN"
+  },
+  "pdf": {
+   "file": "08 - Cover y Hart (1967) (ALGORITMO) (resumen).pdf",
+   "label": "resumen",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r09",
+  "apa": "Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., y Fei-Fei, L. (2009). ImageNet: A large-scale hierarchical image database. En 2009 IEEE Conference on Computer Vision and Pattern Recognition (pp. 248-255). IEEE. https://doi.org/10.1109/CVPR.2009.5206848",
+  "cite": "Deng et al., 2009",
+  "url": "https://doi.org/10.1109/CVPR.2009.5206848",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 9,
+   "titulo": "ImageNet: A large-scale hierarchical image database",
+   "autor": "Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., y Fei-Fei, L.",
+   "anio": "2009",
+   "tipo": "Paper",
+   "abstract": "Presenta ImageNet, base de millones de imágenes organizadas según la jerarquía de WordNet y anotadas a mano. Se convirtió en el conjunto con el que se preentrenan redes como ResNet50.",
+   "palabras": "ImageNet; base de datos de imágenes; WordNet; reconocimiento de objetos",
+   "vi": [
+    "Jerarquía semántica (WordNet)",
+    "Recolección y anotación de imágenes"
+   ],
+   "vd": "Calidad y escala de la base de imágenes para entrenar modelos",
+   "aporte": "X₄ — origen de los pesos preentrenados"
+  },
+  "pdf": {
+   "file": "09 - Deng et al. (2009) (ALGORITMO) (resumen).pdf",
+   "label": "resumen",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r10",
+  "apa": "Ermetin, O., y Kahramanlı Örnek, H. (2025). Deep-learning-based buffalo identification through muzzle pattern images. Archives Animal Breeding, 68(3), 473-484. https://doi.org/10.5194/aab-68-473-2025",
+  "cite": "Ermetin y Kahramanlı Örnek, 2025",
+  "url": "https://doi.org/10.5194/aab-68-473-2025",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 10,
+   "titulo": "Deep-learning-based buffalo identification through muzzle pattern images",
+   "autor": "Ermetin, O., y Kahramanlı Örnek, H.",
+   "anio": "2025",
+   "tipo": "Paper",
+   "abstract": "Identifica búfalos de agua por imágenes del hocico con aprendizaje profundo. Con 11 animales y 4.263 imágenes compara AlexNet, SqueezeNet, GoogLeNet y ResNet101; SqueezeNet alcanza 99,88 % de exactitud.",
+   "palabras": "Búfalo; identificación; patrón del hocico; aprendizaje profundo; CNN",
+   "vi": [
+    "11 búfalos de agua y 4.263 imágenes; comparación de AlexNet, SqueezeNet, GoogLeNet y ResNet101 (hasta 99,88 %)."
+   ],
+   "vd": "Identificación por patrón del hocico.",
+   "aporte": "X₄ — comparación de redes; antecedente del corpus"
+  },
+  "pdf": {
+   "file": "10 - Ermetin y Kahramanli Ornek (2025) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r11",
+  "apa": "Federación Colombiana de Ganaderos [Fedegán]. (2025). Balance y perspectivas del sector ganadero colombiano 2024-2025. Oficina de Planeación y Estudios Económicos, Fondo Nacional del Ganado. https://estadisticas.fedegan.org.co/DOC/download.jsp?pRealName=Balance_perspectivas_ganaderia_colombiana_2024_2025_.pdf&iIdFiles=1121",
+  "cite": "Fedegán, 2025",
+  "url": "https://estadisticas.fedegan.org.co/DOC/download.jsp?pRealName=Balance_perspectivas_ganaderia_colombiana_2024_2025_.pdf&iIdFiles=1121",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "2",
+    "title": "Planteamiento del problema"
+   },
+   {
+    "num": "3",
+    "title": "Justificación de la investigación"
+   }
+  ],
+  "ficha": {
+   "ficha": 11,
+   "titulo": "Balance y perspectivas del sector ganadero colombiano 2024-2025",
+   "autor": "Federación Colombiana de Ganaderos [Fedegán]",
+   "anio": "2025",
+   "tipo": "Informe gremial",
+   "abstract": "Balance de la ganadería colombiana en 2024 y perspectivas para 2025: aporte al PIB, inventario bovino de 29,5 millones de animales, precios, consumo y problemas de seguridad rural.",
+   "palabras": "Ganadería colombiana; inventario bovino; PIB pecuario; abigeato",
+   "vi": [
+    "Inventario bovino",
+    "Precios y consumo",
+    "Seguridad rural"
+   ],
+   "vd": "Situación económica del sector ganadero",
+   "aporte": "Contexto — planteamiento del problema"
+  },
+  "pdf": {
+   "file": "11 - Fedegan (2025) - Balance 2024-2025 (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r12",
+  "apa": "Felmer, R., Chávez, R., Catrileo, A., y Rojas, C. (2006). Tecnologías actuales y emergentes para la identificación animal y su aplicación en la trazabilidad animal. Archivos de Medicina Veterinaria, 38(3), 197-206. https://doi.org/10.4067/S0301-732X2006000300002",
+  "cite": "Felmer et al., 2006",
+  "url": "https://doi.org/10.4067/S0301-732X2006000300002",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   }
+  ],
+  "ficha": {
+   "ficha": 12,
+   "titulo": "Tecnologías actuales y emergentes para la identificación animal y su aplicación en la trazabilidad animal",
+   "autor": "Felmer, R., Chávez, R., Catrileo, A., y Rojas, C.",
+   "anio": "2006",
+   "tipo": "Paper",
+   "abstract": "Revisa las tecnologías actuales y emergentes de identificación animal (marcas, aretes, RFID, biometría y ADN) y su uso en la trazabilidad, ante la exigencia de los consumidores de conocer el origen de los alimentos.",
+   "palabras": "Trazabilidad; microsatélites; identificación individual",
+   "vi": [
+    "Tecnología de identificación (marcas, RFID, biometría, ADN)",
+    "Exigencias del mercado y de los consumidores"
+   ],
+   "vd": "Trazabilidad animal",
+   "aporte": "Y — fundamento de la identificación (6.2.1)"
+  },
+  "pdf": {
+   "file": "12 - Felmer et al. (2006) (IDENTIFICACION ANIMAL).pdf",
+   "label": "documento completo",
+   "cat": "IDENTIFICACION ANIMAL"
+  }
+ },
+ {
+  "id": "r13",
+  "apa": "Field, C. A., y Welsh, A. H. (2007). Bootstrapping clustered data. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 69(3), 369-390. https://doi.org/10.1111/j.1467-9868.2007.00593.x",
+  "cite": "Field y Welsh, 2007",
+  "url": "https://doi.org/10.1111/j.1467-9868.2007.00593.x",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.10",
+    "title": "Análisis de la información"
+   }
+  ],
+  "ficha": {
+   "ficha": 13,
+   "titulo": "Bootstrapping clustered data",
+   "autor": "Field, C. A., y Welsh, A. H.",
+   "anio": "2007",
+   "tipo": "Paper",
+   "abstract": "Estudia métodos bootstrap para datos agrupados (conglomerados) y muestra cuáles remuestreos son consistentes según cómo se modelen los datos. Es la base para remuestrear bovinos completos y no fotografías sueltas.",
+   "palabras": "Bootstrap; conglomerados; datos jerárquicos; sumas de cuadrados",
+   "vi": [
+    "Esquema de remuestreo (por conglomerado o por observación)",
+    "Modelo de los datos agrupados"
+   ],
+   "vd": "Validez de los intervalos de confianza",
+   "aporte": "Análisis — intervalo de la exactitud por bovino"
+  },
+  "pdf": {
+   "file": "13 - Field y Welsh (2007) (ESTADISTICA Y EVALUACION).pdf",
+   "label": "documento completo",
+   "cat": "ESTADISTICA Y EVALUACION"
+  }
+ },
+ {
+  "id": "r14",
+  "apa": "Fielding, R. T. (2000). Architectural styles and the design of network-based software architectures [Tesis doctoral, University of California, Irvine]. https://ics.uci.edu/~fielding/pubs/dissertation/top.htm",
+  "cite": "Fielding, 2000",
+  "url": "https://ics.uci.edu/~fielding/pubs/dissertation/top.htm",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.7",
+    "title": "Arquitectura cliente-servidor y gestión de registros"
+   }
+  ],
+  "ficha": {
+   "ficha": 14,
+   "titulo": "Architectural styles and the design of network-based software architectures",
+   "autor": "Fielding, R. T.",
+   "anio": "2000",
+   "tipo": "Trabajo de grado o tesis",
+   "abstract": "Tesis doctoral que define estilos de arquitectura para software en red y propone REST (transferencia de estado representacional), el estilo con el que se diseñan las API web.",
+   "palabras": "REST; arquitectura de software; estilos arquitectónicos; Web",
+   "vi": [
+    "Restricciones de arquitectura (cliente-servidor, sin estado, interfaz uniforme)"
+   ],
+   "vd": "Propiedades del sistema (escalabilidad, simplicidad, portabilidad)",
+   "aporte": "X₆ — arquitectura cliente-servidor"
+  },
+  "pdf": {
+   "file": "14 - Fielding (2000) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r15",
+  "apa": "Frostig, R., Johnson, M. J., y Leary, C. (2018). Compiling machine learning programs via high-level tracing. En Proceedings of SysML 2018. Google Research. https://research.google/pubs/compiling-machine-learning-programs-via-high-level-tracing/",
+  "cite": "Frostig et al., 2018",
+  "url": "https://research.google/pubs/compiling-machine-learning-programs-via-high-level-tracing/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 15,
+   "titulo": "Compiling machine learning programs via high-level tracing",
+   "autor": "Frostig, R., Johnson, M. J., y Leary, C.",
+   "anio": "2018",
+   "tipo": "Paper",
+   "abstract": "Describe JAX, un compilador JIT que traza programas de Python y NumPy y genera código acelerado con XLA, compatible con diferenciación automática.",
+   "palabras": "JAX; compilación JIT; XLA; aprendizaje automático; diferenciación automática",
+   "vi": [
+    "Trazado de alto nivel del programa",
+    "Compilador XLA",
+    "Diferenciación automática"
+   ],
+   "vd": "Rendimiento de los programas de aprendizaje automático",
+   "aporte": "X₄ — motor de cálculo de Keras"
+  },
+  "pdf": {
+   "file": "15 - Frostig et al. (2018) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r16",
+  "apa": "Goodfellow, I., Bengio, Y., y Courville, A. (2016). Deep learning. MIT Press. https://www.deeplearningbook.org/",
+  "cite": "Goodfellow et al., 2016",
+  "url": "https://www.deeplearningbook.org/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   }
+  ],
+  "ficha": {
+   "ficha": 16,
+   "titulo": "Deep learning",
+   "autor": "Goodfellow, I., Bengio, Y., y Courville, A.",
+   "anio": "2016",
+   "tipo": "Libro",
+   "abstract": "Libro de referencia del aprendizaje profundo. El capítulo 1 explica cómo las redes aprenden representaciones por capas, de rasgos simples a conceptos complejos, y la evolución histórica del campo.",
+   "palabras": "Aprendizaje profundo; redes neuronales; aprendizaje de representaciones; inteligencia artificial",
+   "vi": [
+    "Datos de entrenamiento",
+    "Profundidad y arquitectura de la red",
+    "Capacidad de cómputo"
+   ],
+   "vd": "Capacidad de la red para representar y reconocer patrones",
+   "aporte": "X₄ — fundamento de las redes neuronales"
+  },
+  "pdf": {
+   "file": "16 - Goodfellow et al. (2016) (ALGORITMO) (cap. 1).pdf",
+   "label": "capítulo 1",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r17",
+  "apa": "Han, M., Li, B., Li, Q., Wang, Y., Yang, M., y Gao, C. (2026). Enhanced cattle identification using Siamese network and MobileViT with EMA attention. Frontiers in Veterinary Science, 12, 1660163. https://doi.org/10.3389/fvets.2025.1660163",
+  "cite": "Han et al., 2026",
+  "url": "https://doi.org/10.3389/fvets.2025.1660163",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 71,
+   "titulo": "Enhanced cattle identification using Siamese network and MobileViT with EMA attention",
+   "autor": "Han, M., Li, B., Li, Q., Wang, Y., Yang, M., y Gao, C.",
+   "anio": "2026",
+   "tipo": "Paper",
+   "abstract": "Construye una base de 31.312 imágenes del hocico de 658 bovinos (Wagyu, Simmental y Holstein) tomadas en potrero, de frente, en varios ángulos y con oclusión, y propone CattleMuzzleNet: una red siamesa ligera con MobileViT y atención EMA que compara vectores normalizados por distancia con un umbral de confianza. Obtiene 97,87 % de exactitud y 98,89 % de F1 con un modelo de 6,9 MB; la exactitud baja a cerca de 86 % con ángulos mayores de 60° u oclusiones mayores de 40 %.",
+   "palabras": "Hocico bovino; red siamesa; MobileViT; atención EMA; seguro ganadero",
+   "vi": [
+    "31.312 imágenes de 658 bovinos (30 a 120 por animal) tomadas en potrero, de frente, en ángulo y con oclusión; red siamesa con MobileViT y atención EMA; vectores normalizados comparados por distancia con umbral de confianza de 0,5 (97,87 % de exactitud y 96,82 % en el primer intento sobre la galería completa)."
+   ],
+   "vd": "Verificación de identidad en escenas complejas (seguro ganadero).",
+   "aporte": "X₅ — comparación de vectores con umbral; corpus (Tabla 8)"
+  },
+  "pdf": null
+ },
+ {
+  "id": "r18",
+  "apa": "Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., ... Oliphant, T. E. (2020). Array programming with NumPy. Nature, 585(7825), 357-362. https://doi.org/10.1038/s41586-020-2649-2",
+  "cite": "Harris et al., 2020",
+  "url": "https://doi.org/10.1038/s41586-020-2649-2",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 17,
+   "titulo": "Array programming with NumPy",
+   "autor": "Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., … Oliphant, T. E.",
+   "anio": "2020",
+   "tipo": "Paper",
+   "abstract": "Revisa la programación con arreglos en NumPy: estructura del arreglo, vectorización y su papel como base del ecosistema científico de Python.",
+   "palabras": "NumPy; programación con arreglos; Python; computación científica",
+   "vi": [
+    "Estructura de datos del arreglo",
+    "Operaciones vectorizadas"
+   ],
+   "vd": "Eficiencia del cálculo numérico",
+   "aporte": "X₅ — cálculo de vectores y similitud"
+  },
+  "pdf": {
+   "file": "17 - Harris et al. (2020) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r19",
+  "apa": "He, K., Zhang, X., Ren, S., y Sun, J. (2016). Deep residual learning for image recognition. En 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR) (pp. 770-778). IEEE. https://doi.org/10.1109/CVPR.2016.90",
+  "cite": "He et al., 2016",
+  "url": "https://doi.org/10.1109/CVPR.2016.90",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 18,
+   "titulo": "Deep residual learning for image recognition",
+   "autor": "He, K., Zhang, X., Ren, S., y Sun, J.",
+   "anio": "2016",
+   "tipo": "Paper",
+   "abstract": "Propone las redes residuales (ResNet), que agregan conexiones de atajo para entrenar redes muy profundas sin que empeore el error. Gana ILSVRC 2015 en clasificación de imágenes.",
+   "palabras": "Aprendizaje residual; ResNet; redes profundas; reconocimiento de imágenes",
+   "vi": [
+    "Conexiones residuales (atajos)",
+    "Profundidad de la red (hasta 152 capas)"
+   ],
+   "vd": "Error de clasificación en ImageNet",
+   "aporte": "X₄ — ResNet50"
+  },
+  "pdf": {
+   "file": "18 - He et al. (2016) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r20",
+  "apa": "Hernández-Sampieri, R., y Mendoza, C. P. (2018). Metodología de la investigación: las rutas cuantitativa, cualitativa y mixta. McGraw-Hill Interamericana. https://repositorio.uasb.edu.bo/items/70dca925",
+  "cite": "Hernández-Sampieri y Mendoza, 2018",
+  "url": "https://repositorio.uasb.edu.bo/items/70dca925",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "5.1",
+    "title": "Paradigma de investigación"
+   },
+   {
+    "num": "5.2",
+    "title": "Enfoque de la investigación"
+   },
+   {
+    "num": "5.3",
+    "title": "Tipo y alcance de la investigación"
+   },
+   {
+    "num": "5.4",
+    "title": "Diseño de investigación"
+   },
+   {
+    "num": "5.10",
+    "title": "Análisis de la información"
+   }
+  ],
+  "ficha": {
+   "ficha": 19,
+   "titulo": "Metodología de la investigación: las rutas cuantitativa, cualitativa y mixta",
+   "autor": "Hernández-Sampieri, R., y Mendoza, C. P.",
+   "anio": "2018",
+   "tipo": "Libro",
+   "abstract": "Manual de metodología que presenta las rutas cuantitativa, cualitativa y mixta: planteamiento del problema, hipótesis, variables, diseño, alcance, muestra, recolección y análisis de datos.",
+   "palabras": "Metodología de la investigación; enfoque cuantitativo; variables; diseño; alcance correlacional",
+   "vi": [
+    "Enfoque de investigación",
+    "Diseño y alcance",
+    "Técnicas de recolección"
+   ],
+   "vd": "Validez y rigor del proceso de investigación",
+   "aporte": "Metodología — enfoque, alcance y variables"
+  },
+  "pdf": {
+   "file": "19 - Hernandez-Sampieri y Mendoza (2018) (METODOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "METODOLOGIA"
+  }
+ },
+ {
+  "id": "r21",
+  "apa": "Hirsch, M., Graham, E. F., y Dracy, A. E. (1952). A classification for the identification of bovine noseprints. Journal of Dairy Science, 35(4), 314-319. https://doi.org/10.3168/jds.S0022-0302(52)93707-7",
+  "cite": "Hirsch et al., 1952",
+  "url": "https://doi.org/10.3168/jds.S0022-0302(52)93707-7",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 20,
+   "titulo": "A classification for the identification of bovine noseprints",
+   "autor": "Hirsch, M., Graham, E. F., y Dracy, A. E.",
+   "anio": "1952",
+   "tipo": "Paper",
+   "abstract": "Propone una clasificación de las huellas nasales bovinas por tipos de patrón (crestas rectas, irregulares, puntos y líneas) para encontrar rápido una huella dentro de un archivo grande.",
+   "palabras": "Huella nasal; identificación bovina; clasificación de patrones",
+   "vi": [
+    "Tipo de patrón de la huella (crestas, puntos, líneas)"
+   ],
+   "vd": "Rapidez y certeza para ubicar la huella de un animal",
+   "aporte": "Y — antecedente histórico (6.1 y 6.2.2)"
+  },
+  "pdf": {
+   "file": "20 - Hirsch et al. (1952) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r22",
+  "apa": "International Organization for Standardization y International Electrotechnical Commission [ISO/IEC]. (2021). Information technology --- Biometric performance testing and reporting --- Part 1: Principles and framework (ISO/IEC 19795-1:2021). https://www.iso.org/standard/73515.html",
+  "cite": "ISO/IEC, 2021",
+  "url": "https://www.iso.org/standard/73515.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 21,
+   "titulo": "Information technology — Biometric performance testing and reporting — Part 1: Principles and framework (ISO/IEC 19795-1:2021)",
+   "autor": "International Organization for Standardization y International Electrotechnical Commission [ISO/IEC]",
+   "anio": "2021",
+   "tipo": "Norma técnica internacional",
+   "abstract": "Norma que establece los principios para probar e informar el desempeño de los sistemas biométricos: tipos de prueba, métricas de error y forma de reportar resultados.",
+   "palabras": "Biometría; pruebas de desempeño; métricas de error; reporte",
+   "vi": [
+    "Tipo de prueba (tecnología, escenario, operación)",
+    "Población y protocolo de prueba"
+   ],
+   "vd": "Métricas de desempeño biométrico",
+   "aporte": "X₅ y Y — evaluación del reconocimiento"
+  },
+  "pdf": {
+   "file": "21 - ISO-IEC (2021) - 19795-1 (BIOMETRIA) (vista previa).pdf",
+   "label": "vista previa",
+   "cat": "BIOMETRIA"
+  }
+ },
+ {
+  "id": "r23",
+  "apa": "Jain, A. K., Ross, A., y Prabhakar, S. (2004). An introduction to biometric recognition. IEEE Transactions on Circuits and Systems for Video Technology, 14(1), 4-20. https://doi.org/10.1109/TCSVT.2003.818349",
+  "cite": "Jain et al., 2004",
+  "url": "https://doi.org/10.1109/TCSVT.2003.818349",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 22,
+   "titulo": "An introduction to biometric recognition",
+   "autor": "Jain, A. K., Ross, A., y Prabhakar, S.",
+   "anio": "2004",
+   "tipo": "Paper",
+   "abstract": "Introduce el reconocimiento biométrico: rasgos físicos y de comportamiento, modos de verificación e identificación, errores del sistema y propiedades que debe cumplir un rasgo (universalidad, distintividad, permanencia y colectabilidad).",
+   "palabras": "Biometría; reconocimiento; verificación; identificación; errores biométricos",
+   "vi": [
+    "Rasgo biométrico",
+    "Modo de operación (verificación o identificación)",
+    "Calidad de la captura"
+   ],
+   "vd": "Exactitud del reconocimiento del individuo",
+   "aporte": "Y — fundamento de la biometría (6.2.2)"
+  },
+  "pdf": {
+   "file": "22 - Jain et al. (2004) (BIOMETRIA) (resumen).pdf",
+   "label": "resumen",
+   "cat": "BIOMETRIA"
+  }
+ },
+ {
+  "id": "r24",
+  "apa": "Jain, A. K., Ross, A. A., y Nandakumar, K. (2011). Introduction to biometrics. Springer. https://doi.org/10.1007/978-0-387-77326-1",
+  "cite": "Jain et al., 2011",
+  "url": "https://doi.org/10.1007/978-0-387-77326-1",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 23,
+   "titulo": "Introduction to biometrics",
+   "autor": "Jain, A. K., Ross, A. A., y Nandakumar, K.",
+   "anio": "2011",
+   "tipo": "Libro",
+   "abstract": "Libro de texto sobre biometría: terminología, sistemas, rasgos, evaluación del desempeño y seguridad.",
+   "palabras": "Biometría; sistemas biométricos; rasgos; evaluación",
+   "vi": [
+    "Rasgos biométricos",
+    "Arquitectura del sistema biométrico"
+   ],
+   "vd": "Desempeño del sistema biométrico",
+   "aporte": "Y — fundamento de la biometría (6.2.2)"
+  },
+  "pdf": {
+   "file": "23 - Jain et al. (2011) (BIOMETRIA) (resumen).pdf",
+   "label": "resumen",
+   "cat": "BIOMETRIA"
+  }
+ },
+ {
+  "id": "r25",
+  "apa": "JAX. (s. f.). Installation. JAX documentation. https://docs.jax.dev/en/latest/installation.html",
+  "cite": "JAX, s. f.",
+  "url": "https://docs.jax.dev/en/latest/installation.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 24,
+   "titulo": "Installation",
+   "autor": "JAX",
+   "anio": "s. f.",
+   "tipo": "Documentación técnica",
+   "abstract": "Guía oficial de instalación de JAX: plataformas compatibles (CPU, GPU, TPU) y comandos de instalación con pip.",
+   "palabras": "JAX; instalación; CPU; GPU; Python",
+   "vi": [
+    "Plataforma y sistema operativo",
+    "Versión de Python y paquetes"
+   ],
+   "vd": "Instalación funcional del entorno",
+   "aporte": "X₄ — entorno de ejecución"
+  },
+  "pdf": {
+   "file": "24 - JAX (s.f.) - Installation (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r26",
+  "apa": "Kanezawa, N., Rauch, G., y Kovanen, T. (2016, 25 de octubre). Next.js. Vercel Blog. https://vercel.com/blog/next",
+  "cite": "Kanezawa et al., 2016",
+  "url": "https://vercel.com/blog/next",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 25,
+   "titulo": "Next.js",
+   "autor": "Kanezawa, N., Rauch, G., y Kovanen, T.",
+   "anio": "2016",
+   "tipo": "Blog técnico",
+   "abstract": "Anuncio de Next.js como marco de código abierto para aplicaciones web en React con renderizado en el servidor.",
+   "palabras": "Next.js; React; renderizado en el servidor; JavaScript",
+   "vi": [
+    "Renderizado en el servidor",
+    "Sistema de páginas y rutas"
+   ],
+   "vd": "Desarrollo de aplicaciones web",
+   "aporte": "X₆ — interfaz web del prototipo"
+  },
+  "pdf": {
+   "file": "25 - Kanezawa et al. (2016) - Next.js (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r27",
+  "apa": "Kaufman, S., Rosset, S., Perlich, C., y Stitelman, O. (2012). Leakage in data mining: Formulation, detection, and avoidance. ACM Transactions on Knowledge Discovery from Data, 6(4), artículo 15. https://doi.org/10.1145/2382577.2382579",
+  "cite": "Kaufman et al., 2012",
+  "url": "https://doi.org/10.1145/2382577.2382579",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 26,
+   "titulo": "Leakage in data mining: Formulation, detection, and avoidance",
+   "autor": "Kaufman, S., Rosset, S., Perlich, C., y Stitelman, O.",
+   "anio": "2012",
+   "tipo": "Paper",
+   "abstract": "Define la fuga de datos (leakage) en minería de datos, muestra cómo infla los resultados y propone una metodología para detectarla y evitarla.",
+   "palabras": "Minería de datos; fuga de datos; modelado predictivo",
+   "vi": [
+    "Información no legítima en los datos de entrenamiento",
+    "Forma de partir los datos"
+   ],
+   "vd": "Desempeño real del modelo",
+   "aporte": "Análisis — calibración del umbral sin fuga"
+  },
+  "pdf": {
+   "file": "26 - Kaufman et al. (2012) (ESTADISTICA Y EVALUACION).pdf",
+   "label": "documento completo",
+   "cat": "ESTADISTICA Y EVALUACION"
+  }
+ },
+ {
+  "id": "r28",
+  "apa": "Keras. (s. f.-a). Getting started with Keras. https://keras.io/getting_started/",
+  "cite": "Keras, s. f.-a",
+  "url": "https://keras.io/getting_started/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 27,
+   "titulo": "Getting started with Keras",
+   "autor": "Keras",
+   "anio": "s. f.-a",
+   "tipo": "Documentación técnica",
+   "abstract": "Página oficial de inicio de Keras 3: instalación, recursos de aprendizaje y motores compatibles (JAX, TensorFlow, PyTorch).",
+   "palabras": "Keras 3; instalación; aprendizaje profundo",
+   "vi": [
+    "Motor de cálculo",
+    "Versión de Keras"
+   ],
+   "vd": "Puesta en marcha de modelos de aprendizaje profundo",
+   "aporte": "X₄ — herramienta"
+  },
+  "pdf": {
+   "file": "27 - Keras (s.f.-a) - Getting started (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r29",
+  "apa": "Keras. (s. f.-b). ResNet and ResNetV2 [Documentación de la API de Keras 3]. https://keras.io/api/applications/resnet/",
+  "cite": "Keras, s. f.-b",
+  "url": "https://keras.io/api/applications/resnet/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 28,
+   "titulo": "ResNet and ResNetV2",
+   "autor": "Keras",
+   "anio": "s. f.-b",
+   "tipo": "Documentación técnica",
+   "abstract": "Documentación de las funciones ResNet50, ResNet101 y ResNet152 de Keras y de sus utilidades de preprocesamiento.",
+   "palabras": "ResNet50; Keras; modelos preentrenados; preprocesamiento",
+   "vi": [
+    "Modelo (ResNet50, 101, 152)",
+    "Pesos (ImageNet)",
+    "Tamaño de entrada"
+   ],
+   "vd": "Vector de características o predicción",
+   "aporte": "X₄ — ResNet50 preentrenada"
+  },
+  "pdf": {
+   "file": "28 - Keras (s.f.-b) - ResNet (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r30",
+  "apa": "Keras. (s. f.-c). Keras Applications [Documentación de la API de Keras 3]. https://keras.io/api/applications/",
+  "cite": "Keras, s. f.-c",
+  "url": "https://keras.io/api/applications/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "5.10",
+    "title": "Análisis de la información"
+   },
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   }
+  ],
+  "ficha": {
+   "ficha": 29,
+   "titulo": "Keras Applications",
+   "autor": "Keras",
+   "anio": "s. f.-c",
+   "tipo": "Documentación técnica",
+   "abstract": "Documentación de Keras Applications: modelos preentrenados disponibles y ejemplos de clasificación y extracción de características.",
+   "palabras": "Keras Applications; modelos preentrenados; extracción de características",
+   "vi": [
+    "Modelo preentrenado",
+    "Capa de salida o agrupamiento (pooling)"
+   ],
+   "vd": "Vector de características de la imagen",
+   "aporte": "X₄ — extracción con red preentrenada"
+  },
+  "pdf": {
+   "file": "29 - Keras (s.f.-c) - Applications (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r31",
+  "apa": "Kühl, H. S., y Burghardt, T. (2013). Animal biometrics: Quantifying and detecting phenotypic appearance. Trends in Ecology & Evolution, 28(7), 432-441. https://doi.org/10.1016/j.tree.2013.02.013",
+  "cite": "Kühl y Burghardt, 2013",
+  "url": "https://doi.org/10.1016/j.tree.2013.02.013",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 30,
+   "titulo": "Animal biometrics: Quantifying and detecting phenotypic appearance",
+   "autor": "Kühl, H. S., y Burghardt, T.",
+   "anio": "2013",
+   "tipo": "Paper",
+   "abstract": "Define la biometría animal como campo que cuantifica y detecta rasgos de apariencia para identificar individuos y especies, y plantea sus aplicaciones en ecología.",
+   "palabras": "Biometría animal; fenotipo; visión artificial; ecología",
+   "vi": [
+    "Rasgos fenotípicos de apariencia",
+    "Técnicas de detección automática"
+   ],
+   "vd": "Identificación de individuos y especies",
+   "aporte": "Y — fundamento de la biometría animal (6.2.2)"
+  },
+  "pdf": {
+   "file": "30 - Kuhl y Burghardt (2013) (IDENTIFICACION ANIMAL) (resumen).pdf",
+   "label": "resumen",
+   "cat": "IDENTIFICACION ANIMAL"
+  }
+ },
+ {
+  "id": "r32",
+  "apa": "Kumar, S., Singh, S. K., Dutta, T., y Gupta, H. P. (2016). A fast cattle recognition system using smart devices. En Proceedings of the 24th ACM International Conference on Multimedia (pp. 742-743). ACM. https://doi.org/10.1145/2964284.2973829",
+  "cite": "Kumar et al., 2016",
+  "url": "https://doi.org/10.1145/2964284.2973829",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.7",
+    "title": "Arquitectura cliente-servidor y gestión de registros"
+   }
+  ],
+  "ficha": {
+   "ficha": 31,
+   "titulo": "A fast cattle recognition system using smart devices",
+   "autor": "Kumar, S., Singh, S. K., Dutta, T., y Gupta, H. P.",
+   "anio": "2016",
+   "tipo": "Paper",
+   "abstract": "Propone un sistema rápido de reconocimiento de bovinos con dispositivos inteligentes a partir de la imagen del hocico, para verificar reclamaciones falsas de seguros.",
+   "palabras": "Reconocimiento de ganado; patrón del hocico; aprendizaje automático; extracción de características; clasificación",
+   "vi": [
+    "Imagen del hocico tomada con dispositivo móvil",
+    "Descriptores de características",
+    "Clasificador"
+   ],
+   "vd": "Reconocimiento y verificación del bovino",
+   "aporte": "X₁ — captura con dispositivo móvil"
+  },
+  "pdf": {
+   "file": "31 - Kumar et al. (2016) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r33",
+  "apa": "Kumar, S., Singh, S. K., y Singh, A. K. (2017). Muzzle point pattern based techniques for individual cattle identification. IET Image Processing, 11(10), 805-814. https://doi.org/10.1049/iet-ipr.2016.0799",
+  "cite": "Kumar et al., 2017",
+  "url": "https://doi.org/10.1049/iet-ipr.2016.0799",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 32,
+   "titulo": "Muzzle point pattern based techniques for individual cattle identification",
+   "autor": "Kumar, S., Singh, S. K., y Singh, A. K.",
+   "anio": "2017",
+   "tipo": "Paper",
+   "abstract": "Presenta un algoritmo de reconocimiento automático del patrón del hocico, comparable a las minucias de la huella dactilar, para identificar bovinos y verificar reclamaciones de seguros.",
+   "palabras": "Biometría animal; patrón del hocico; identificación de ganado; reconocimiento",
+   "vi": [
+    "Preprocesamiento de la imagen del hocico",
+    "Extracción de características",
+    "Clasificador"
+   ],
+   "vd": "Exactitud de la identificación individual",
+   "aporte": "X₂ a X₅ — referente técnico"
+  },
+  "pdf": {
+   "file": "32 - Kumar et al. (2017) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r34",
+  "apa": "Kusakunniran, W., Wiratsudakul, A., Chuachan, U., Kanchanapreechakorn, S., Imaromkul, T., Suksriupatham, N., y Thongkanchorn, K. (2020). Biometric for cattle identification using muzzle patterns. International Journal of Pattern Recognition and Artificial Intelligence, 34(12), 2056007. https://doi.org/10.1142/S0218001420560078",
+  "cite": "Kusakunniran et al., 2020",
+  "url": "https://doi.org/10.1142/S0218001420560078",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.6",
+    "title": "Variables del estudio"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 33,
+   "titulo": "Biometric for cattle identification using muzzle patterns",
+   "autor": "Kusakunniran, W., Wiratsudakul, A., Chuachan, U., Kanchanapreechakorn, S., Imaromkul, T., Suksriupatham, N., y Thongkanchorn, K.",
+   "anio": "2020",
+   "tipo": "Paper",
+   "abstract": "Identifica bovinos por el hocico con visión artificial clásica: localiza la cara, segmenta el hocico y extrae descriptores de textura (BoHOG y LBP) con un clasificador SVM; logra cerca de 95 % en 431 individuos.",
+   "palabras": "Identificación de ganado; imágenes del hocico; biometría animal",
+   "vi": [
+    "Localización de la cara con clasificador en cascada; segmentación del hocico; descriptores de textura BoHOG y LBP con clasificador SVM; cinco bases de datos (una de bovinos y cuatro de búfalos de agua); cerca de 95 % con 431 búfalos fotografiados en campo."
+   ],
+   "vd": "Identificación por patrón del hocico.",
+   "aporte": "X₁ a X₃ — retos de campo; corpus"
+  },
+  "pdf": {
+   "file": "33 - Kusakunniran et al. (2020) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r35",
+  "apa": "LeCun, Y., Bottou, L., Bengio, Y., y Haffner, P. (1998). Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11), 2278-2324. https://doi.org/10.1109/5.726791",
+  "cite": "LeCun et al., 1998",
+  "url": "https://doi.org/10.1109/5.726791",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 34,
+   "titulo": "Gradient-based learning applied to document recognition",
+   "autor": "LeCun, Y., Bottou, L., Bengio, Y., y Haffner, P.",
+   "anio": "1998",
+   "tipo": "Paper",
+   "abstract": "Muestra que las redes neuronales convolucionales entrenadas por gradiente superan a otros métodos en el reconocimiento de dígitos escritos a mano (LeNet-5) y propone las redes de transformadores de grafos.",
+   "palabras": "Redes neuronales convolucionales; aprendizaje por gradiente; reconocimiento de documentos",
+   "vi": [
+    "Arquitectura convolucional",
+    "Entrenamiento por retropropagación"
+   ],
+   "vd": "Error de reconocimiento de caracteres",
+   "aporte": "X₄ — origen de las CNN"
+  },
+  "pdf": {
+   "file": "34 - LeCun et al. (1998) (ALGORITMO) (resumen).pdf",
+   "label": "resumen",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r36",
+  "apa": "Lee, T., Na, Y., Kim, B. G., Lee, S., y Choi, Y. (2023). Identification of individual Hanwoo cattle by muzzle pattern images through deep learning. Animals, 13(18), 2856. https://doi.org/10.3390/ani13182856",
+  "cite": "Lee et al., 2023",
+  "url": "https://doi.org/10.3390/ani13182856",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.6",
+    "title": "Variables del estudio"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.3",
+    "title": "Adquisición de la imagen desde el celular"
+   },
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 35,
+   "titulo": "Identification of individual Hanwoo cattle by muzzle pattern images through deep learning",
+   "autor": "Lee, T., Na, Y., Kim, B. G., Lee, S., y Choi, Y.",
+   "anio": "2023",
+   "tipo": "Paper",
+   "abstract": "Identifica bovinos Hanwoo por el hocico con aprendizaje profundo: 9.230 imágenes de 336 animales tomadas con celular a 30 cm en cuatro momentos, recorte con YOLOv8 y EfficientNetV2 con transferencia de aprendizaje (97 % en prueba).",
+   "palabras": "Identificación de ganado; aprendizaje profundo; transferencia de aprendizaje; EfficientNet; Hanwoo; patrón del hocico",
+   "vi": [
+    "336 bovinos Hanwoo y 9.230 imágenes tomadas con celular a 30 cm en cuatro momentos; recorte con YOLOv8 entrenado con 150 imágenes anotadas; EfficientNetV2 con transferencia de aprendizaje (97,0 % en prueba)."
+   ],
+   "vd": "Identificación individual en condiciones de granja.",
+   "aporte": "X₁ — protocolo de captura; corpus"
+  },
+  "pdf": {
+   "file": "35 - Lee et al. (2023) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r37",
+  "apa": "Li, D., Li, B., Li, Q., Wang, Y., Yang, M., y Han, M. (2024). Cattle identification based on multiple feature decision layer fusion. Scientific Reports, 14, 26631. https://doi.org/10.1038/s41598-024-76718-x",
+  "cite": "D. Li et al., 2024",
+  "url": "https://doi.org/10.1038/s41598-024-76718-x",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 36,
+   "titulo": "Cattle identification based on multiple feature decision layer fusion",
+   "autor": "Li, D., Li, B., Li, Q., Wang, Y., Yang, M., y Han, M.",
+   "anio": "2024",
+   "tipo": "Paper",
+   "abstract": "Propone identificar bovinos fusionando en la capa de decisión tres rasgos: rostro, patrón del hocico y arete. Usa SOLO para segmentar, FaceNet para los rasgos y PP-OCRv4 para leer el arete (95,74 %).",
+   "palabras": "Identificación de ganado; fusión multimodal; rostro; patrón del hocico; arete",
+   "vi": [
+    "Rostro, patrón del hocico y arete; segmentación con SOLO, rasgos con FaceNet y lectura del arete con PP-OCRv4; fusión en la capa de decisión (95,74 %)."
+   ],
+   "vd": "Identificación en escenas complejas.",
+   "aporte": "Contraste — solución multirrasgo"
+  },
+  "pdf": {
+   "file": "36 - Li, D. et al. (2024) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r38",
+  "apa": "Li, G., Erickson, G. E., y Xiong, Y. (2022). Individual beef cattle identification using muzzle images and deep learning techniques. Animals, 12(11), 1453. https://doi.org/10.3390/ani12111453",
+  "cite": "G. Li et al., 2022",
+  "url": "https://doi.org/10.3390/ani12111453",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.7",
+    "title": "Protocolo de captura y calendario de sesiones"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 37,
+   "titulo": "Individual beef cattle identification using muzzle images and deep learning techniques",
+   "autor": "Li, G., Erickson, G. E., y Xiong, Y.",
+   "anio": "2022",
+   "tipo": "Paper",
+   "abstract": "Evalúa 59 modelos de aprendizaje profundo para identificar bovinos de engorde con imágenes del hocico (268 animales, 4.923 imágenes); el mejor llega a 98,7 % y el más rápido procesa una imagen en 28,3 ms.",
+   "palabras": "Biometría animal; visión artificial; aprendizaje automático; ganadería de precisión; reconocimiento de patrones",
+   "vi": [
+    "4.923 imágenes de 268 bovinos de engorde; comparación de 59 modelos CNN; aumento de datos y pérdida ponderada; 98,7 % y 28,3 ms por imagen."
+   ],
+   "vd": "Identificación individual y tiempo de procesamiento.",
+   "aporte": "X₄ y Y — referencia de tiempo; corpus"
+  },
+  "pdf": {
+   "file": "37 - Li, G. et al. (2022) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r39",
+  "apa": "Marcotte, E. (2010, 25 de mayo). Responsive web design. A List Apart, (306). https://alistapart.com/article/responsive-web-design/",
+  "cite": "Marcotte, 2010",
+  "url": "https://alistapart.com/article/responsive-web-design/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.3",
+    "title": "Adquisición de la imagen desde el celular"
+   }
+  ],
+  "ficha": {
+   "ficha": 38,
+   "titulo": "Responsive web design",
+   "autor": "Marcotte, E.",
+   "anio": "2010",
+   "tipo": "Artículo web",
+   "abstract": "Propone el diseño web adaptable (responsive): rejillas fluidas, imágenes flexibles y consultas de medios para que una página se ajuste a cualquier pantalla.",
+   "palabras": "Diseño web adaptable; rejillas fluidas; consultas de medios; CSS",
+   "vi": [
+    "Rejilla fluida",
+    "Imágenes flexibles",
+    "Consultas de medios"
+   ],
+   "vd": "Adaptación de la interfaz al tamaño de pantalla",
+   "aporte": "X₆ — interfaz en el celular"
+  },
+  "pdf": {
+   "file": "38 - Marcotte (2010) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r40",
+  "apa": "Mozilla. (s. f.). HTML attribute: capture. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture",
+  "cite": "Mozilla, s. f.",
+  "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.3",
+    "title": "Adquisición de la imagen desde el celular"
+   }
+  ],
+  "ficha": {
+   "ficha": 39,
+   "titulo": "HTML attribute: capture",
+   "autor": "Mozilla",
+   "anio": "s. f.",
+   "tipo": "Documentación técnica",
+   "abstract": "Documenta el atributo HTML capture, que permite abrir directamente la cámara del dispositivo (frontal o trasera) desde un campo de archivo.",
+   "palabras": "HTML; atributo capture; cámara; formulario web",
+   "vi": [
+    "Valor del atributo (user o environment)",
+    "Navegador y dispositivo"
+   ],
+   "vd": "Captura de la foto desde el navegador",
+   "aporte": "X₁ — captura con la cámara trasera"
+  },
+  "pdf": {
+   "file": "39 - Mozilla (s.f.) - atributo capture (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r41",
+  "apa": "Oliveira, A., de Queiroz Pereira, G., dos Santos, P. V., Gonçalves, C., Pacheco, J. T. R., Vaz, M. S. M. G., y Scoczynski, M. (2026). Biometric recognition of cows through muzzle images applied to animal management. Iberoamerican Journal of Applied Computing, 14(1). https://revistas.uepg.br/index.php/ijac/article/view/27119",
+  "cite": "Oliveira et al., 2026",
+  "url": "https://revistas.uepg.br/index.php/ijac/article/view/27119",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "5.7",
+    "title": "Protocolo de captura y calendario de sesiones"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   }
+  ],
+  "ficha": {
+   "ficha": 40,
+   "titulo": "Biometric recognition of cows through muzzle images applied to animal management",
+   "autor": "Oliveira, A., de Queiroz Pereira, G., dos Santos, P. V., Gonçalves, C., Pacheco, J. T. R., Vaz, M. S. M. G., y Scoczynski, M.",
+   "anio": "2026",
+   "tipo": "Paper",
+   "abstract": "Reconoce vacas por imágenes del hocico con un flujo de visión artificial: preprocesamiento, extracción con CNN, vectores normalizados, distancia coseno y 1-NN, con validación dejando uno fuera; 92,7 % con 30 vacas y 5 imágenes por animal.",
+   "palabras": "Biometría bovina; imágenes del hocico; aprendizaje profundo; similitud coseno; gestión ganadera",
+   "vi": [
+    "150 imágenes de 30 vacas (5 por animal); preprocesamiento; extracción de características con CNN (embeddings normalizados); distancia coseno y 1-NN con validación dejando uno fuera (92,7 %)."
+   ],
+   "vd": "Identificación a pequeña escala y gestión.",
+   "aporte": "X₂ a X₅ — referente más cercano; corpus"
+  },
+  "pdf": {
+   "file": "40 - Oliveira et al. (2026) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r42",
+  "apa": "OpenCV. (s. f.-a). About OpenCV. https://opencv.org/about/",
+  "cite": "OpenCV, s. f.-a",
+  "url": "https://opencv.org/about/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 41,
+   "titulo": "About OpenCV",
+   "autor": "OpenCV",
+   "anio": "s. f.-a",
+   "tipo": "Sitio web oficial",
+   "abstract": "Presenta OpenCV, la biblioteca de visión artificial de código abierto más grande, con más de 2.500 algoritmos.",
+   "palabras": "OpenCV; visión artificial; código abierto",
+   "vi": [
+    "Algoritmos de procesamiento de imágenes"
+   ],
+   "vd": "Infraestructura para aplicaciones de visión artificial",
+   "aporte": "X₂ — herramienta"
+  },
+  "pdf": {
+   "file": "41 - OpenCV (s.f.-a) - About (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r43",
+  "apa": "OpenCV. (s. f.-b). Histogram equalization [Tutorial, OpenCV 4.x]. https://docs.opencv.org/4.x/d2/d74/tutorial_js_histogram_equalization.html",
+  "cite": "OpenCV, s. f.-b",
+  "url": "https://docs.opencv.org/4.x/d2/d74/tutorial_js_histogram_equalization.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   }
+  ],
+  "ficha": {
+   "ficha": 42,
+   "titulo": "Histogram equalization",
+   "autor": "OpenCV",
+   "anio": "s. f.-b",
+   "tipo": "Documentación técnica",
+   "abstract": "Tutorial de ecualización de histograma y CLAHE en OpenCV para mejorar el contraste de una imagen.",
+   "palabras": "Ecualización de histograma; CLAHE; contraste; OpenCV",
+   "vi": [
+    "Método de ecualización (global o adaptativa)",
+    "Tamaño de bloque y límite de recorte"
+   ],
+   "vd": "Contraste de la imagen",
+   "aporte": "X₂ — normalización del contraste"
+  },
+  "pdf": {
+   "file": "42 - OpenCV (s.f.-b) - Histogram equalization (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r44",
+  "apa": "OpenCV. (s. f.-c). 20 years of OpenCV [Línea de tiempo]. https://opencv.org/anniversary/",
+  "cite": "OpenCV, s. f.-c",
+  "url": "https://opencv.org/anniversary/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   },
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 43,
+   "titulo": "20 years of OpenCV",
+   "autor": "OpenCV",
+   "anio": "s. f.-c",
+   "tipo": "Sitio web oficial",
+   "abstract": "Línea de tiempo de los 20 años de OpenCV, desde su creación en Intel en 2000.",
+   "palabras": "OpenCV; historia; visión artificial",
+   "vi": [
+    "Versiones y desarrollo de la biblioteca"
+   ],
+   "vd": "Evolución de OpenCV",
+   "aporte": "X₂ — origen de la herramienta"
+  },
+  "pdf": {
+   "file": "43 - OpenCV (s.f.-c) - 20 years (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r45",
+  "apa": "Pan, S. J., y Yang, Q. (2010). A survey on transfer learning. IEEE Transactions on Knowledge and Data Engineering, 22(10), 1345-1359. https://doi.org/10.1109/TKDE.2009.191",
+  "cite": "Pan y Yang, 2010",
+  "url": "https://doi.org/10.1109/TKDE.2009.191",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 44,
+   "titulo": "A survey on transfer learning",
+   "autor": "Pan, S. J., y Yang, Q.",
+   "anio": "2010",
+   "tipo": "Paper",
+   "abstract": "Revisa el aprendizaje por transferencia: aprovechar lo aprendido en una tarea o dominio para otro con pocos datos. Clasifica sus tipos (inductivo, transductivo y no supervisado).",
+   "palabras": "Aprendizaje por transferencia; adaptación de dominio; aprendizaje automático",
+   "vi": [
+    "Dominio y tarea de origen",
+    "Dominio y tarea de destino",
+    "Qué se transfiere (instancias, características, parámetros)"
+   ],
+   "vd": "Desempeño en la tarea de destino",
+   "aporte": "X₄ — red preentrenada como extractor"
+  },
+  "pdf": {
+   "file": "44 - Pan y Yang (2010) (ALGORITMO) (resumen).pdf",
+   "label": "resumen",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r46",
+  "apa": "Petersen, W. E. (1922). The identification of the bovine by means of nose-prints. Journal of Dairy Science, 5(3), 249-258. https://doi.org/10.3168/jds.S0022-0302(22)94150-5",
+  "cite": "Petersen, 1922",
+  "url": "https://doi.org/10.3168/jds.S0022-0302(22)94150-5",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.2",
+    "title": "Biometría animal y patrón naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 45,
+   "titulo": "The identification of the bovine by means of nose-prints",
+   "autor": "Petersen, W. E.",
+   "anio": "1922",
+   "tipo": "Paper",
+   "abstract": "Primer estudio sobre la huella nasal bovina: toma huellas con tinta y concluye que no hay dos animales con la misma huella y que el patrón se mantiene con la edad.",
+   "palabras": "Huella nasal; identificación bovina; registro de razas",
+   "vi": [
+    "Huella nasal tomada con tinta",
+    "Edad del animal"
+   ],
+   "vd": "Unicidad y permanencia de la huella",
+   "aporte": "Y — origen del patrón naso-labial (6.2.2)"
+  },
+  "pdf": {
+   "file": "45 - Petersen (1922) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r47",
+  "apa": "Pizer, S. M., Amburn, E. P., Austin, J. D., Cromartie, R., Geselowitz, A., Greer, T., ter Haar Romeny, B., Zimmerman, J. B., y Zuiderveld, K. (1987). Adaptive histogram equalization and its variations. Computer Vision, Graphics, and Image Processing, 39(3), 355-368. https://doi.org/10.1016/S0734-189X(87)80186-X",
+  "cite": "Pizer et al., 1987",
+  "url": "https://doi.org/10.1016/S0734-189X(87)80186-X",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 46,
+   "titulo": "Adaptive histogram equalization and its variations",
+   "autor": "Pizer, S. M., Amburn, E. P., Austin, J. D., Cromartie, R., Geselowitz, A., Greer, T., ter Haar Romeny, B., Zimmerman, J. B., y Zuiderveld, K.",
+   "anio": "1987",
+   "tipo": "Paper",
+   "abstract": "Presenta la ecualización adaptativa de histograma y sus variantes, incluida la de contraste limitado (CLAHE), para mejorar el contraste local sin amplificar el ruido.",
+   "palabras": "Ecualización adaptativa de histograma; CLAHE; contraste; procesamiento de imágenes",
+   "vi": [
+    "Tamaño de la región contextual",
+    "Límite de recorte del contraste",
+    "Interpolación"
+   ],
+   "vd": "Calidad del contraste de la imagen",
+   "aporte": "X₂ — CLAHE"
+  },
+  "pdf": {
+   "file": "46 - Pizer et al. (1987) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r48",
+  "apa": "PostgreSQL Global Development Group. (s. f.-a). What is PostgreSQL? PostgreSQL documentation. https://www.postgresql.org/docs/current/intro-whatis.html",
+  "cite": "PostgreSQL Global Development Group, s. f.-a",
+  "url": "https://www.postgresql.org/docs/current/intro-whatis.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.7",
+    "title": "Arquitectura cliente-servidor y gestión de registros"
+   }
+  ],
+  "ficha": {
+   "ficha": 47,
+   "titulo": "What is PostgreSQL?",
+   "autor": "PostgreSQL Global Development Group",
+   "anio": "s. f.-a",
+   "tipo": "Documentación técnica",
+   "abstract": "Documentación que describe PostgreSQL como sistema de gestión de bases de datos objeto-relacional de código abierto y sus funciones.",
+   "palabras": "PostgreSQL; base de datos; objeto-relacional; SQL",
+   "vi": [
+    "Modelo de datos objeto-relacional",
+    "Lenguaje SQL"
+   ],
+   "vd": "Gestión confiable de datos",
+   "aporte": "X₆ — base de datos"
+  },
+  "pdf": {
+   "file": "47 - PostgreSQL (s.f.-a) - What is PostgreSQL (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r49",
+  "apa": "PostgreSQL Global Development Group. (s. f.-b). A brief history of PostgreSQL. PostgreSQL documentation. https://www.postgresql.org/docs/18/history.html",
+  "cite": "PostgreSQL Global Development Group, s. f.-b",
+  "url": "https://www.postgresql.org/docs/18/history.html",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.7",
+    "title": "Arquitectura cliente-servidor y gestión de registros"
+   },
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 48,
+   "titulo": "A brief history of PostgreSQL",
+   "autor": "PostgreSQL Global Development Group",
+   "anio": "s. f.-b",
+   "tipo": "Documentación técnica",
+   "abstract": "Historia de PostgreSQL: del proyecto POSTGRES en Berkeley (1986) a su desarrollo actual como proyecto de código abierto.",
+   "palabras": "PostgreSQL; POSTGRES; historia; Berkeley",
+   "vi": [
+    "Versiones del sistema"
+   ],
+   "vd": "Evolución del gestor de base de datos",
+   "aporte": "X₆ — origen de la base de datos"
+  },
+  "pdf": {
+   "file": "48 - PostgreSQL (s.f.-b) - History (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r50",
+  "apa": "Pressman, R. S. (2010). Ingeniería del software: un enfoque práctico (7.ª ed.). McGraw-Hill Interamericana. https://search.worldcat.org/title/782894802",
+  "cite": "Pressman, 2010",
+  "url": "https://search.worldcat.org/title/782894802",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "5.9",
+    "title": "Fases del proyecto y relación con los objetivos"
+   }
+  ],
+  "ficha": {
+   "ficha": 49,
+   "titulo": "Ingeniería del software: un enfoque práctico (7.ª ed.)",
+   "autor": "Pressman, R. S.",
+   "anio": "2010",
+   "tipo": "Libro",
+   "abstract": "Manual de ingeniería del software: procesos y modelos de desarrollo, requisitos, diseño, pruebas y gestión de proyectos (en el proyecto se usa el modelo incremental).",
+   "palabras": "Ingeniería del software; modelos de proceso; requisitos; diseño; pruebas",
+   "vi": [
+    "Modelo de proceso de desarrollo",
+    "Gestión de requisitos y pruebas"
+   ],
+   "vd": "Calidad del producto de software",
+   "aporte": "Metodología — modelo de desarrollo del prototipo"
+  },
+  "pdf": {
+   "file": "49 - Pressman (2010) (METODOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "METODOLOGIA"
+  }
+ },
+ {
+  "id": "r51",
+  "apa": "Python Software Foundation. (s. f.). keras [Paquete de Python]. Python Package Index. https://pypi.org/project/keras/",
+  "cite": "Python Software Foundation, s. f.",
+  "url": "https://pypi.org/project/keras/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 50,
+   "titulo": "keras",
+   "autor": "Python Software Foundation",
+   "anio": "s. f.",
+   "tipo": "Repositorio de paquetes",
+   "abstract": "Página del paquete keras en PyPI: versión, instalación con pip, requisitos de Python y motores compatibles.",
+   "palabras": "Keras; PyPI; Python; instalación",
+   "vi": [
+    "Versión de Keras",
+    "Versión de Python"
+   ],
+   "vd": "Instalación del paquete",
+   "aporte": "X₄ — herramienta"
+  },
+  "pdf": {
+   "file": "50 - PyPI (s.f.) - keras (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r52",
+  "apa": "Ramírez, S. (s. f.). FastAPI. https://fastapi.tiangolo.com/",
+  "cite": "Ramírez, s. f.",
+  "url": "https://fastapi.tiangolo.com/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 51,
+   "titulo": "FastAPI",
+   "autor": "Ramírez, S.",
+   "anio": "s. f.",
+   "tipo": "Documentación técnica",
+   "abstract": "Documentación oficial de FastAPI, marco de Python para crear API rápidas a partir de anotaciones de tipos, con validación y documentación automáticas.",
+   "palabras": "FastAPI; API; Python; anotaciones de tipos",
+   "vi": [
+    "Definición de rutas y modelos de datos",
+    "Validación automática"
+   ],
+   "vd": "Rendimiento y facilidad de desarrollo de la API",
+   "aporte": "X₆ — servidor de la API"
+  },
+  "pdf": {
+   "file": "51 - Ramirez (s.f.) - FastAPI docs (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r53",
+  "apa": "Ramírez, S. (2019, 4 de febrero). Introducing FastAPI. Medium. https://tiangolo.medium.com/introducing-fastapi-fdc1206d453f",
+  "cite": "Ramírez, 2019",
+  "url": "https://tiangolo.medium.com/introducing-fastapi-fdc1206d453f",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 52,
+   "titulo": "Introducing FastAPI",
+   "autor": "Ramírez, S.",
+   "anio": "2019",
+   "tipo": "Blog técnico",
+   "abstract": "Artículo en el que el autor presenta FastAPI y explica por qué lo creó y en qué se basa.",
+   "palabras": "FastAPI; marco web; Python",
+   "vi": [
+    "Anotaciones de tipos de Python",
+    "Estándares OpenAPI"
+   ],
+   "vd": "Desarrollo de API",
+   "aporte": "X₆ — origen de FastAPI"
+  },
+  "pdf": {
+   "file": "52 - Ramirez (2019) - Introducing FastAPI (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r54",
+  "apa": "Ramos, C. A. (2015). Los paradigmas de la investigación científica. Avances en Psicología, 23(1), 9-17. https://revistas.unife.edu.pe/index.php/avancesenpsicologia/article/view/167",
+  "cite": "Ramos, 2015",
+  "url": "https://revistas.unife.edu.pe/index.php/avancesenpsicologia/article/view/167",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "5.1",
+    "title": "Paradigma de investigación"
+   }
+  ],
+  "ficha": {
+   "ficha": 53,
+   "titulo": "Los paradigmas de la investigación científica",
+   "autor": "Ramos, C. A.",
+   "anio": "2015",
+   "tipo": "Paper",
+   "abstract": "Describe los paradigmas de la investigación científica (positivismo, pospositivismo, teoría crítica y constructivismo) y cómo cada uno orienta la metodología.",
+   "palabras": "Investigación científica; paradigmas; positivismo; pospositivismo; teoría crítica; constructivismo",
+   "vi": [
+    "Paradigma de investigación"
+   ],
+   "vd": "Concepción de la realidad y metodología del estudio",
+   "aporte": "Metodología — paradigma"
+  },
+  "pdf": {
+   "file": "53 - Ramos (2015) (METODOLOGIA) (resumen).pdf",
+   "label": "resumen",
+   "cat": "METODOLOGIA"
+  }
+ },
+ {
+  "id": "r55",
+  "apa": "Razavian, A. S., Azizpour, H., Sullivan, J., y Carlsson, S. (2014). CNN features off-the-shelf: An astounding baseline for recognition. En 2014 IEEE Conference on Computer Vision and Pattern Recognition Workshops (pp. 806-813). IEEE. https://doi.org/10.1109/CVPRW.2014.131",
+  "cite": "Razavian et al., 2014",
+  "url": "https://doi.org/10.1109/CVPRW.2014.131",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 54,
+   "titulo": "CNN features off-the-shelf: An astounding baseline for recognition",
+   "autor": "Razavian, A. S., Azizpour, H., Sullivan, J., y Carlsson, S.",
+   "anio": "2014",
+   "tipo": "Paper",
+   "abstract": "Muestra que las características de una CNN preentrenada en ImageNet, usadas sin reentrenar y con un clasificador simple, son una base muy fuerte para muchas tareas de reconocimiento.",
+   "palabras": "Características CNN; transferencia; reconocimiento visual",
+   "vi": [
+    "Características de una CNN preentrenada",
+    "Clasificador simple (SVM lineal)",
+    "Aumento de datos"
+   ],
+   "vd": "Desempeño en tareas de reconocimiento",
+   "aporte": "X₄ — extracción sin entrenamiento"
+  },
+  "pdf": {
+   "file": "54 - Razavian et al. (2014) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r56",
+  "apa": "Redmon, J., Divvala, S., Girshick, R., y Farhadi, A. (2016). You only look once: Unified, real-time object detection. En 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 779-788. https://doi.org/10.1109/CVPR.2016.91",
+  "cite": "Redmon et al., 2016",
+  "url": "https://doi.org/10.1109/CVPR.2016.91",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 55,
+   "titulo": "You only look once: Unified, real-time object detection",
+   "autor": "Redmon, J., Divvala, S., Girshick, R., y Farhadi, A.",
+   "anio": "2016",
+   "tipo": "Paper",
+   "abstract": "Propone YOLO, un detector de objetos que predice cajas y clases en una sola pasada de la red y funciona en tiempo real.",
+   "palabras": "Detección de objetos; tiempo real; YOLO; CNN",
+   "vi": [
+    "Rejilla de predicción y cajas",
+    "Arquitectura de una sola etapa"
+   ],
+   "vd": "Exactitud y velocidad de detección",
+   "aporte": "X₃ — detector automático (trabajo futuro)"
+  },
+  "pdf": {
+   "file": "55 - Redmon et al. (2016) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r57",
+  "apa": "Render. (s. f.). Deploy for free. Render documentation. https://render.com/docs/free",
+  "cite": "Render, s. f.",
+  "url": "https://render.com/docs/free",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 56,
+   "titulo": "Deploy for free",
+   "autor": "Render",
+   "anio": "s. f.",
+   "tipo": "Documentación técnica",
+   "abstract": "Explica qué servicios se pueden desplegar gratis en Render y sus límites, como la suspensión por inactividad y la pérdida de archivos locales.",
+   "palabras": "Render; despliegue; nube; servicios gratuitos",
+   "vi": [
+    "Tipo de servicio",
+    "Plan gratuito y sus límites"
+   ],
+   "vd": "Disponibilidad del servicio desplegado",
+   "aporte": "X₆ — alojamiento del prototipo"
+  },
+  "pdf": {
+   "file": "56 - Render (s.f.) - Deploy for free (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r58",
+  "apa": "Ruiz-Garcia, L., y Lunadei, L. (2011). The role of RFID in agriculture: Applications, limitations and challenges. Computers and Electronics in Agriculture, 79(1), 42-50. https://doi.org/10.1016/j.compag.2011.08.010",
+  "cite": "Ruiz-Garcia y Lunadei, 2011",
+  "url": "https://doi.org/10.1016/j.compag.2011.08.010",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   }
+  ],
+  "ficha": {
+   "ficha": 57,
+   "titulo": "The role of RFID in agriculture: Applications, limitations and challenges",
+   "autor": "Ruiz-Garcia, L., y Lunadei, L.",
+   "anio": "2011",
+   "tipo": "Paper",
+   "abstract": "Revisa el uso de RFID en la agricultura: identificación animal, trazabilidad de alimentos y cadena de frío, con sus limitaciones (costo, lectura, pérdida de dispositivos).",
+   "palabras": "RFID; agricultura de precisión; identificación animal; trazabilidad de alimentos; cadena de frío",
+   "vi": [
+    "Tecnología RFID (frecuencia, tipo de etiqueta)",
+    "Ámbito de aplicación"
+   ],
+   "vd": "Eficacia de la identificación y la trazabilidad",
+   "aporte": "Y — limitación de los métodos físicos (planteamiento)"
+  },
+  "pdf": {
+   "file": "57 - Ruiz-Garcia y Lunadei (2011) (IDENTIFICACION ANIMAL).pdf",
+   "label": "documento completo",
+   "cat": "IDENTIFICACION ANIMAL"
+  }
+ },
+ {
+  "id": "r59",
+  "apa": "Russakovsky, O., Deng, J., Su, H., Krause, J., Satheesh, S., Ma, S., ... Fei-Fei, L. (2015). ImageNet large scale visual recognition challenge. International Journal of Computer Vision, 115(3), 211-252. https://doi.org/10.1007/s11263-015-0816-y",
+  "cite": "Russakovsky et al., 2015",
+  "url": "https://doi.org/10.1007/s11263-015-0816-y",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   },
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 58,
+   "titulo": "ImageNet large scale visual recognition challenge",
+   "autor": "Russakovsky, O., Deng, J., Su, H., Krause, J., Satheesh, S., Ma, S., … Fei-Fei, L.",
+   "anio": "2015",
+   "tipo": "Paper",
+   "abstract": "Describe el desafío ILSVRC: construcción de la base, anotación, tareas de clasificación y detección, y avances de los modelos entre 2010 y 2014.",
+   "palabras": "Base de datos; gran escala; punto de referencia; reconocimiento de objetos; detección",
+   "vi": [
+    "Base de datos y anotación",
+    "Algoritmos participantes"
+   ],
+   "vd": "Exactitud de clasificación y detección",
+   "aporte": "X₄ — preentrenamiento en ImageNet"
+  },
+  "pdf": {
+   "file": "58 - Russakovsky et al. (2015) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r60",
+  "apa": "Salton, G., Wong, A., y Yang, C. S. (1975). A vector space model for automatic indexing. Communications of the ACM, 18(11), 613-620. https://doi.org/10.1145/361219.361220",
+  "cite": "Salton et al., 1975",
+  "url": "https://doi.org/10.1145/361219.361220",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.6",
+    "title": "Comparación de vectores y regla de decisión"
+   }
+  ],
+  "ficha": {
+   "ficha": 59,
+   "titulo": "A vector space model for automatic indexing",
+   "autor": "Salton, G., Wong, A., y Yang, C. S.",
+   "anio": "1975",
+   "tipo": "Paper",
+   "abstract": "Propone el modelo de espacio vectorial: representar documentos como vectores y medir su semejanza con el coseno del ángulo entre ellos.",
+   "palabras": "Recuperación de información; indexación automática; espacio vectorial; similitud",
+   "vi": [
+    "Representación vectorial",
+    "Ponderación de términos",
+    "Medida de semejanza (coseno)"
+   ],
+   "vd": "Calidad de la recuperación",
+   "aporte": "X₅ — similitud coseno"
+  },
+  "pdf": {
+   "file": "59 - Salton et al. (1975) (ALGORITMO).pdf",
+   "label": "documento completo",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r61",
+  "apa": "Semana. (2024, 13 de febrero). En los últimos 14 años se han robado 33.650 cabezas de ganado, según Fedegán: Cundinamarca, Meta y Tolima, departamentos con más casos. Semana. https://www.semana.com/nacion/articulo/en-los-ultimos-14-anos-se-han-robado-33650-cabezas-de-ganado-segun-fedegan-cundinamarca-meta-y-tolima-departamentos-con-mas-casos/202435/",
+  "cite": "Semana, 2024",
+  "url": "https://www.semana.com/nacion/articulo/en-los-ultimos-14-anos-se-han-robado-33650-cabezas-de-ganado-segun-fedegan-cundinamarca-meta-y-tolima-departamentos-con-mas-casos/202435/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "2",
+    "title": "Planteamiento del problema"
+   },
+   {
+    "num": "3",
+    "title": "Justificación de la investigación"
+   }
+  ],
+  "ficha": {
+   "ficha": 60,
+   "titulo": "En los últimos 14 años se han robado 33.650 cabezas de ganado, según Fedegán: Cundinamarca, Meta y Tolima, departamentos con más casos",
+   "autor": "Semana",
+   "anio": "2024",
+   "tipo": "Artículo de prensa",
+   "abstract": "Informa, con datos de Fedegán, que en 14 años se robaron 33.650 cabezas de ganado en Colombia, sobre todo en Cundinamarca, Meta y Tolima.",
+   "palabras": "Abigeato; robo de ganado; Fedegán; Colombia",
+   "vi": [
+    "Departamento",
+    "Año"
+   ],
+   "vd": "Número de cabezas de ganado robadas",
+   "aporte": "Contexto — planteamiento del problema"
+  },
+  "pdf": {
+   "file": "60 - Semana (2024) - abigeato (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r62",
+  "apa": "Sereewatanapong, K., Suebsang, S., Champathes, A., Laosunthara, A., Jattawa, D., Kantavat, P., y Kijsirikul, B. (2025). Few-shot cattle muzzle biometric identification using a two-branch prototype network with adaptive-color local binary pattern and enhanced margin prototype loss. Smart Agricultural Technology, 12, 101199. https://doi.org/10.1016/j.atech.2025.101199",
+  "cite": "Sereewatanapong et al., 2025",
+  "url": "https://doi.org/10.1016/j.atech.2025.101199",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.7",
+    "title": "Protocolo de captura y calendario de sesiones"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 61,
+   "titulo": "Few-shot cattle muzzle biometric identification using a two-branch prototype network with adaptive-color local binary pattern and enhanced margin prototype loss",
+   "autor": "Sereewatanapong, K., Suebsang, S., Champathes, A., Laosunthara, A., Jattawa, D., Kantavat, P., y Kijsirikul, B.",
+   "anio": "2025",
+   "tipo": "Paper",
+   "abstract": "Identifica bovinos por el hocico con pocas imágenes por animal mediante una red prototípica de dos ramas con LBP de color adaptativo; logra 98,80 % en una base pública de 300 bovinos y 100 % en 37 bovinos fotografiados con celular.",
+   "palabras": "Red prototípica de dos ramas; LBP de color adaptativo; imágenes del hocico; identificación biométrica; aprendizaje con pocos ejemplos",
+   "vi": [
+    "Base pública de 300 bovinos y base propia de 37 bovinos fotografiados con celular en finca; red prototípica de dos ramas con LBP de color adaptativo; 5 a 7 imágenes por animal (98,80 % y 100 %)."
+   ],
+   "vd": "Identificación del hocico con pocas imágenes por animal.",
+   "aporte": "X₁ y X₄ — pocas fotos por animal; corpus"
+  },
+  "pdf": {
+   "file": "61 - Sereewatanapong et al. (2025) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r63",
+  "apa": "Servicio Nacional de Sanidad y Calidad Agroalimentaria [Senasa]. (2026). Sistema de Identificación Electrónica de Animales. Ministerio de Economía, Argentina. https://www.argentina.gob.ar/senasa/sistema-de-identificacion-electronica-de-animales",
+  "cite": "Senasa, 2026",
+  "url": "https://www.argentina.gob.ar/senasa/sistema-de-identificacion-electronica-de-animales",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   }
+  ],
+  "ficha": {
+   "ficha": 62,
+   "titulo": "Sistema de Identificación Electrónica de Animales",
+   "autor": "Servicio Nacional de Sanidad y Calidad Agroalimentaria [Senasa]",
+   "anio": "2026",
+   "tipo": "Sitio web gubernamental",
+   "abstract": "Describe el sistema de identificación electrónica de Argentina: desde 2026 los terneros bovinos, bubalinos y cérvidos deben identificarse con un dispositivo RFID de baja frecuencia.",
+   "palabras": "Identificación electrónica; RFID; Senasa; bovinos",
+   "vi": [
+    "Dispositivo de identificación electrónica",
+    "Categoría animal y fecha de aplicación"
+   ],
+   "vd": "Identificación oficial del ganado",
+   "aporte": "Contexto — referente regional"
+  },
+  "pdf": {
+   "file": "62 - Senasa (2026) - identificacion electronica (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r64",
+  "apa": "Shojaeipour, A., Falzon, G., Kwan, P., Hadavi, N., Cowley, F. C., y Paul, D. (2021). Automated muzzle detection and biometric identification via few-shot deep transfer learning of mixed breed cattle. Agronomy, 11(11), 2365. https://doi.org/10.3390/agronomy11112365",
+  "cite": "Shojaeipour et al., 2021",
+  "url": "https://doi.org/10.3390/agronomy11112365",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.7",
+    "title": "Protocolo de captura y calendario de sesiones"
+   },
+   {
+    "num": "6.1",
+    "title": "Estado del arte (antecedentes)"
+   },
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   },
+   {
+    "num": "6.2.5",
+    "title": "Redes neuronales convolucionales y extracción de características"
+   }
+  ],
+  "ficha": {
+   "ficha": 63,
+   "titulo": "Automated muzzle detection and biometric identification via few-shot deep transfer learning of mixed breed cattle",
+   "autor": "Shojaeipour, A., Falzon, G., Kwan, P., Hadavi, N., Cowley, F. C., y Paul, D.",
+   "anio": "2021",
+   "tipo": "Paper",
+   "abstract": "Detecta automáticamente el hocico con YOLOv3 (99,13 %) e identifica 300 bovinos de razas mixtas con ResNet50 y transferencia de aprendizaje usando solo 5 imágenes por animal (99,11 %).",
+   "palabras": "Identificación biométrica; ganado; aprendizaje profundo; aprendizaje con pocos ejemplos; bienestar animal; detección del hocico; ganadería de precisión",
+   "vi": [
+    "300 bovinos; detección del hocico con YOLOv3 (99,13 %); identificación con ResNet50 y transferencia de aprendizaje usando 5 imágenes por animal (99,11 %)."
+   ],
+   "vd": "Identificación biométrica automática con pocas imágenes (few-shot).",
+   "aporte": "X₃ y X₄ — referente directo; corpus"
+  },
+  "pdf": {
+   "file": "63 - Shojaeipour et al. (2021) (NASOLABIAL).pdf",
+   "label": "documento completo",
+   "cat": "NASOLABIAL"
+  }
+ },
+ {
+  "id": "r65",
+  "apa": "Stonebraker, M., y Rowe, L. A. (1986). The design of POSTGRES. ACM SIGMOD Record, 15(2), 340-355. https://doi.org/10.1145/16856.16888",
+  "cite": "Stonebraker y Rowe, 1986",
+  "url": "https://doi.org/10.1145/16856.16888",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.7",
+    "title": "Arquitectura cliente-servidor y gestión de registros"
+   },
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 64,
+   "titulo": "The design of POSTGRES",
+   "autor": "Stonebraker, M., y Rowe, L. A.",
+   "anio": "1986",
+   "tipo": "Paper",
+   "abstract": "Presenta el diseño de POSTGRES, el sucesor de Ingres en Berkeley, con soporte para tipos de datos, reglas y objetos complejos; es el origen de PostgreSQL.",
+   "palabras": "POSTGRES; bases de datos; diseño de sistemas; tipos de datos",
+   "vi": [
+    "Modelo de datos extensible",
+    "Reglas y procedimientos"
+   ],
+   "vd": "Capacidad del gestor de base de datos",
+   "aporte": "X₆ — origen de la base de datos"
+  },
+  "pdf": {
+   "file": "64 - Stonebraker y Rowe (1986) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r66",
+  "apa": "Szeliski, R. (2022). Computer vision: Algorithms and applications (2.ª ed.). Springer. https://doi.org/10.1007/978-3-030-34372-9",
+  "cite": "Szeliski, 2022",
+  "url": "https://doi.org/10.1007/978-3-030-34372-9",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "6.2.4",
+    "title": "Preprocesamiento y delimitación de la región naso-labial"
+   }
+  ],
+  "ficha": {
+   "ficha": 65,
+   "titulo": "Computer vision: Algorithms and applications (2.ª ed.)",
+   "autor": "Szeliski, R.",
+   "anio": "2022",
+   "tipo": "Libro",
+   "abstract": "Libro de visión por computador: formación de imágenes, procesamiento, características, reconocimiento y aprendizaje profundo aplicado a imágenes.",
+   "palabras": "Visión por computador; procesamiento de imágenes; reconocimiento; aprendizaje profundo",
+   "vi": [
+    "Técnicas de procesamiento de imágenes",
+    "Métodos de extracción de características"
+   ],
+   "vd": "Reconocimiento a partir de imágenes",
+   "aporte": "X₂ — fundamento del procesamiento"
+  },
+  "pdf": {
+   "file": "65 - Szeliski (2022) (ALGORITMO) (pagina del libro).pdf",
+   "label": "página del libro",
+   "cat": "ALGORITMO"
+  }
+ },
+ {
+  "id": "r67",
+  "apa": "Vercel. (s. f.). Next.js documentation. https://nextjs.org/docs",
+  "cite": "Vercel, s. f.",
+  "url": "https://nextjs.org/docs",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 66,
+   "titulo": "Next.js documentation",
+   "autor": "Vercel",
+   "anio": "s. f.",
+   "tipo": "Documentación técnica",
+   "abstract": "Documentación oficial de Next.js: estructura del proyecto, rutas, renderizado y despliegue de aplicaciones React.",
+   "palabras": "Next.js; React; aplicación web",
+   "vi": [
+    "Sistema de rutas",
+    "Modo de renderizado"
+   ],
+   "vd": "Funcionamiento de la aplicación web",
+   "aporte": "X₆ — interfaz web"
+  },
+  "pdf": {
+   "file": "66 - Vercel (s.f.) - Next.js docs (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r68",
+  "apa": "Virtanen, P., Gommers, R., Oliphant, T. E., Haberland, M., Reddy, T., Cournapeau, D., ... SciPy 1.0 Contributors. (2020). SciPy 1.0: Fundamental algorithms for scientific computing in Python. Nature Methods, 17(3), 261-272. https://doi.org/10.1038/s41592-019-0686-2",
+  "cite": "Virtanen et al., 2020",
+  "url": "https://doi.org/10.1038/s41592-019-0686-2",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.10",
+    "title": "Análisis de la información"
+   },
+   {
+    "num": "6.2.8",
+    "title": "Herramientas de desarrollo"
+   }
+  ],
+  "ficha": {
+   "ficha": 67,
+   "titulo": "SciPy 1.0: Fundamental algorithms for scientific computing in Python",
+   "autor": "Virtanen, P., Gommers, R., Oliphant, T. E., Haberland, M., Reddy, T., Cournapeau, D., … SciPy 1.0 Contributors",
+   "anio": "2020",
+   "tipo": "Paper",
+   "abstract": "Presenta SciPy 1.0: historia, organización y algoritmos fundamentales de cómputo científico en Python (estadística, optimización, álgebra lineal).",
+   "palabras": "SciPy; computación científica; Python; algoritmos",
+   "vi": [
+    "Módulos y algoritmos de la biblioteca"
+   ],
+   "vd": "Disponibilidad de algoritmos científicos confiables",
+   "aporte": "Análisis — pruebas estadísticas"
+  },
+  "pdf": {
+   "file": "67 - Virtanen et al. (2020) (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ },
+ {
+  "id": "r69",
+  "apa": "Wilcoxon, F. (1945). Individual comparisons by ranking methods. Biometrics Bulletin, 1(6), 80-83. https://doi.org/10.2307/3001968",
+  "cite": "Wilcoxon, 1945",
+  "url": "https://doi.org/10.2307/3001968",
+  "kind": "doi",
+  "sections": [
+   {
+    "num": "5.10",
+    "title": "Análisis de la información"
+   }
+  ],
+  "ficha": {
+   "ficha": 68,
+   "titulo": "Individual comparisons by ranking methods",
+   "autor": "Wilcoxon, F.",
+   "anio": "1945",
+   "tipo": "Paper",
+   "abstract": "Propone pruebas por rangos para comparar dos tratamientos sin suponer normalidad, entre ellas la prueba de rangos con signo para datos pareados.",
+   "palabras": "Prueba de Wilcoxon; rangos; datos pareados; estadística no paramétrica",
+   "vi": [
+    "Diferencias entre pares de observaciones",
+    "Rangos de esas diferencias"
+   ],
+   "vd": "Significancia de la diferencia entre tratamientos",
+   "aporte": "Análisis — comparación con y sin CLAHE"
+  },
+  "pdf": {
+   "file": "68 - Wilcoxon (1945) (ESTADISTICA Y EVALUACION) (resumen).pdf",
+   "label": "resumen",
+   "cat": "ESTADISTICA Y EVALUACION"
+  }
+ },
+ {
+  "id": "r70",
+  "apa": "World Organisation for Animal Health [WOAH]. (2024). Design and implementation of identification systems to achieve animal traceability (cap. 4.3). En Terrestrial Animal Health Code. https://woah.org/fileadmin/Home/eng/Health_standards/tahc/2024/en_chapitre_ident_design.htm",
+  "cite": "WOAH, 2024",
+  "url": "https://woah.org/fileadmin/Home/eng/Health_standards/tahc/2024/en_chapitre_ident_design.htm",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.1",
+    "title": "Identificación individual y trazabilidad del ganado bovino"
+   }
+  ],
+  "ficha": {
+   "ficha": 69,
+   "titulo": "Design and implementation of identification systems to achieve animal traceability (cap",
+   "autor": "World Organisation for Animal Health [WOAH]",
+   "anio": "2024",
+   "tipo": "Norma internacional",
+   "abstract": "Capítulo del Código Sanitario de la OMSA que fija los elementos para diseñar sistemas de identificación y trazabilidad animal: identificadores únicos, registro de eventos y movimientos.",
+   "palabras": "Trazabilidad animal; identificación; registro de eventos; OMSA",
+   "vi": [
+    "Identificador único",
+    "Registro de eventos y movimientos",
+    "Responsabilidades de los actores"
+   ],
+   "vd": "Trazabilidad animal",
+   "aporte": "Y — fundamento de la trazabilidad (6.2.1)"
+  },
+  "pdf": {
+   "file": "69 - WOAH (2024) - Codigo Terrestre cap 4.3 (NORMATIVA Y CONTEXTO).pdf",
+   "label": "documento completo",
+   "cat": "NORMATIVA Y CONTEXTO"
+  }
+ },
+ {
+  "id": "r71",
+  "apa": "World Wide Web Consortium [W3C]. (2018, 1 de febrero). HTML Media Capture (A. Kostiainen, Ed.). W3C Recommendation. https://www.w3.org/TR/2018/REC-html-media-capture-20180201/",
+  "cite": "W3C, 2018",
+  "url": "https://www.w3.org/TR/2018/REC-html-media-capture-20180201/",
+  "kind": "url",
+  "sections": [
+   {
+    "num": "6.2",
+    "title": "Marco teórico"
+   },
+   {
+    "num": "6.2.3",
+    "title": "Adquisición de la imagen desde el celular"
+   }
+  ],
+  "ficha": {
+   "ficha": 70,
+   "titulo": "HTML Media Capture",
+   "autor": "World Wide Web Consortium [W3C]",
+   "anio": "2018",
+   "tipo": "Recomendación técnica W3C",
+   "abstract": "Especificación W3C que amplía el campo de archivo HTML con el atributo capture para pedir la captura directa de imágenes, audio o video desde el dispositivo.",
+   "palabras": "HTML Media Capture; atributo capture; cámara; navegador",
+   "vi": [
+    "Atributo capture",
+    "Tipo de medio aceptado"
+   ],
+   "vd": "Captura de medios desde la página web",
+   "aporte": "X₁ — captura desde el navegador"
+  },
+  "pdf": {
+   "file": "70 - W3C (2018) - HTML Media Capture (TECNOLOGIA).pdf",
+   "label": "documento completo",
+   "cat": "TECNOLOGIA"
+  }
+ }
+]

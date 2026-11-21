@@ -1,0 +1,39 @@
+/* Identidad NASOID clara: salvia, oliva, bosque moderado, marfil, beige, piedra, tierra y ámbar discreto. */
+:root {
+  --ivory: #f6f2e8; --paper: #fbf8f1; --beige: #e9e0cc; --sand: #d9ccb0;
+  --sage: #8fa382; --sage-l: #c9d5bd; --sage-d: #5f7352; --olive: #9aa66b; --forest: #3e5a3c;
+  --stone: #8b8a83; --stone-l: #c9c6bc; --earth: #8a6a4a; --amber: #c8922e; --amber-l: #f1dcb0;
+  --ink: #273024; --ink-2: #4a5244; --muted: #6d7166; --line: rgba(39, 48, 36, 0.12); --line-2: rgba(39, 48, 36, 0.22);
+  --ok: #4f7a45; --ok-bg: #e3ecd9; --warn: #9a5a2c; --warn-bg: #f4e3d2; --tie: #8a6a1e; --tie-bg: #f3e8c8;
+  --night: #1f251d; --night-2: #2c3329;
+  --r: 16px; --r-s: 10px;
+  --shadow: 0 10px 30px rgba(52, 60, 40, 0.14), 0 2px 6px rgba(52, 60, 40, 0.08);
+  --f-display: 'Fraunces', Georgia, serif; --f-sans: 'IBM Plex Sans', system-ui, sans-serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: var(--f-sans); color: var(--ink); background: var(--ivory); -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+kbd { font-family: var(--f-mono); font-size: 11px; padding: 1px 5px; border-radius: 5px; border: 1px solid var(--line-2); background: rgba(255,255,255,.6); color: var(--ink-2); }
+.hidden { display: none !important; }
+.small { font-size: 13px; color: var(--muted); }
+.mono { font-family: var(--f-mono); }
+.btn { border: 1px solid var(--line-2); background: var(--paper); border-radius: 999px; padding: 10px 18px; font-weight: 500; transition: background .2s, transform .15s, box-shadow .2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+.btn:hover { background: #fff; box-shadow: var(--shadow); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--forest); border-color: var(--forest); color: var(--paper); }
+.btn.primary:hover { background: #33502f; }
+.btn.amber { background: var(--amber); border-color: var(--amber); color: #fffaf0; }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--warn); border-color: rgba(154,90,44,.35); }
+.btn.big { padding: 15px 28px; font-size: 17px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+.link { background: none; border: 0; padding: 0; color: var(--sage-d); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--sage-l); color: var(--forest); font-weight: 600; }
+.chip.practice { background: var(--amber-l); color: #7a5617; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--sage-d); }
+.panel { background: rgba(251, 248, 241, 0.88); backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
+.mark { width: 22px; height: 22px; border-radius: 50%; background: var(--sage-d); display: inline-block; position: relative; flex: none; }
+.mark::before, .mark::after { content: ''; position: absolute; top: 8px; width: 5px; height: 7px; border-radius: 50%; background: var(--ivory); }
+.mark::before { left: 5px; } .mark::after { right: 5px; }
