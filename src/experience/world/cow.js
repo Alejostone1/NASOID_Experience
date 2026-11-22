@@ -57,7 +57,7 @@ function bodySDF(x, y, z, hump = 0) {
   d = smin(d, sphere(ax, y, z, 0.2, 1.24, -0.48, 0.1), 0.12);                              // huesos de la cadera
   d = smin(d, capsule(x, y, z, 0, 1.22, -0.55, 0, 1.24, -0.96, 0.14), 0.12);               // grupa hacia la cola
   d = smin(d, ellipsoid(x, y, z, 0, 0.8, 0.02, 0.33, 0.25, 0.58), 0.18);                   // vientre
-  d = smin(d, roundCone(x, y, z, 0, 1.1, 0.6, 0, 1.15, 0.8, 0.25, 0.2), 0.12);             // base del cuello (el resto es una malla flexible que sigue a la cabeza)
+  d = smin(d, roundCone(x, y, z, 0, 1.08, 0.58, 0, 1.1, 0.72, 0.25, 0.2), 0.12);            // base del cuello (el resto es una malla flexible que sigue a la cabeza)
   d = smin(d, ellipsoid(x, y, z, 0, 0.84, 0.78, 0.055, 0.2 + hump * 0.06, 0.22), 0.08);    // papada
   d = smin(d, ellipsoid(ax, y, z, 0.19, 0.82, -0.56, 0.13, 0.3, 0.21), 0.1);               // muslos
   d = smin(d, ellipsoid(ax, y, z, 0.18, 0.8, 0.55, 0.11, 0.24, 0.13), 0.1);                // antebrazos
@@ -217,7 +217,7 @@ function neckGeometry() {
 }
 const _M = new THREE.Matrix4(), _P = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()], _T3 = new THREE.Vector3(), _S3 = new THREE.Vector3(), _U3 = new THREE.Vector3();
 const _C = new THREE.Vector3(), _T = new THREE.Vector3(), _S = new THREE.Vector3(), _U = new THREE.Vector3();
-const N0 = { P: new THREE.Vector3(0, 1.13, 0.7), T: new THREE.Vector3(0, 0.12, 1).normalize(), S: new THREE.Vector3(1, 0, 0), U: new THREE.Vector3(0, 1, -0.12).normalize() };
+const N0 = { P: new THREE.Vector3(0, 1.15, 0.6), T: new THREE.Vector3(0, 0.1, 1).normalize(), S: new THREE.Vector3(1, 0, 0), U: new THREE.Vector3(0, 1, -0.12).normalize() };
 function updateNeck(cow) {
   cow.neck.updateMatrix(); cow.head.updateMatrix(); _M.multiplyMatrices(cow.neck.matrix, cow.head.matrix);
   const P0 = _P[0].copy(N0.P), P3 = _P[3].set(0, 0.005, -0.19).applyMatrix4(_M);
@@ -229,7 +229,7 @@ function updateNeck(cow) {
     _C.set(0, 0, 0).addScaledVector(_P[0], u * u * u).addScaledVector(_P[1], 3 * u * u * s).addScaledVector(_P[2], 3 * u * s * s).addScaledVector(_P[3], s * s * s);
     _T.set(0, 0, 0).addScaledVector(_P[1].clone().sub(_P[0]), 3 * u * u).addScaledVector(_P[2].clone().sub(_P[1]), 6 * u * s).addScaledVector(_P[3].clone().sub(_P[2]), 3 * s * s).normalize();
     _S.copy(N0.S).lerp(_S3, s); _S.addScaledVector(_T, -_S.dot(_T)).normalize(); _U.crossVectors(_T, _S).normalize();
-    const e = Math.pow(s, 1.15), rx = 0.2 + (0.094 - 0.2) * e, ry = 0.232 + (0.112 - 0.232) * s, dew = 1 + 0.22 * Math.sin(Math.PI * Math.min(1, s * 1.4)) * (1 - s);
+    const e = Math.pow(s, 1.1), rx = 0.225 + (0.094 - 0.225) * e, ry = 0.262 + (0.112 - 0.262) * Math.pow(s, 0.9), dew = 1 + 0.22 * Math.sin(Math.PI * Math.min(1, s * 1.4)) * (1 - s);
     for (let j = 0; j < NS; j++) {
       const th = j / NS * Math.PI * 2, c = Math.cos(th), sn = Math.sin(th), k = (i * NS + j) * 3, ryy = sn < 0 ? ry * dew : ry;
       pos[k] = _C.x + _S.x * c * rx + _U.x * sn * ryy; pos[k + 1] = _C.y + _S.y * c * rx + _U.y * sn * ryy; pos[k + 2] = _C.z + _S.z * c * rx + _U.z * sn * ryy;

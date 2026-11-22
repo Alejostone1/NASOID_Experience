@@ -126,7 +126,7 @@ export class Stage3D {
     if (o.fast) this.snapNext = true;
     gsap.to(this, { shift: o.shift ?? 0.22, duration: 1.2, onUpdate: () => this.applyShift() });
     this.graze = o.graze ? 1 : 0;
-    c.headPitchTarget = o.graze ? 1.05 : o.headUp ? 0.12 : 0.3; c.neckPitchTarget = o.graze ? 0.62 : o.headUp ? -0.12 : 0; c.chew = o.graze ? 1 : 0;
+    c.headPitchTarget = o.graze ? 0.62 : o.headUp ? 0.12 : 0.3; c.neckPitchTarget = o.graze ? 0.28 : o.headUp ? -0.12 : 0; // olfatea el pasto: cabeza baja sin doblar del todo el cuello c.chew = o.graze ? 1 : 0;
     gsap.to(this.ring.material, { opacity: o.ring ? 0.95 : 0, duration: 0.6 });
     gsap.killTweensOf(this.scan.position); gsap.to(this.scan.material, { opacity: o.scan ? 0.9 : 0, duration: 0.4 });
     if (o.scan) gsap.fromTo(this.scan.position, { y: MUZZLE.center.y - MUZZLE.ry }, { y: MUZZLE.center.y + MUZZLE.ry, duration: 1.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });

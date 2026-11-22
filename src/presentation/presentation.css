@@ -386,3 +386,74 @@ body.wide .wash { background: linear-gradient(90deg, rgba(246,242,232,.97) 0%, r
 .st.on { z-index: 4; }
 .board { height: 250px; }
 .st.on .viz { transform: translateX(-50%) translateZ(22px) rotateX(-40deg) scale(1.42); transition: opacity .3s, transform .5s cubic-bezier(.2,.9,.3,1.3); }
+/* ===== ¿Cómo funciona? — cinco pasos animados ===== */
+.flow2 { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin: 26px auto 10px; max-width: 1180px; perspective: 1000px; }
+.f2-track { position: absolute; left: 10%; right: 10%; top: 72px; height: 4px; border-radius: 4px; background: var(--beige); z-index: 0; }
+.f2-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--sage, #8aa27a), var(--amber)); }
+.f2-dot { position: absolute; top: -6px; left: 0; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 6px rgba(241,185,77,.25), 0 0 18px rgba(241,185,77,.7); }
+.f2 { position: relative; z-index: 1; display: grid; justify-items: center; gap: 8px; text-align: center; padding: 14px 12px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,.8);
+  background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(246,242,230,.88)); box-shadow: 0 14px 30px -20px rgba(40,50,30,.45); transition: transform .35s cubic-bezier(.2,.9,.3,1.3), box-shadow .35s; }
+.f2.on { transform: translateY(-10px) scale(1.04); box-shadow: 0 0 0 3px rgba(241,185,77,.55), 0 26px 40px -22px rgba(40,50,30,.55); }
+.f2.done { background: linear-gradient(160deg, #fff, #eef3e8); }
+.f2-n { position: absolute; top: 10px; left: 12px; font: 600 11px var(--f-mono); color: var(--muted); }
+.f2 b { font-family: var(--f-display); font-size: 21px; font-weight: 500; } .f2-d { font-size: 13px; color: var(--ink-2); line-height: 1.4; }
+.f2-viz { height: 118px; width: 100%; display: grid; place-items: center; border-radius: 14px; background: radial-gradient(120% 100% at 50% 0%, #fff, #f1ecdd); overflow: hidden; position: relative; }
+.f2-viz em { position: absolute; bottom: 6px; right: 8px; font: 600 10px var(--f-mono); font-style: normal; color: var(--forest); background: #fff; padding: 2px 6px; border-radius: 6px; border: 1px solid var(--line); }
+.fv-reg { position: relative; width: 100%; height: 100%; } .fv-reg canvas { position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -30px 0 0 -26px; border-radius: 10px; border: 2px solid #fff; box-shadow: 0 6px 14px -6px rgba(0,0,0,.45); }
+.fv-cam .ph { position: relative; display: grid; place-items: center; width: 70px; height: 100px; border-radius: 14px; background: #20252a; } .fv-cam canvas { width: 56px; height: 56px; border-radius: 6px; }
+.fv-cam .ph i { position: absolute; width: 12px; height: 12px; border: 2px solid var(--amber); } .fv-cam .c1 { left: 10px; top: 26px; border-right: 0; border-bottom: 0; } .fv-cam .c2 { right: 10px; top: 26px; border-left: 0; border-bottom: 0; } .fv-cam .c3 { left: 10px; bottom: 26px; border-right: 0; border-top: 0; } .fv-cam .c4 { right: 10px; bottom: 26px; border-left: 0; border-top: 0; }
+.fv-cam .flash { position: absolute; inset: 0; border-radius: 14px; background: #fff; opacity: 0; }
+.fv-ai { display: flex; align-items: center; gap: 8px; } .fv-ai canvas { width: 50px; height: 50px; border-radius: 8px; border: 2px solid #fff; box-shadow: 0 6px 14px -6px rgba(0,0,0,.4); }
+.fv-ai .arrow { width: 18px; height: 2px; background: var(--amber); position: relative; } .fv-ai .arrow::after { content: ''; position: absolute; right: -2px; top: -4px; border: 5px solid transparent; border-left-color: var(--amber); }
+.fv-ai .bars { display: flex; align-items: flex-end; gap: 2px; height: 56px; } .fv-ai .bars i { width: 3px; height: calc(var(--h) * 100%); background: linear-gradient(var(--forest), var(--sage, #8aa27a)); border-radius: 2px; transform-origin: 50% 100%; }
+.fv-cmp svg, .fv-dec svg { width: 130px; height: 96px; overflow: visible; } .fv-cmp .ax { stroke: var(--line-2); stroke-width: 1.5; } .fv-cmp .v1 { stroke: var(--forest); stroke-width: 3; stroke-linecap: round; } .fv-cmp .v2 { stroke: var(--amber); stroke-width: 3; stroke-linecap: round; } .fv-cmp .arc { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.fv-dec .g-bg { fill: none; stroke: var(--beige); stroke-width: 10; stroke-linecap: round; } .fv-dec .g-ok { fill: none; stroke: var(--ok); stroke-width: 10; stroke-linecap: round; } .fv-dec .th { stroke: var(--ink); stroke-width: 2; } .fv-dec .needle { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; } .fv-dec circle { fill: var(--ink); }
+.decide .s { transition: box-shadow .3s, transform .3s; } .decide .s.lit { transform: scale(1.06); box-shadow: 0 0 0 3px rgba(95,115,82,.35), 0 8px 22px -8px rgba(60,80,50,.5); }
+@media (max-width: 1100px) { .flow2 { grid-template-columns: repeat(2, 1fr); } .f2-track { display: none; } }
+/* ===== escalera metodológica en 3D ===== */
+.ladder { gap: 14px; padding-top: 14px; }
+.step { position: relative; overflow: visible; border-radius: 10px 10px 4px 4px; border: 1px solid rgba(255,255,255,.7);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--sage-l) calc(var(--i) * 9%), #fffdf8), color-mix(in srgb, var(--sage-l) calc(20% + var(--i) * 9%), #efe9d8));
+  box-shadow: 0 18px 24px -18px rgba(40,50,30,.5); padding-top: 12px; }
+.step::before { content: ''; position: absolute; left: 4px; right: -9px; top: -10px; height: 10px; border-radius: 6px 6px 0 0; background: linear-gradient(90deg, #fffdf6, color-mix(in srgb, var(--sage-l) calc(var(--i) * 10%), #f7f2e4)); transform: skewX(-42deg); transform-origin: 0 100%; border: 1px solid rgba(255,255,255,.7); border-bottom: 0; }
+.step::after { content: ''; position: absolute; top: -5px; right: -10px; width: 10px; bottom: 6px; background: linear-gradient(180deg, color-mix(in srgb, var(--sage) calc(25% + var(--i) * 6%), #d8d1bd), #cfc7af); transform: skewY(-42deg); transform-origin: 0 0; border-radius: 0 4px 4px 0; }
+.step .s-ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #fff; color: var(--forest); box-shadow: 0 4px 10px -6px rgba(0,0,0,.4); margin-bottom: 2px; }
+.step .s-ic svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.step.on { background: linear-gradient(180deg, #fff8e8, #f3dfae); border-color: rgba(241,185,77,.8); box-shadow: 0 0 0 3px rgba(241,185,77,.35), 0 22px 30px -18px rgba(40,50,30,.6); }
+.step.on .s-ic { background: var(--amber); color: #fff; }
+.step.done .s-ic { background: var(--forest); color: #fff; }
+.lo { grid-template-columns: auto 1.5fr 1fr; }
+.lo-badge { position: relative; width: 74px; height: 74px; border-radius: 22px; display: grid; place-items: center; background: radial-gradient(circle at 30% 25%, #fff, var(--sage-l)); color: var(--forest); box-shadow: 0 12px 24px -14px rgba(40,60,30,.6); }
+.lo-badge svg { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lo-badge b { position: absolute; right: -8px; top: -8px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--amber); color: #fff; font: 700 12px var(--f-mono); }
+/* ===== población: vacas dibujadas en sus corrales ===== */
+.pen { position: relative; padding: 12px 12px 10px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(214,228,196,.7)); border: 2px solid #b08a5e; box-shadow: inset 0 -10px 0 rgba(127,160,96,.25); }
+.pen::before { content: ''; position: absolute; left: 10px; right: 10px; top: -2px; height: 6px; background: repeating-linear-gradient(90deg, #8a6a4a 0 6px, transparent 6px 26px); }
+.cows { gap: 6px; max-width: 360px; }
+.cows i { width: 44px; height: 30px; background: none; border-radius: 0; color: var(--earth); transition: transform .2s; } .cows i::after { display: none; }
+.cows.b i { color: var(--forest); } .cows i:hover { transform: translateY(-5px) rotate(-4deg); }
+.cows svg { width: 44px; height: 30px; overflow: visible; }
+.cows svg rect, .cows svg ellipse { fill: currentColor; } .cows svg .sp { fill: rgba(255,255,255,.75); } .cows svg .mz { fill: #e7b9a3; } .cows svg .ey { fill: #fff; }
+.cows svg .lg, .cows svg .tl, .cows svg .ear { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.cows i.walk .lg { animation: cowStep .28s steps(2) infinite; } .cows i.walk .hd { animation: cowNod .56s ease-in-out infinite; transform-origin: 36px 12px; }
+.cows i .tl { animation: cowTail 2.4s ease-in-out infinite; transform-origin: 8px 12px; }
+@keyframes cowStep { 0% { transform: translateX(0); } 100% { transform: translateX(1.6px); } }
+@keyframes cowNod { 50% { transform: rotate(6deg); } }
+@keyframes cowTail { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(14deg); } }
+/* ===== contexto: contenido contenido a la izquierda ===== */
+.col.wide.ctx-col { max-width: 860px; }
+.ctx-col .bars { max-width: 640px; }
+/* arquitectura: las animaciones se muestran en una franja propia, sobre su estación, sin tapar nada */
+.p3d-screen { position: relative; height: 168px; margin: 4px 2% 0; }
+.slot { position: absolute; left: calc(var(--x) * 96% + 2%); bottom: 14px; transform: translateX(var(--tx)) scale(.9); opacity: 0; transition: opacity .35s, transform .45s cubic-bezier(.2,.9,.3,1.3); pointer-events: none; }
+.slot.on { opacity: 1; transform: translateX(var(--tx)) scale(1.18); transform-origin: 50% 100%; }
+.slot::after { content: ''; position: absolute; left: calc(-1 * var(--tx)); bottom: -16px; height: 14px; border-left: 2px dashed var(--amber); }
+.board { height: 200px; margin-top: -6px; }
+.st .viz { display: none; }
+.p3d .v-stack { width: 160px; }
+.cows.b i { background: none; color: #34322e; }
+.cows.b svg .sp { fill: #f4f1ea; }
+.cows i, .cows svg { width: 52px; height: 36px; }
+.cows { max-width: 420px; }
+.ladder { height: 280px; } .step { height: calc(128px + var(--i) * 16px); }
+@media (max-height: 820px) { .ladder { height: 262px; } .step { height: calc(118px + var(--i) * 15px); } }

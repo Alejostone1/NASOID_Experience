@@ -9,6 +9,18 @@ import { METHOD, VARIABLES } from '../../shared/content.js';
 import { C, $, $$, fmt } from '../core.js';
 
 const B = 'Metodología';
+/** Íconos de trazo para cada escalón de la metodología. */
+const LICON = [
+  '<circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>',
+  '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+  '<circle cx="6" cy="17" r="3"/><circle cx="18" cy="7" r="3"/><path d="M8.5 15l7-6"/>',
+  '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15h.01M12 15h.01M16 15h.01"/>',
+  '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M15 15.5c2.6-.4 4.8 1 5.5 4"/>',
+  '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+  '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/>',
+  '<path d="M18 4H6l6 8-6 8h12"/>',
+];
 const LADDER = [
   ['Paradigma', '¿Desde qué visión del conocimiento investigamos?', 'El conjunto de supuestos sobre qué cuenta como evidencia y qué métodos son válidos.', 'Positivista', 'Nuestra pregunta se responde con hechos medibles: si el sistema acertó, con qué puntuación y en cuánto tiempo. El resultado no depende de nuestra opinión.'],
   ['Enfoque', '¿Con qué tipo de datos respondemos?', 'Números y estadística (cuantitativo), significados y relatos (cualitativo) o ambos (mixto).', 'Cuantitativo', '«En qué medida» pide un número: registramos todo en cifras o en categorías fijadas antes de ir al campo y lo analizamos con estadística.'],
@@ -37,17 +49,17 @@ export const METODOLOGIA = [
       <div class="eyebrow" data-a>07 · Metodología de la investigación · capítulo 5 del V27</div>
       <h2 data-a>La metodología es el <em>plan</em> para responder la pregunta con evidencia.</h2>
       <p class="lead" data-a>Antes de tomar una sola foto decidimos, en orden, desde dónde miramos el problema, qué datos recogemos, con quiénes, con qué instrumentos y cómo los analizamos. Cada escalón responde una pregunta. ${C('r20', 'r54')}</p>
-      <div class="ladder interactive" data-a><span class="ladder-pin"></span>${LADDER.map(([t, q], i) => `<button class="step" data-i="${i}" style="--i:${i}"><span class="n">${i + 1}</span><b>${t}</b><span class="q">${q}</span></button>`).join('')}</div>
+      <div class="ladder interactive" data-a><span class="ladder-pin"></span>${LADDER.map(([t, q], i) => `<button class="step" data-i="${i}" style="--i:${i}"><span class="s-ic"><svg viewBox="0 0 24 24">${LICON[i]}</svg></span><span class="n">${i + 1}</span><b>${t}</b><span class="q">${q}</span></button>`).join('')}</div>
       <div class="ladder-out panel" id="ladder-out" data-a></div></div>`,
     mount(root) {
       const pin = $('.ladder-pin', root);
       const show = (i, quick) => {
         const [t, q, d, ours, why] = LADDER[i], st = $$('.step', root)[i], L = $('.ladder', root);
-        $('#ladder-out').innerHTML = `<div class="lo"><div><div class="eyebrow">${i + 1} · ${t}</div><h3>${q}</h3><p>${d}</p></div><div class="ours"><small>En nuestro proyecto</small><b>${ours}</b><p class="why">${why}</p></div></div>`;
+        $('#ladder-out').innerHTML = `<div class="lo"><div class="lo-badge"><svg viewBox="0 0 24 24">${LICON[i]}</svg><b>${i + 1}</b></div><div><div class="eyebrow">${i + 1} · ${t}</div><h3>${q}</h3><p>${d}</p></div><div class="ours"><small>En nuestro proyecto</small><b>${ours}</b><p class="why">${why}</p></div></div>`;
         $$('.step', root).forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); });
         gsap.to(pin, { x: st.offsetLeft + st.offsetWidth / 2 - 9, y: st.offsetTop - L.clientTop - 12, duration: quick === true ? 0 : 0.5, ease: 'back.out(1.8)' });
         if (!quick || quick === 'tour') gsap.to(pin, { scale: quick === 'tour' ? 0.85 : 1, duration: 0.2 });
-        if (!quick) { gsap.fromTo('#ladder-out .lo > div', { opacity: 0, y: 12 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.4 }); gsap.fromTo('#ladder-out .why', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, delay: 0.25, ease: 'power2.out' }); }
+        if (!quick) { gsap.fromTo('#ladder-out .lo > div', { opacity: 0, y: 12 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.4 }); gsap.fromTo('#ladder-out .lo-badge', { scale: 0.5, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.2)' }); gsap.fromTo('#ladder-out .lo-badge path, #ladder-out .lo-badge circle, #ladder-out .lo-badge rect', { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.9, delay: 0.15 }); gsap.fromTo('#ladder-out .why', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, delay: 0.25, ease: 'power2.out' }); }
         this._i = i;
       };
       this._show = show; requestAnimationFrame(() => show(0, true));
@@ -114,14 +126,14 @@ export const METODOLOGIA = [
     html: () => `<div class="col wide">
       <div class="eyebrow" data-a>5.5 · Población y muestra</div>
       <h2 data-a>No elegimos una parte: trabajamos con <em>todos</em>.</h2>
-      <div class="herds" data-a><div><div class="cows">${'<i></i>'.repeat(7)}</div><b>Finca A · 7 bovinos</b></div><div><div class="cows b">${'<i></i>'.repeat(12)}</div><b>Finca B · 12 bovinos</b></div><div class="tot"><b class="num19">19</b><span>bovinos, sin excluir por raza, sexo o edad</span></div></div>
+      <div class="herds" data-a><div><div class="pen"><div class="cows">${'<i><svg viewBox="0 0 44 30"><g class="cw"><path class="lg l1" d="M12 20v8M16 20v8M28 20v8M32 20v8"/><rect x="8" y="8" width="28" height="14" rx="7"/><circle class="sp" cx="17" cy="13" r="3.2"/><circle class="sp" cx="27" cy="16" r="2.4"/><path class="tl" d="M8 12c-3 1-4 5-3 8"/><g class="hd"><ellipse cx="38" cy="10" rx="5" ry="5.6"/><ellipse class="mz" cx="40.5" cy="13" rx="3" ry="2.3"/><path class="ear" d="M34 6l-3-2 1 4M42 6l3-2-1 4"/><circle class="ey" cx="39" cy="9" r=".9"/></g></g></svg></i>'.repeat(7)}</div></div><b>Finca A · 7 bovinos</b></div><div><div class="pen b"><div class="cows b">${'<i><svg viewBox="0 0 44 30"><g class="cw"><path class="lg l1" d="M12 20v8M16 20v8M28 20v8M32 20v8"/><rect x="8" y="8" width="28" height="14" rx="7"/><circle class="sp" cx="17" cy="13" r="3.2"/><circle class="sp" cx="27" cy="16" r="2.4"/><path class="tl" d="M8 12c-3 1-4 5-3 8"/><g class="hd"><ellipse cx="38" cy="10" rx="5" ry="5.6"/><ellipse class="mz" cx="40.5" cy="13" rx="3" ry="2.3"/><path class="ear" d="M34 6l-3-2 1 4M42 6l3-2-1 4"/><circle class="ey" cx="39" cy="9" r=".9"/></g></g></svg></i>'.repeat(12)}</div></div><b>Finca B · 12 bovinos</b></div><div class="tot"><b class="num19">19</b><span>bovinos, sin excluir por raza, sexo o edad</span></div></div>
       <div class="design" data-a>
         <div><b>Población</b><p>Bovinos de fincas ganaderas que no cuentan con una plataforma tecnológica propia para identificar a sus animales.</p></div>
         <div><b>Fincas por conveniencia</b><p>Las elegimos según nuestro acceso y la autorización de los propietarios. Dos fincas nos permiten observar el prototipo en dos entornos de manejo, espacio y luz.</p></div>
         <div><b>Límite honesto</b><p>Con dos fincas y 19 animales, los resultados sirven para valorar el prototipo, pero no los generalizamos a todo el ganado del país.</p></div>
         <div><b>Ética</b><p>Tomamos las fotos sin tocar al animal, durante su manejo habitual y con autorización de los propietarios; usamos la información solo con fines académicos.</p></div>
       </div></div>`,
-    enter(root) { gsap.fromTo($$('.cows i', root), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.05, duration: 0.35, ease: 'back.out(2.5)' }); const el = $('.num19', root), o = { v: 0 }; gsap.to(o, { v: 19, duration: 1.2, delay: 0.4, onUpdate: () => { el.textContent = Math.round(o.v); } }); },
+    enter(root) { gsap.fromTo($$('.pen', root), { opacity: 0, scaleY: 0.6 }, { opacity: 1, scaleY: 1, transformOrigin: '50% 100%', stagger: 0.2, duration: 0.6, ease: 'power3.out' }); gsap.fromTo($$('.cows i', root), { x: -90, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.07, duration: 0.9, delay: 0.3, ease: 'power2.out', onStart() { this.targets()[0]?.classList.add('walk'); }, onComplete() { this.targets()[0]?.classList.remove('walk'); } }); $$('.cows i', root).forEach((c, k) => { c.classList.add('walk'); setTimeout(() => c.classList.remove('walk'), 1200 + k * 70); }); const el = $('.num19', root), o = { v: 0 }; gsap.to(o, { v: 19, duration: 1.6, delay: 0.8, onUpdate: () => { el.textContent = Math.round(o.v); } }); },
     notes: { idea: 'Población pequeña: se toma completa; fincas por conveniencia; no se generaliza.', guion: ['La finca A tiene 7 bovinos y la B tiene 12: 19 en total. Como son pocos, no se selecciona una muestra: se trabaja con todos.', 'Las fincas se eligen por conveniencia. Por eso los resultados valoran el prototipo pero no se generalizan al país.'] },
   },
   {

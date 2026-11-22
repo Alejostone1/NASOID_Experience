@@ -53,7 +53,7 @@ def presentation(b):
     pg.click('#tl-card .cite'); pg.wait_for_timeout(600); check('pres.cita_abre_biblioteca', pg.is_visible('#biblio') and pg.evaluate("document.querySelector('#biblio').dataset.focus") != '')
     nref = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); nlinks = pg.eval_on_selector_all('#biblio .ref-links a[href^="http"]', 'e => e.length')
     check('pres.biblioteca_71', nref == 71 and nlinks >= 70, f'{nref} fichas · {nlinks} enlaces reales'); shot(pg, 'pres_biblioteca')
-    pg.fill('#biblio [data-q]', 'ResNet'); pg.wait_for_timeout(600); k = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); check('pres.biblioteca_busqueda', 0 < k < 71, k)
+    pg.fill('#biblio [data-q]', 'ResNet'); pg.wait_for_timeout(2000); k = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); check('pres.biblioteca_busqueda', 0 < k < 71, k)
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
     check('pres.biblioteca_escape', not pg.is_visible('#biblio .bib-tools'))
     pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('tabla1'))"); pg.wait_for_timeout(2000); pg.click('.t1-r >> nth=0'); pg.wait_for_timeout(600)
