@@ -57,7 +57,7 @@ function bodySDF(x, y, z, hump = 0) {
   d = smin(d, sphere(ax, y, z, 0.2, 1.24, -0.48, 0.1), 0.12);                              // huesos de la cadera
   d = smin(d, capsule(x, y, z, 0, 1.22, -0.55, 0, 1.24, -0.96, 0.14), 0.12);               // grupa hacia la cola
   d = smin(d, ellipsoid(x, y, z, 0, 0.8, 0.02, 0.33, 0.25, 0.58), 0.18);                   // vientre
-  d = smin(d, roundCone(x, y, z, 0, 1.1, 0.6, 0, 1.17, 0.98, 0.25, 0.16), 0.12);           // cuello
+  d = smin(d, roundCone(x, y, z, 0, 1.1, 0.6, 0, 1.15, 0.8, 0.25, 0.2), 0.12);             // base del cuello (el resto es una malla flexible que sigue a la cabeza)
   d = smin(d, ellipsoid(x, y, z, 0, 0.84, 0.78, 0.055, 0.2 + hump * 0.06, 0.22), 0.08);    // papada
   d = smin(d, ellipsoid(ax, y, z, 0.19, 0.82, -0.56, 0.13, 0.3, 0.21), 0.1);               // muslos
   d = smin(d, ellipsoid(ax, y, z, 0.18, 0.8, 0.55, 0.11, 0.24, 0.13), 0.1);                // antebrazos
@@ -204,6 +204,40 @@ function withColors(base, colors) {
   g.setIndex(base.index); g.groups = base.groups; g.boundingSphere = base.boundingSphere; g.setAttribute('color', colors); return g;
 }
 
+/* ------------------------------------------------------ cuello flexible -- */
+/** Tubo elíptico que une la base del cuello (cuerpo) con la nuca (cabeza). Se recalcula cada cuadro
+ *  con una curva de Bézier, así el cuello se dobla de forma continua al pastar y no se ve «por partes». */
+const NR = 16, NS = 28;
+function neckGeometry() {
+  const g = new THREE.BufferGeometry(), uv = new Float32Array(NR * NS * 2), idx = [];
+  for (let i = 0; i < NR; i++) for (let j = 0; j < NS; j++) { uv[(i * NS + j) * 2] = j / NS; uv[(i * NS + j) * 2 + 1] = i / (NR - 1); }
+  for (let i = 0; i < NR - 1; i++) for (let j = 0; j < NS; j++) { const a = i * NS + j, b = i * NS + (j + 1) % NS, c = a + NS, d = b + NS; idx.push(a, b, c, b, d, c); }
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(NR * NS * 3), 3)); g.setAttribute('uv', new THREE.BufferAttribute(uv, 2)); g.setIndex(idx);
+  return g;
+}
+const _M = new THREE.Matrix4(), _P = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()], _T3 = new THREE.Vector3(), _S3 = new THREE.Vector3(), _U3 = new THREE.Vector3();
+const _C = new THREE.Vector3(), _T = new THREE.Vector3(), _S = new THREE.Vector3(), _U = new THREE.Vector3();
+const N0 = { P: new THREE.Vector3(0, 1.13, 0.7), T: new THREE.Vector3(0, 0.12, 1).normalize(), S: new THREE.Vector3(1, 0, 0), U: new THREE.Vector3(0, 1, -0.12).normalize() };
+function updateNeck(cow) {
+  cow.neck.updateMatrix(); cow.head.updateMatrix(); _M.multiplyMatrices(cow.neck.matrix, cow.head.matrix);
+  const P0 = _P[0].copy(N0.P), P3 = _P[3].set(0, 0.005, -0.19).applyMatrix4(_M);
+  _T3.set(0, -0.08, 1).normalize().transformDirection(_M); _S3.set(1, 0, 0).transformDirection(_M); _U3.set(0, 1, 0).transformDirection(_M);
+  const L = P0.distanceTo(P3); _P[1].copy(P0).addScaledVector(N0.T, L * 0.42); _P[2].copy(P3).addScaledVector(_T3, -L * 0.42);
+  const pos = cow.neckMesh.geometry.attributes.position.array;
+  for (let i = 0; i < NR; i++) {
+    const s = i / (NR - 1), u = 1 - s;
+    _C.set(0, 0, 0).addScaledVector(_P[0], u * u * u).addScaledVector(_P[1], 3 * u * u * s).addScaledVector(_P[2], 3 * u * s * s).addScaledVector(_P[3], s * s * s);
+    _T.set(0, 0, 0).addScaledVector(_P[1].clone().sub(_P[0]), 3 * u * u).addScaledVector(_P[2].clone().sub(_P[1]), 6 * u * s).addScaledVector(_P[3].clone().sub(_P[2]), 3 * s * s).normalize();
+    _S.copy(N0.S).lerp(_S3, s); _S.addScaledVector(_T, -_S.dot(_T)).normalize(); _U.crossVectors(_T, _S).normalize();
+    const e = Math.pow(s, 1.15), rx = 0.2 + (0.094 - 0.2) * e, ry = 0.232 + (0.112 - 0.232) * s, dew = 1 + 0.22 * Math.sin(Math.PI * Math.min(1, s * 1.4)) * (1 - s);
+    for (let j = 0; j < NS; j++) {
+      const th = j / NS * Math.PI * 2, c = Math.cos(th), sn = Math.sin(th), k = (i * NS + j) * 3, ryy = sn < 0 ? ry * dew : ry;
+      pos[k] = _C.x + _S.x * c * rx + _U.x * sn * ryy; pos[k + 1] = _C.y + _S.y * c * rx + _U.y * sn * ryy; pos[k + 2] = _C.z + _S.z * c * rx + _U.z * sn * ryy;
+    }
+  }
+  const g = cow.neckMesh.geometry; g.attributes.position.needsUpdate = true; g.computeVertexNormals(); g.computeBoundingSphere();
+}
+
 /* ================================================================== Cow == */
 export class Cow {
   /** @param {number} k índice del animal en la finca (semilla de pelaje y hocico) */
@@ -258,6 +292,9 @@ export class Cow {
     this.ears = [-1, 1].map(sx => { const g = new THREE.Group(); g.position.set(sx * 0.118, 0.115, -0.17); g.scale.x = sx; const m = new THREE.Mesh(eg, earOuter); m.castShadow = true; g.add(m); g.rotation.set(0, 0.35, -0.25 - B.droop * 0.85); g.userData.base = g.rotation.z; this.head.add(g); return g; });
     if (B.horns) { const hm = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.45 }); [-1, 1].forEach(sx => { const h = new THREE.Mesh(S.horn, hm); h.position.set(sx * 0.082, 0.162, -0.205); h.scale.set(sx * 0.8, 0.8, 0.8); h.castShadow = true; this.head.add(h); }); }
 
+    // cuello flexible entre cuerpo y cabeza
+    this.neckMesh = new THREE.Mesh(neckGeometry(), coatMat); this.neckMesh.castShadow = this.neckMesh.receiveShadow = true; this.neckMesh.frustumCulled = false; this.body.add(this.neckMesh);
+    updateNeck(this); this.neckMesh.geometry.setAttribute('color', paint(this.neckMesh.geometry, null, B, seed, 'body'));
     // patrón naso-labial propio
     this.setMuzzle('limpio');
     // estado de animación
@@ -309,6 +346,7 @@ export class Cow {
     this.neck.rotation.set(this.neckPitch, this.headYaw * 0.55, 0);
     this.head.rotation.set(this.headPitch + Math.sin(t * 6.2) * 0.02 * this.chew, this.headYaw * 0.45, Math.sin(t * 6.2) * 0.012 * this.chew);
     this.neck.position.y = 1.16 - Math.max(0, this.neckPitch) * 0.12;
+    updateNeck(this);
     // parpadeo
     this.nextBlink -= dt; if (this.nextBlink < 0) { this.blink = 1; this.nextBlink = 2.5 + this.rand() * 5; }
     this.blink = Math.max(0, this.blink - dt * 7); const lidS = 0.86 - 0.5 * Math.sin(this.blink * Math.PI);

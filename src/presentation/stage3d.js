@@ -1,7 +1,7 @@
 /* =============================================================================
    ESCENARIO 3D DE LA PRESENTACIÓN — un bovino animado sobre un prado claro.
    Cada escena pide una «toma» (posición de cámara, estado del animal y efectos:
-   arete que se cae, región naso-labial resaltada, escaneo).
+   región naso-labial resaltada, escaneo).
    ============================================================================= */
 import * as THREE from 'three';
 import gsap from 'gsap';
@@ -38,7 +38,7 @@ export class Stage3D {
     // bovino
     this.cow = new Cow(4, this.q); this.cow.root.position.set(0, 0, 0); this.cow.root.rotation.y = -0.5; s.add(this.cow.root);
     this.cow.headPitchTarget = 0.3; this.cow.neckPitchTarget = 0;
-    this.addTag(); this.addHighlight();
+    this.addHighlight();
     this.timer = new THREE.Timer(); this.graze = 0;
     addEventListener('resize', () => this.resize()); this.resize();
     const loop = t => { requestAnimationFrame(loop); this.timer.update(t); this.tick(Math.min(0.05, this.timer.getDelta())); };
@@ -104,11 +104,6 @@ export class Stage3D {
     for (let i = -6; i <= 6; i++) { const post = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 1.3, 7), wood); post.position.set(i * 2.2, 0.65, -7 - Math.abs(i) * 0.15); post.castShadow = true; this.scene.add(post); }
     for (const y of [0.5, 0.95]) { const rail = new THREE.Mesh(new THREE.BoxGeometry(27, 0.09, 0.05), wood); rail.position.set(0, y, -7.4); this.scene.add(rail); }
   }
-  addTag() {
-    // arete plástico en la oreja izquierda (para la escena del problema)
-    const tag = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.06, 0.006), new THREE.MeshStandardMaterial({ color: 0xe6b83a, roughness: 0.5 }));
-    tag.position.set(0.09, -0.012, 0); this.cow.ears[0].add(tag); this.tag = tag; this.tagHome = tag.position.clone();
-  }
   addHighlight() {
     const ring = new THREE.Mesh(new THREE.RingGeometry(0.92, 1, 64), new THREE.MeshBasicMaterial({ color: 0xf1b94d, transparent: true, opacity: 0, depthTest: false }));
     ring.scale.set(MUZZLE.rx * 1.08, MUZZLE.ry * 1.08, 1); ring.position.copy(MUZZLE.center).add(new THREE.Vector3(0, 0, 0.012)); ring.renderOrder = 10; this.cow.head.add(ring); this.ring = ring;
@@ -135,14 +130,7 @@ export class Stage3D {
     gsap.to(this.ring.material, { opacity: o.ring ? 0.95 : 0, duration: 0.6 });
     gsap.killTweensOf(this.scan.position); gsap.to(this.scan.material, { opacity: o.scan ? 0.9 : 0, duration: 0.4 });
     if (o.scan) gsap.fromTo(this.scan.position, { y: MUZZLE.center.y - MUZZLE.ry }, { y: MUZZLE.center.y + MUZZLE.ry, duration: 1.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    if (o.dropTag) this.dropTag(); else this.resetTag();
   }
-  dropTag() {
-    const t = this.tag; if (t.parent !== this.cow.ears[0]) return;
-    const w = new THREE.Vector3(); t.getWorldPosition(w); this.scene.attach(t);
-    gsap.to(t.position, { y: 0.004, duration: 1.1, ease: 'bounce.out', delay: 0.6 }); gsap.to(t.rotation, { x: Math.PI / 2, z: 1.2, duration: 1.1, delay: 0.6 });
-  }
-  resetTag() { const t = this.tag; if (t.parent === this.cow.ears[0]) return; gsap.killTweensOf(t.position); gsap.killTweensOf(t.rotation); this.cow.ears[0].add(t); t.position.copy(this.tagHome); t.rotation.set(0, 0, 0); }
   tick(dt) {
     this.gTime.value += dt; this.cow.update(dt); const T = this.gTime.value;
     // polen, mariposas y nubes

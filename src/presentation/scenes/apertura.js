@@ -30,8 +30,8 @@ export const APERTURA = [
     notes: { idea: 'Presentarnos, presentar el proyecto y decir qué vamos a mostrar.', guion: ['Buenos días. Somos estudiantes de Ingeniería de Sistemas y Telecomunicaciones de la Universidad Católica de Pereira.', 'Nuestro proyecto es un prototipo para reconocer a cada bovino por la huella de su hocico, con una foto del celular e inteligencia artificial.', 'Vamos a recorrer el problema, lo que dice la literatura, cómo lo vamos a investigar —la metodología— y la tecnología, y al final lo verán funcionar en un simulador.'] },
   },
   {
-    id: 'contexto', block: B, title: 'La ganadería en cifras', spk: 'D', shot: { rel: [3.6, 0.8, 4.2], look: 'body', lookOff: [0, -0.2, 0], shift: 0.3, graze: true }, wide: true,
-    html: () => `<div class="col wide">
+    id: 'contexto', block: B, title: 'La ganadería en cifras', spk: 'D', shot: { rel: [3.6, 0.8, 4.2], look: 'body', lookOff: [0, -0.2, 0], shift: 0.4, graze: true }, wide: true,
+    html: () => `<div class="col wide ctx-col">
       <div class="eyebrow" data-a>Contexto · Colombia, 2024</div>
       <h2 data-a>Un hato de <em>29,5 millones</em> de animales que debe poder identificarse uno por uno.</h2>
       <div class="ctx" data-a>
@@ -46,7 +46,7 @@ export const APERTURA = [
     notes: { idea: 'La ganadería pesa en la economía y el robo de ganado es real.', guion: ['Según Fedegán, en 2024 la ganadería bovina aportó el 1,4 % del PIB nacional, el 20 % del agropecuario y el 46 % del pecuario, con 29,5 millones de animales.', 'Entre 2010 y 2023 se denunciaron 33.650 casos de abigeato.', 'Hay sistemas oficiales, pero muchas fincas no tienen una plataforma propia para verificar quién es cada animal.'] },
   },
   {
-    id: 'problema', block: B, title: 'Árbol del problema', spk: 'D', wide: true, shot: { rel: [-4.6, 1.2, 4.6], look: 'body', lookOff: [0, -0.2, 0], shift: 0.34, graze: true, dropTag: true },
+    id: 'problema', block: B, title: 'Árbol del problema', spk: 'D', wide: true, shot: { rel: [-4.6, 1.2, 4.6], look: 'body', lookOff: [0, -0.2, 0], shift: 0.34, graze: true },
     html: () => `<div class="tree-wrap">
       <div class="tree-head" data-a><div class="eyebrow">01 · El problema · haz clic en cada parte del árbol</div><h2>¿Por qué es difícil saber <em>quién es</em> cada animal?</h2></div>
       <div class="tree interactive" data-a>

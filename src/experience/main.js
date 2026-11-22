@@ -100,7 +100,7 @@ async function backgroundPrep() {
 }
 
 /** Versión de la galería de práctica: cambia cuando cambian el modelado o la luz de la finca. */
-const GALLERY_V = 3;
+const GALLERY_V = 4;
 const DEMO = [
   { k: 0, code: 'BOV-001', name: 'Lucero' }, { k: 1, code: 'BOV-002', name: 'Canela' }, { k: 2, code: 'BOV-003', name: 'Mariposa' },
   { k: 3, code: 'BOV-004', name: 'Tormenta' }, { k: 4, code: 'BOV-005', name: 'Paloma' }, { k: 5, code: 'BOV-006', name: 'Azucena' },
