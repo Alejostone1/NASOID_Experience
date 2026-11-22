@@ -53,6 +53,7 @@ export class Herd {
 
   update(dt, player) {
     for (const cow of this.cows) {
+      if (cow.inChute) { cow.speed = 0; cow.update(dt); continue; } // en el brete: quieto, fuera de las reglas del potrero
       cow.timer -= dt; const pos = cow.position;
       let desired = 0, turnTo = null;
       if (cow.state === 'graze') {
@@ -84,7 +85,7 @@ export class Herd {
       }
       // separación entre animales y respeto al operario
       for (const o of this.cows) {
-        if (o === cow) continue; const dx = pos.x - o.position.x, dz = pos.z - o.position.z, d = Math.hypot(dx, dz);
+        if (o === cow || o.inChute) continue; const dx = pos.x - o.position.x, dz = pos.z - o.position.z, d = Math.hypot(dx, dz);
         if (d < 2.2 && d > 1e-3) { pos.x += dx / d * (2.2 - d) * 0.5 * Math.min(1, dt * 4); pos.z += dz / d * (2.2 - d) * 0.5 * Math.min(1, dt * 4); }
       }
       if (player && cow.state === 'walk') { const ahead = new THREE.Vector3(Math.sin(cow.heading), 0, Math.cos(cow.heading)); const tp = player.clone().sub(pos); if (tp.length() < 2.4 && tp.dot(ahead) > 0) desired = 0; }
