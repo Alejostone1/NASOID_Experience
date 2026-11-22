@@ -1,5 +1,5 @@
 /* =============================================================================
-   NASOID — PRESENTACIÓN DE SUSTENTACIÓN (versión clara y explicada)
+   PRESENTACIÓN DE SUSTENTACIÓN (versión clara y explicada)
    Escenas animadas y clicables organizadas en bloques, con índice (M), notas del
    expositor (N), biblioteca de referencias (R) y citas que abren su fuente.
    Contenido: documento V27 (autoridad académica), redactado de forma sencilla.
@@ -21,7 +21,7 @@ const SCENES = [...APERTURA, ...FUNDAMENTOS, ...METODOLOGIA, ...TECNOLOGIA, ...C
 /** Marca de narración: solo un color por voz (sin nombres) para seguir la línea del relato. */
 const SPK_COLOR = { D: '#8a6a4a', J: '#5f7352', DJ: '#c8922e' };
 /** Sección del V27 → escena (para los botones «Citada en V27» de la biblioteca). */
-const SECTION_SCENE = { '1': 'nasoid', '2': 'problema', '3': 'problema', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'objetivos', '5': 'metodologia', '5.1': 'paradigmas', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'metodologia', '5.5': 'poblacion', '5.6': 'variables', '5.7': 'metodologia', '5.8': 'metodologia', '5.9': 'objetivos', '5.10': 'metodologia', '5.11': 'metodologia', '6': 'estado-arte', '6.1': 'estado-arte', '6.2': 'funcion', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'funcion', '6.2.4': 'funcion', '6.2.5': 'funcion', '6.2.6': 'funcion', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'objetivos', '7.2': 'objetivos', '7.3': 'objetivos', '8': 'referencias' };
+const SECTION_SCENE = { '1': 'portada', '2': 'problema', '3': 'problema', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'objetivos', '5': 'metodologia', '5.1': 'paradigmas', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'metodologia', '5.5': 'poblacion', '5.6': 'variables', '5.7': 'metodologia', '5.8': 'metodologia', '5.9': 'objetivos', '5.10': 'metodologia', '5.11': 'metodologia', '6': 'estado-arte', '6.1': 'estado-arte', '6.2': 'funcion', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'funcion', '6.2.4': 'funcion', '6.2.5': 'funcion', '6.2.6': 'funcion', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'objetivos', '7.2': 'objetivos', '7.3': 'objetivos', '8': 'referencias' };
 
 let idx = 0, stage = null, typed = '';
 const mounted = new Set();

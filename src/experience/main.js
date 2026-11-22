@@ -1,5 +1,5 @@
 /* =============================================================================
-   NASOID RANCH — BIOMETRIC EXPERIENCE
+   SIMULADOR DE IDENTIFICACIÓN NASO-LABIAL
    Orquestador del juego: carga, bucle, estados (menú, exploración, interacción,
    observación, cámara, revisión, análisis), galería de demostración y HUD.
    ============================================================================= */
@@ -37,8 +37,8 @@ $('#sel-quality').value = Q.level;
 const canvas = $('#gl');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Q.dpr); renderer.setSize(innerWidth, innerHeight);
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.92;
-renderer.shadowMap.enabled = Q.shadows; renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.95;
+renderer.shadowMap.enabled = Q.shadows; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.05, 1200);
 const photoCam = new PhotoCamera(); photoCam.fit(innerWidth, innerHeight);
@@ -88,14 +88,18 @@ async function backgroundPrep() {
     await loadModel(f => { mt.textContent = `ResNet50: descargando pesos… ${Math.round(f * 100)} %`; });
     md.className = 'dot on'; mt.textContent = `ResNet50 lista · ${MODEL_INFO.backend} · ${fmt(MODEL_INFO.loadMs / 1000, 1)} s`;
   } catch (e) { md.className = 'dot'; mt.textContent = 'No se pudo cargar ResNet50: ' + e.message; console.error(e); return; }
-  if (!(await db.getMeta('seeded'))) {
+  const seeded = await db.getMeta('seeded');
+  if (seeded !== GALLERY_V) {
     gd.className = 'dot busy';
+    if (seeded) { await db.resetAll(); G.progress = {}; G.identified.clear(); await refresh(); } // la finca cambió: las referencias viejas ya no corresponden a los renders nuevos
     await seedDemo((i, n) => { gt.textContent = `Galería de práctica: fotografiando referencias ${i}/${n}…`; });
   }
   gd.className = 'dot on'; gt.textContent = `Galería de práctica lista · ${STATE.records.length} registros · θ = ${fmt(STATE.cal.theta)}`;
   G.ready = true; renderMission();
 }
 
+/** Versión de la galería de práctica: cambia cuando cambian el modelado o la luz de la finca. */
+const GALLERY_V = 2;
 const DEMO = [
   { k: 0, code: 'BOV-001', name: 'Lucero' }, { k: 1, code: 'BOV-002', name: 'Canela' }, { k: 2, code: 'BOV-003', name: 'Mariposa' },
   { k: 3, code: 'BOV-004', name: 'Tormenta' }, { k: 4, code: 'BOV-005', name: 'Paloma' }, { k: 5, code: 'BOV-006', name: 'Azucena' },
@@ -109,8 +113,8 @@ function shoot(cow, p, blur = 0) {
   cow.headPitch = cow.headPitchTarget; cow.neckPitch = cow.neckPitchTarget; cow.headYaw = cow.headYawTarget; cow.speed = 0; cow.update(1e-4);
   Object.assign(photoCam.params, { dist: p.dist, yaw: p.yaw, pitch: p.pitch, offX: 0, offY: 0 });
   photoCam.fit(innerWidth, innerHeight); photoCam.aim(cow);
-  G.env.followShadow(cow.position);
-  renderer.render(scene, photoCam.cam);
+  G.env.followShadow(cow.position); fullResolution(); photoLight(true);
+  renderer.render(scene, photoCam.cam); photoLight(false);
   const photo = photoCam.grab(canvas, blur);
   const box = suggestBox(cow, photo);
   Object.assign(cow, { state: saved.st, headPitch: saved.hp, neckPitch: saved.np, headYaw: saved.hy, headPitchTarget: saved.hpt, neckPitchTarget: saved.npt, headYawTarget: saved.hyt, speed: saved.sp, phase: saved.ph });
@@ -142,7 +146,7 @@ async function seedDemo(onStep) {
     dup.refs = src.refs.map(r => ({ ...r, id: db.uid('ref') })); dup.coverId = src.coverId; dup.status = 'registrado'; dup.note = 'Registro duplicado de práctica';
     await db.putRecord(dup); await db.addEvent({ recordId: dup.id, type: 'registro', text: 'Copia de las referencias de BOV-003 (registro duplicado de práctica)' });
   }
-  await db.setMeta('seeded', true); await refresh();
+  await db.setMeta('seeded', GALLERY_V); await refresh();
 }
 async function resetPractice() {
   closeRegistry(); await db.resetAll(); G.identified.clear(); G.progress = {}; await refresh();
@@ -157,16 +161,63 @@ function loop(ts) {
   const p = G.farmer.position;
   G.env.update(dt, p);
   G.herd.update(dt, G.mode === 'explore' ? p : null);
-  const sp = G.mode === 'explore' ? G.ctrl.update(dt) : (G.ctrl.vel.multiplyScalar(0.8), 0);
+  const sp = G.mode === 'explore' ? G.ctrl.update(dt) : G.mode === 'travel' ? G.travelSpeed : (G.ctrl.vel.multiplyScalar(0.8), 0);
   G.farmer.update(dt, sp, G.mode === 'capture' || G.mode === 'review');
   if (G.mode === 'menu') menuCamera();
   if (G.mode === 'observe') { G.observeA += dt * 0.35; observeCamera(); }
   G.rig.update(dt, p);
-  if (G.mode === 'capture') { photoCam.aim(G.cow); updateCameraHud(dt); renderer.render(scene, photoCam.cam); }
+  if (G.mode === 'capture') { photoCam.aim(G.cow); updateCameraHud(dt); photoLight(true); renderer.render(scene, photoCam.cam); photoLight(false); }
   else renderer.render(scene, camera);
   if (G.mode === 'explore') updatePrompt();
   if ((G.frame = (G.frame || 0) + 1) % 3 === 0 && G.mode !== 'menu') drawMinimap();
+  adaptResolution(dt);
 }
+/** Resolución adaptativa: si el equipo no alcanza ~40 fps al explorar, baja la densidad de píxeles; si sobra, la sube. */
+const PERF = { acc: 0, n: 0, dpr: Q.dpr };
+function adaptResolution(dt) {
+  PERF.acc += dt; PERF.n++; if (PERF.acc < 1.5) return;
+  const ms = PERF.acc / PERF.n * 1000; PERF.acc = 0; PERF.n = 0;
+  if (!G.ready || (G.mode !== 'explore' && G.mode !== 'menu' && G.mode !== 'travel')) return; // nunca mientras se crea la galería: las fotos se toman a resolución completa
+  const next = ms > 25 ? Math.max(0.65, PERF.dpr - 0.15) : ms < 14 ? Math.min(Q.dpr, PERF.dpr + 0.1) : PERF.dpr;
+  if (Math.abs(next - PERF.dpr) > 0.01) { PERF.dpr = next; renderer.setPixelRatio(next); }
+}
+/** Exposición automática del celular: a 30 cm el hocico queda en la sombra de la cabeza; la cámara compensa con más exposición y luz de relleno del cielo. */
+const LOOK = { world: null };
+function photoLight(on) {
+  const e = G.env; if (!LOOK.world) LOOK.world = { hemi: e.hemi.intensity, envI: scene.environmentIntensity, exp: renderer.toneMappingExposure };
+  const w = LOOK.world; e.hemi.intensity = on ? 0.85 : w.hemi; scene.environmentIntensity = on ? 0.42 : w.envI; renderer.toneMappingExposure = on ? 1.08 : w.exp;
+}
+function fullResolution() { if (PERF.dpr !== Q.dpr) { PERF.dpr = Q.dpr; renderer.setPixelRatio(Q.dpr); } }
+
+/* ------------------------------------------------- viaje rápido al bovino -- */
+/** Bovino sugerido: el más cercano que aún no se ha identificado (al repetir, pasa al siguiente). */
+function nextCow() {
+  const p = G.farmer.position, list = G.herd.cows.filter(c => !c.inChute);
+  list.sort((a, b) => (G.identified.has(a.k) - G.identified.has(b.k)) || (a.position.distanceTo(p) - b.position.distanceTo(p)));
+  const i = list.indexOf(G.lastTravel); return list.length > 1 && i === 0 ? list[1] : list[0];
+}
+async function goToCow(cow) {
+  if (!cow || G.mode !== 'explore') return;
+  G.lastTravel = cow; G.mode = 'travel'; setPrompt(''); progress('met');
+  const f = new THREE.Vector3(Math.sin(cow.heading), 0, Math.cos(cow.heading)), side = new THREE.Vector3(f.z, 0, -f.x);
+  const target = cow.position.clone().addScaledVector(f, 2.3 * cow.scale).addScaledVector(side, 0.5); G.env.resolve(target, 0.3); target.y = heightAt(target.x, target.z);
+  G.herd.attend(cow, target.clone()); // se detiene y espera mirando hacia donde llegará el operario
+  const from = G.farmer.position.clone(), d = from.distanceTo(target), P = LAYOUT.pasture;
+  const inside = v => v.x > P.x0 && v.x < P.x1 && v.z > P.z0 && v.z < P.z1;
+  if (!inside(from) || d > 26) { // fuera del potrero: un fundido corto en lugar de atravesar cercas
+    await fade(async () => { G.farmer.position.copy(target); G.rig.started = false; });
+  } else {
+    const dur = THREE.MathUtils.clamp(d / 8, 0.45, 1.8), o = { t: 0 }; G.travelSpeed = Math.min(6.8, d / dur);
+    G.input.yaw = Math.atan2(from.x - target.x, from.z - target.z);
+    await gsap.to(o, { t: 1, duration: dur, ease: 'power2.inOut', onUpdate: () => {
+      G.farmer.position.lerpVectors(from, target, o.t); G.farmer.position.y = heightAt(G.farmer.position.x, G.farmer.position.z);
+      G.farmer.root.rotation.y = Math.atan2(target.x - from.x, target.z - from.z);
+      G.travelSpeed = Math.sin(o.t * Math.PI) * Math.min(6.8, d / dur * 1.4);
+    } });
+  }
+  G.travelSpeed = 0; G.mode = 'explore'; openInteract(cow);
+}
+
 
 function menuCamera(snap) {
   G.menuA += 0.0009; const c = new THREE.Vector3(-2, 0, -4), a = G.menuA * Math.PI * 2 + 2.2;
@@ -194,7 +245,7 @@ function updatePrompt() {
   }
   const dz = Math.hypot(p.x - LAYOUT.capture.x, p.z - LAYOUT.capture.z);
   if (dz < 2.5) return setPrompt('Zona de captura · elige «Llevar al brete» al interactuar con un bovino', true);
-  if (!G.progress.met) return setPrompt('Acércate a un bovino del potrero · <kbd>W A S D</kbd> para caminar', true);
+  if (!G.progress.met) return setPrompt('<kbd>Q</kbd> ir al bovino más cercano · o camina con <kbd>W A S D</kbd>', true);
   setPrompt('');
 }
 
@@ -203,6 +254,7 @@ function onKey(k, e) {
   if (G.mode === 'menu') { if (k === 'enter') startGame(); return; }
   if (G.mode === 'explore') {
     if (k === 'e' && G.near) return openInteract(G.near);
+    if (k === 'q') return goToCow(nextCow());
     if (k === 'r') return registryOpen() ? closeRegistry() : openRegistry();
     if (k === 'h') return openHelp();
     if (k === 'escape') return registryOpen() ? closeRegistry() : !$('#help').classList.contains('hidden') ? hide('#help') : pause();
@@ -235,7 +287,7 @@ function openInteract(cow, silent) {
   const id = G.identified.get(cow.k);
   const el = $('#interact');
   el.innerHTML = `<div class="spread"><div><div class="eyebrow">${cow.inChute ? 'En el brete · zona de captura' : 'Potrero'} · pelaje ${esc(cow.breed.name)}</div><h3>${id ? esc(id) : 'Bovino sin identificar'}</h3></div><button class="btn ghost" data-close>Alejarse <kbd>Esc</kbd></button></div>
-    <p class="sub">${id ? 'NASOID ya lo identificó en esta sesión. Puedes volver a comprobarlo.' : 'No lleva identificación visible. Para saber si está registrado, NASOID necesita una foto de su hocico.'}</p>
+    <p class="sub">${id ? 'El sistema ya lo identificó en esta sesión. Puedes volver a comprobarlo.' : 'No lleva identificación visible. Para saber si está registrado, el sistema necesita una foto de su hocico.'}</p>
     <div class="acts">
       <button class="act main" data-act="photo"><b>Fotografiar e identificar <kbd>1</kbd></b><span>Toma la foto del hocico y consulta si está registrado.</span></button>
       <button class="act" data-act="register"><b>Registrar este bovino <kbd>2</kbd></b><span>Crea su ficha y guarda sus fotos de referencia.</span></button>
@@ -274,6 +326,7 @@ async function toggleChute(cow) {
 const CAM = { lastChange: 0, focus: 1, checks: [] };
 function enterCapture(purpose, rec = null) {
   if (!G.cow) return;
+  fullResolution();
   G.purpose = purpose; G.refRecord = rec; hide('#interact'); setPrompt('');
   G.herd.pose(G.cow); G.ctrl.faceTowards(G.cow.muzzleWorld(new THREE.Vector3()));
   Object.assign(photoCam.params, { dist: 0.3, yaw: 0, pitch: 0, offX: 0, offY: 0 });
@@ -324,7 +377,7 @@ let shooting = false;
 async function shutter() {
   if (shooting || G.mode !== 'capture') return; shooting = true;
   const blur = (1 - CAM.focus) * 6;
-  photoCam.aim(G.cow); renderer.render(scene, photoCam.cam);
+  photoCam.aim(G.cow); photoLight(true); renderer.render(scene, photoCam.cam); photoLight(false);
   const photo = photoCam.grab(canvas, blur), box = suggestBox(G.cow, photo);
   shutterSound(); gsap.fromTo('#cam-flash', { opacity: 0.9 }, { opacity: 0, duration: 0.45 });
   progress('shot');
@@ -422,7 +475,7 @@ function onUploadRegister() {
 
 /* -------------------------------------------------------------- HUD varios -- */
 function renderMission() {
-  const P = G.progress, steps = [['met', 'Acércate a un bovino y presiona E'], ['shot', 'Fotografía su hocico'], ['sent', 'Envíala a analizar'], ['result', 'Observa la decisión de NASOID']];
+  const P = G.progress, steps = [['met', 'Acércate a un bovino y presiona E'], ['shot', 'Fotografía su hocico'], ['sent', 'Envíala a analizar'], ['result', 'Observa la decisión del sistema']];
   const now = steps.findIndex(s => !P[s[0]]);
   $('#mission-steps').innerHTML = steps.map(([k, t], i) => `<li class="${P[k] ? 'done' : i === now ? 'now' : ''}"><i>${P[k] ? '' : i + 1}</i>${t}</li>`).join('');
   const C = STATE.challenges || {};
@@ -451,7 +504,7 @@ function openHelp() {
   const d = $('#help');
   d.innerHTML = `<div class="sheet"><div class="spread"><div><div class="eyebrow">Ayuda</div><h2>Cómo se juega</h2></div><button class="btn ghost" data-x>Cerrar <kbd>Esc</kbd></button></div>
     <div class="help-grid">
-      <div><h4>Moverte</h4><ul><li><kbd>W A S D</kbd> o flechas para caminar · <kbd>Shift</kbd> para correr.</li><li>Arrastra con el ratón para girar la cámara; rueda para acercar.</li><li>En pantallas táctiles: joystick a la izquierda y arrastre a la derecha.</li><li><kbd>E</kbd> interactuar · <kbd>R</kbd> registro · <kbd>F</kbd> pantalla completa · <kbd>Esc</kbd> menú.</li></ul></div>
+      <div><h4>Moverte</h4><ul><li><kbd>W A S D</kbd> o flechas para caminar · <kbd>Shift</kbd> para correr.</li><li>Arrastra con el ratón para girar la cámara; rueda para acercar.</li><li>En pantallas táctiles: joystick a la izquierda y arrastre a la derecha.</li><li><kbd>Q</kbd> ir directo al bovino más cercano (o clic en un bovino del mapa).</li><li><kbd>E</kbd> interactuar · <kbd>R</kbd> registro · <kbd>F</kbd> pantalla completa · <kbd>Esc</kbd> menú.</li></ul></div>
       <div><h4>Identificar</h4><ul><li>Acércate a un bovino y elige <b>Fotografiar e identificar</b>.</li><li>Ajusta distancia (~30 cm), ángulo y altura hasta que todo esté en verde y presiona <kbd>Espacio</kbd>.</li><li>Revisa la foto, ajusta el recorte y pulsa <b>ANALIZAR IDENTIDAD</b>.</li></ul></div>
       <div><h4>Qué es real</h4><p>La foto es una captura real de la escena 3D; el recorte, el cambio de tamaño, ResNet50 (pesos de ImageNet, sin entrenamiento), la similitud coseno, el 1-NN y la calibración del umbral se ejecutan de verdad en tu navegador.</p></div>
       <div><h4>Modo práctica</h4><p>Los bovinos y sus hocicos son modelos 3D con patrones generados por computador, no fotos de animales reales. Los resultados sirven para entender el proceso; <b>no son resultados experimentales</b> de la investigación (V27 los obtendrá con 19 bovinos reales).</p></div>
@@ -462,7 +515,7 @@ function toggleFull() { if (document.fullscreenElement) document.exitFullscreen(
 function pause() { G.mode = 'menu'; hide('#hud'); $('#btn-play').textContent = 'Continuar'; show('#menu'); menuCamera(); $('#btn-play').focus(); }
 function startGame() {
   hide('#menu'); show('#hud'); G.mode = 'explore'; G.rig.clearOverride(); promptKey = '';
-  if (!G.started) { G.started = true; G.input.yaw = Math.atan2(-(LAYOUT.spawn.x - 0), -(LAYOUT.spawn.z + 4)) + Math.PI; toast('Bienvenido a la finca. Acércate a un bovino.'); }
+  if (!G.started) { G.started = true; G.input.yaw = Math.atan2(LAYOUT.spawn.x - 1, LAYOUT.spawn.z + 2); toast('Bienvenido a la finca. Pulsa Q para ir directo a un bovino.'); }
   canvas.focus();
 }
 function bindUI() {
@@ -470,6 +523,13 @@ function bindUI() {
   $('#btn-howto').onclick = openHelp;
   $('#btn-help').onclick = openHelp;
   $('#btn-registry').onclick = () => registryOpen() ? closeRegistry() : openRegistry();
+  $('#btn-go').onclick = () => goToCow(nextCow());
+  $('#minimap').addEventListener('click', e => { // clic en un bovino del mapa: ir hasta él
+    const c = $('#minimap'), b = c.getBoundingClientRect(), mx = (e.clientX - b.left) / b.width * c.width, my = (e.clientY - b.top) / b.height * c.height;
+    const X = v => (v - mm.x0) / (mm.x1 - mm.x0) * c.width, Z = v => (v - mm.z0) / (mm.z1 - mm.z0) * c.height;
+    let best = null, bd = 18; for (const cow of G.herd.cows) { const d = Math.hypot(X(cow.position.x) - mx, Z(cow.position.z) - my); if (d < bd) { bd = d; best = cow; } }
+    if (best) goToCow(best);
+  });
   $('#btn-full').onclick = toggleFull; $('#btn-pause').onclick = pause;
   $('#btn-mission-toggle').onclick = e => { const m = $('#mission'); m.classList.toggle('collapsed'); e.target.textContent = m.classList.contains('collapsed') ? 'mostrar' : 'ocultar'; };
   $('#btn-reset').onclick = async () => { if (await confirmDialog('Reiniciar datos de práctica', 'Se borrarán registros, fotos e historial de este navegador y se creará otra vez la galería de demostración.', 'Reiniciar', true)) resetPractice(); };
@@ -486,5 +546,5 @@ function bindUI() {
   addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); photoCam.fit(innerWidth, innerHeight); if (G.mode === 'capture') layoutViewfinder(); });
 }
 
-Object.assign(G.api, { inChute, shoot, suggestBox, setPad: v => { CROP_PAD = v; }, openInteract, enterCapture, shutter, startGame, analyze, seedDemo, refresh, STATE, photoCam, toggleChute, resetPractice });
+Object.assign(G.api, { goToCow, nextCow, inChute, shoot, suggestBox, setPad: v => { CROP_PAD = v; }, openInteract, enterCapture, shutter, startGame, analyze, seedDemo, refresh, STATE, photoCam, toggleChute, resetPractice });
 boot().catch(e => { console.error(e); $('#load-text').textContent = 'Error al cargar: ' + e.message; });

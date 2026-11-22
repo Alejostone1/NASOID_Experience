@@ -11,14 +11,14 @@ export const CIERRE = [
   {
     id: 'cierre', block: B, title: 'Cierre', spk: 'DJ', shot: { rel: [2.6, 0.2, 4.4], look: 'body', lookOff: [0, -0.35, 0], shift: 0, headUp: true }, wide: true,
     html: () => `<div class="col center">
-      <div class="eyebrow" data-a>NASOID · ${PROJECT.university}</div>
+      <div class="eyebrow" data-a>${PROJECT.university}</div>
       <h2 class="big" data-a>Identificar sin marcar.</h2>
       <p class="lead" data-a>Una foto del hocico, una red preentrenada y un registro digital confiable para saber quién es cada animal.</p>
       <div class="question" data-a><span>Nuestra investigación responderá</span>${QUESTION}</div>
       <div class="thanks" data-a><b>Gracias</b><span>Al profesor <b>Alexander Quintero</b>, por su asesoría en Fundamentos de Investigación durante la elaboración del documento.</span></div>
-      <div class="row center" data-a><a class="btn amber big" href="${SIM}">EXPLORAR SIMULADOR NASOID</a><button class="btn" onclick="NASOID_P.go(NASOID_P.count-1)">Referencias</button></div></div>`,
+      <div class="row center" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a><button class="btn" onclick="NASOID_P.go(NASOID_P.count-1)">Referencias</button></div></div>`,
     enter(root) { gsap.fromTo($('.question', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.6, delay: 0.8, ease: 'power2.inOut' }); gsap.fromTo($('.thanks b', root), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, delay: 1.8, ease: 'elastic.out(1, .5)' }); },
-    notes: { idea: 'Cerrar con la idea central y agradecer.', guion: ['NASOID propone identificar sin marcar: una foto del hocico, inteligencia artificial y un registro confiable.', 'Agradecemos al profesor Alexander Quintero por su acompañamiento. Quedamos atentos a sus preguntas.'] },
+    notes: { idea: 'Cerrar con la idea central y agradecer.', guion: ['Proponemos identificar sin marcar: una foto del hocico, inteligencia artificial y un registro confiable.', 'Agradecemos al profesor Alexander Quintero por su acompañamiento. Quedamos atentos a sus preguntas.'] },
   },
   {
     id: 'referencias', block: B, title: 'Referencias', spk: 'DJ', wide: true, hide3d: true,

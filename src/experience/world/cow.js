@@ -12,6 +12,7 @@ import * as THREE from 'three';
 import { sd, smin, smax, surfaceNets } from './mesher.js';
 import { generateMuzzle } from '../biometric/muzzle.js';
 import { mulberry32 } from '../../shared/rng.js';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 const { ellipsoid, capsule, roundCone, sphere } = sd;
 
@@ -121,7 +122,19 @@ function hornGeometry() {
   for (let i = 0; i < seg; i++) for (let j = 0; j < rad; j++) { const a = i * (rad + 1) + j, b = a + rad + 1; ind.push(a, b, a + 1, b, b + 1, a + 1); }
   const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3)); g.setIndex(ind); g.computeVertexNormals(); return g;
 }
-function legGeometry(r0, r1, len) { const g = new THREE.CylinderGeometry(r0, r1, len, 10, 3); g.translate(0, -len / 2, 0); return g; }
+function legGeometry(r0, r1, len) { const g = new THREE.CylinderGeometry(r0, r1, len, 16, 3); g.translate(0, -len / 2, 0); return g; }
+/** Pata con perfil anatómico (revolución): músculo arriba, caña delgada y menudillo abultado abajo. */
+function shapedLeg(r0, r1, len, muscle, fetlock) {
+  const pts = [];
+  for (let i = 0; i <= 16; i++) { const t = i / 16; let r = THREE.MathUtils.lerp(r0, r1, Math.pow(t, 0.8)); r *= 1 + muscle * Math.exp(-((t - 0.22) ** 2) / 0.02) + fetlock * Math.exp(-((t - 0.9) ** 2) / 0.004); pts.push(new THREE.Vector2(r, -t * len)); }
+  pts.unshift(new THREE.Vector2(0.001, 0)); pts.push(new THREE.Vector2(0.001, -len));
+  const g = new THREE.LatheGeometry(pts.reverse(), 18); g.scale(1, 1, 0.82); g.computeVertexNormals(); return g;
+}
+/** Pezuña hendida: dos mitades con una ranura al frente. */
+function hoofGeometry() {
+  const half = sx => { const g = new THREE.CylinderGeometry(0.042, 0.058, 0.085, 12, 1, false, sx < 0 ? Math.PI : 0, Math.PI); g.translate(sx * 0.006, -0.042, 0.012); return g; };
+  return mergeGeometries([half(-1), half(1)]);
+}
 function furTexture() {
   const S = 256, c = document.createElement('canvas'); c.width = c.height = S; const x = c.getContext('2d');
   x.fillStyle = '#808080'; x.fillRect(0, 0, S, S); const r = mulberry32(99);
@@ -135,17 +148,18 @@ export function buildShared(quality = { level: 'alto' }) {
   const hiStep = quality.level === 'bajo' ? 0.011 : 0.0072;
   const headHi = splitMuzzle(surfaceNets(headSDF, [-0.24, -0.3, -0.56], [0.24, 0.23, 0.33], hiStep));
   const headLo = splitMuzzle(surfaceNets(headSDF, [-0.24, -0.3, -0.56], [0.24, 0.23, 0.33], 0.02));
-  const body = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 0), [-0.5, 0.42, -1.15], [0.5, 1.5, 1.2], 0.03));
-  const bodyHump = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 1), [-0.5, 0.42, -1.15], [0.5, 1.62, 1.2], 0.03));
+  const bodyStep = quality.level === 'bajo' ? 0.03 : 0.019; // malla más fina: silueta suave, sin facetas
+  const body = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 0), [-0.5, 0.42, -1.15], [0.5, 1.5, 1.2], bodyStep));
+  const bodyHump = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 1), [-0.5, 0.42, -1.15], [0.5, 1.62, 1.2], bodyStep));
   SHARED = {
     headHi, headLo, body, bodyHump,
     aoHeadHi: aoFor(headHi, headSDF, 0.006), aoHeadLo: aoFor(headLo, headSDF, 0.006),
     aoBody: aoFor(body, (x, y, z) => bodySDF(x, y, z, 0), 0.03), aoBodyHump: aoFor(bodyHump, (x, y, z) => bodySDF(x, y, z, 1), 0.03),
     horn: hornGeometry(), fur: furTexture(),
-    legUpperF: legGeometry(0.105, 0.064, 0.46), legLowerF: legGeometry(0.056, 0.046, 0.4),
-    legUpperR: legGeometry(0.125, 0.066, 0.5), legLowerR: legGeometry(0.056, 0.046, 0.42),
-    joint: new THREE.SphereGeometry(1, 10, 8), hoof: (() => { const g = new THREE.CylinderGeometry(0.045, 0.06, 0.08, 10); g.translate(0, -0.04, 0.01); return g; })(),
-    tailSeg: legGeometry(0.022, 0.016, 0.13), tuft: (() => { const g = new THREE.SphereGeometry(0.05, 8, 6); g.scale(0.8, 2.2, 0.8); g.translate(0, -0.09, 0); return g; })(),
+    legUpperF: shapedLeg(0.1, 0.06, 0.46, 0.22, 0), legLowerF: shapedLeg(0.054, 0.044, 0.4, 0.05, 0.22),
+    legUpperR: shapedLeg(0.12, 0.062, 0.5, 0.25, 0), legLowerR: shapedLeg(0.054, 0.044, 0.42, 0.05, 0.22),
+    joint: new THREE.SphereGeometry(1, 18, 12), hoof: hoofGeometry(),
+    tailSeg: legGeometry(0.022, 0.016, 0.13), tuft: (() => { const g = new THREE.SphereGeometry(0.05, 16, 12); g.scale(0.8, 2.2, 0.8); g.translate(0, -0.09, 0); return g; })(),
     eye: new THREE.SphereGeometry(0.0185, 18, 12), lid: new THREE.TorusGeometry(0.0185, 0.0042, 8, 24),
     ms: 0,
   };
@@ -180,7 +194,7 @@ function paint(g, ao, B, seed, part, toWorld) {
     }
     if (part === 'body') { const belly = Math.max(0, Math.min(1, (0.75 - y) * 2.5)); c = c.map((ch, i) => ch * (1 - belly * 0.25) + B.dark[i] * belly * 0.25); }
     const jitter = 0.94 + 0.12 * noise3(x * 300, y * 300, z * 300, seed), a = ao ? ao[v] : 1;
-    const k = 0.86 * jitter * a; C[v * 3] = c[0] * k; C[v * 3 + 1] = c[1] * k; C[v * 3 + 2] = c[2] * k;
+    const k = 0.8 * jitter * a; C[v * 3] = c[0] * k; C[v * 3 + 1] = c[1] * k; C[v * 3 + 2] = c[2] * k;
   }
   return new THREE.BufferAttribute(C, 3);
 }

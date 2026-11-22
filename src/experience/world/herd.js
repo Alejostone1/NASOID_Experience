@@ -8,7 +8,8 @@ import { Cow } from './cow.js';
 import { LAYOUT, heightAt } from './environment.js';
 
 const P = LAYOUT.pasture;
-const SPOTS = [[-14, -8], [-4, -14], [6, -6], [-18, 6], [2, 6], [12, -14], [-8, -2], [14, 4], [-20, -18]];
+// la manada pasta cerca de la entrada sur, a pocos pasos del operario
+const SPOTS = [[-3, -2], [3, -7], [9, -1], [-8, 3], [1, 2], [10, -9], [-5, -10], [13, 3], [-11, -5]];
 
 export class Herd {
   constructor(scene, quality, env, onProgress) {
@@ -34,7 +35,7 @@ export class Herd {
   randomTarget(cow) {
     for (let i = 0; i < 20; i++) {
       const x = P.x0 + 3 + cow.rand() * (P.x1 - P.x0 - 6), z = P.z0 + 3 + cow.rand() * (P.z1 - P.z0 - 6);
-      if (Math.hypot(x - cow.position.x, z - cow.position.z) < 14) return new THREE.Vector3(x, 0, z);
+      if (Math.hypot(x - cow.position.x, z - cow.position.z) < 9 && Math.hypot(x - 1, z + 2) < 15) return new THREE.Vector3(x, 0, z);
     }
     return new THREE.Vector3((P.x0 + P.x1) / 2, 0, (P.z0 + P.z1) / 2);
   }

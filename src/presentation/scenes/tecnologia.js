@@ -38,14 +38,14 @@ export const TECNOLOGIA = [
     notes: { idea: 'Cliente liviano, procesamiento en el servidor, todo con herramientas gratuitas.', guion: ['Next.js en el celular; FastAPI, OpenCV, Keras con JAX y NumPy en el servidor; PostgreSQL para los datos.', 'No se necesita tarjeta gráfica. Cada herramienta tiene una alternativa descartada, documentada en la Tabla 12.'] },
   },
   {
-    id: 'experiencia', block: B, title: 'La experiencia NASOID', spk: 'J', shot: { rel: [1.1, 0.15, 1.5], look: 'muzzle', lookOff: [0, -0.05, -0.5], shift: 0.24, headUp: true },
+    id: 'experiencia', block: B, title: 'El simulador', spk: 'J', shot: { rel: [1.1, 0.15, 1.5], look: 'muzzle', lookOff: [0, -0.05, -0.5], shift: 0.24, headUp: true },
     html: () => `<div class="col">
       <div class="eyebrow" data-a>09 · Demostración</div>
       <h2 data-a>Ahora, <em>pruébalo</em> tú.</h2>
-      <p class="lead" data-a>Construimos una finca 3D para mostrarlo: acércate a un bovino, fotografía su hocico y observa cómo NASOID lo compara con los animales registrados.</p>
+      <p class="lead" data-a>Construimos una finca 3D para mostrarlo: acércate a un bovino, fotografía su hocico y observa cómo el sistema lo compara con los animales registrados.</p>
       <div class="decide" data-a><span class="s ok">Identificado</span><span class="s warn">No identificado</span><span class="s tie">No concluyente</span></div>
       <p class="sub" data-a>El simulador ejecuta de verdad el recorte, ResNet50 (pesos de ImageNet, sin entrenamiento), la similitud coseno, el vecino más próximo y el umbral calibrado con la regla del V27. Los animales son modelos 3D: es un <b>modo práctica</b>, no un resultado de la investigación.</p>
-      <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR SIMULADOR NASOID</a></div></div>`,
+      <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a></div></div>`,
     enter(root) { gsap.fromTo($$('.decide .s', root), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, stagger: 0.25, duration: 0.5, delay: 0.6, ease: 'back.out(2.2)' }); gsap.fromTo($('.btn.amber', root), { boxShadow: '0 0 0 0 rgba(200,146,46,.6)' }, { boxShadow: '0 0 0 18px rgba(200,146,46,0)', duration: 1.4, repeat: 2, delay: 1.4 }); },
     notes: { idea: 'Pasar a la demostración en vivo.', guion: ['En el simulador se camina por una finca, se fotografía el hocico de un bovino y se ve cómo el sistema lo analiza y decide.'] },
   },

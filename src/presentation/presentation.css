@@ -1,4 +1,4 @@
-/* ============================ Presentación NASOID (tema claro) ============================ */
+/* ============================ Presentación (tema claro) ============================ */
 body.pres { overflow: hidden; background: #e4e9dc; }
 #bg { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; transition: opacity .9s, filter .9s; }
 body.hide3d #bg { opacity: .32; filter: blur(6px) saturate(.8); }
@@ -310,3 +310,4 @@ h2 em.swept { background-size: 100% 100%; }
 .kw { background-repeat: no-repeat; background-size: 100% 100%; }
 .ladder { height: 250px; } .step { height: calc(100px + var(--i) * 17px); overflow: hidden; }
 @media (max-height: 820px) { .ladder { height: 240px; } .step { height: calc(96px + var(--i) * 16px); } }
+.giant.title-doc { font-size: clamp(42px, 5.4vw, 84px); line-height: 1.02; max-width: 16ch; }

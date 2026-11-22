@@ -16,18 +16,18 @@ function counter(el, to, d = 0, dur = 1.8) { const o = { v: 0 }; gsap.to(o, { v:
 
 export const APERTURA = [
   {
-    id: 'nasoid', block: B, title: 'NASOID', spk: 'DJ', shot: { rel: [2.3, 0.35, 3.4], look: 'body', lookOff: [0, 0.1, 0.4], shift: 0.24 },
+    id: 'portada', block: B, title: 'Portada', spk: 'DJ', shot: { rel: [2.3, 0.35, 3.4], look: 'body', lookOff: [0, 0.1, 0.4], shift: 0.24 },
     html: () => `<div class="col">
       <div class="eyebrow" data-a>${PROJECT.university} · ${PROJECT.year}</div>
-      <h1 class="giant" data-a>NASOID</h1>
-      <p class="lead" data-a>Identificación biométrica naso-labial en bovinos, apoyada en inteligencia artificial.</p>
+      <h1 class="giant title-doc" data-a>Identificación biométrica <em>naso-labial</em> en bovinos</h1>
+      <p class="lead" data-a>Un prototipo apoyado en inteligencia artificial para reconocer a cada animal por su hocico.</p>
       <div class="authors" data-a><div><b>Daniel Felipe Colorado Amaya</b></div><div><b>John Alejandro Piedrahita Muñoz</b></div>
         <div class="small">${PROJECT.program} · ${PROJECT.faculty}</div>
         <div class="small">Fundamentos de Investigación · Asesor: <b>Prof. Alexander Quintero</b></div></div>
-      <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR SIMULADOR NASOID</a><button class="btn ghost" onclick="NASOID_P.go(1)">Comenzar →</button></div>
+      <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a><button class="btn ghost" onclick="NASOID_P.go(1)">Comenzar →</button></div>
       <p class="hint" data-a>← → para avanzar · <kbd>M</kbd> índice · <kbd>R</kbd> referencias · <kbd>N</kbd> notas</p></div>`,
     enter(root) { gsap.fromTo($('.giant', root), { letterSpacing: '0.35em', opacity: 0, filter: 'blur(8px)' }, { letterSpacing: '0em', opacity: 1, filter: 'blur(0px)', duration: 1.4, ease: 'power3.out' }); },
-    notes: { idea: 'Presentarnos, presentar el proyecto y decir qué vamos a mostrar.', guion: ['Buenos días. Somos estudiantes de Ingeniería de Sistemas y Telecomunicaciones de la Universidad Católica de Pereira.', 'NASOID es un prototipo para reconocer a cada bovino por la huella de su hocico, con una foto del celular e inteligencia artificial.', 'Vamos a recorrer el problema, lo que dice la literatura, cómo lo vamos a investigar —la metodología— y la tecnología, y al final lo verán funcionar en un simulador.'] },
+    notes: { idea: 'Presentarnos, presentar el proyecto y decir qué vamos a mostrar.', guion: ['Buenos días. Somos estudiantes de Ingeniería de Sistemas y Telecomunicaciones de la Universidad Católica de Pereira.', 'Nuestro proyecto es un prototipo para reconocer a cada bovino por la huella de su hocico, con una foto del celular e inteligencia artificial.', 'Vamos a recorrer el problema, lo que dice la literatura, cómo lo vamos a investigar —la metodología— y la tecnología, y al final lo verán funcionar en un simulador.'] },
   },
   {
     id: 'contexto', block: B, title: 'La ganadería en cifras', spk: 'D', shot: { rel: [3.6, 0.8, 4.2], look: 'body', lookOff: [0, -0.2, 0], shift: 0.3, graze: true }, wide: true,

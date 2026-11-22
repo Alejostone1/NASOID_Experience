@@ -102,6 +102,10 @@ def game(b):
         if abs(p1['x'] - p0['x']) + abs(p1['z'] - p0['z']) > 1.5: break
     pg.keyboard.up('w'); d = abs(p1['x'] - p0['x']) + abs(p1['z'] - p0['z']); check('game.movimiento_wasd', d > 1.5, f'{d:.2f} m'); shot(pg, 'game_caminar')
     f0 = pg.evaluate('NASOID.frame'); pg.wait_for_timeout(5000); fps = (pg.evaluate('NASOID.frame') - f0) / 5; REPORT['fps_swiftshader_bajo'] = fps
+    # viaje rápido (Q): llega al bovino y abre la interacción sin caminar todo el potrero
+    pg.keyboard.press('q'); pg.wait_for_function('NASOID.mode==="interact"', timeout=60000); pg.wait_for_timeout(800)
+    d = pg.evaluate('(()=>{const c=NASOID.cow,p=NASOID.farmer.position; return Math.hypot(c.position.x-p.x,c.position.z-p.z)})()')
+    check('game.viaje_rapido_Q', pg.is_visible('#interact') and d < 4, f'{d:.2f} m del bovino'); shot(pg, 'game_viaje_rapido'); pg.keyboard.press('Escape'); pg.wait_for_timeout(600)
     # interacción por teclado
     pg.evaluate('(()=>{const c=NASOID.herd.cows[1], m=c.muzzleWorld(new c.position.constructor()), h=c.heading; NASOID.farmer.position.set(m.x+Math.sin(h)*1.1,0,m.z+Math.cos(h)*1.1); NASOID.ctrl.faceTowards(m);})()')
     pg.wait_for_timeout(2500); pg.keyboard.press('e'); pg.wait_for_timeout(1500)

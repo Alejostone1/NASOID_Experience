@@ -56,9 +56,9 @@ export class PlayerController {
     const mv = this.lock ? new THREE.Vector2() : this.input.moveVector(), yaw = this.input.yaw;
     const fwd = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), right = new THREE.Vector3(-fwd.z, 0, fwd.x);
     const want = fwd.multiplyScalar(mv.y).add(right.multiplyScalar(mv.x));
-    const max = this.input.running ? 4.6 : 2.1;
+    const max = this.input.running ? 6.8 : 3.2;
     want.multiplyScalar(max * Math.min(1, mv.length()));
-    this.vel.lerp(want, 1 - Math.exp(-dt * 8));
+    this.vel.lerp(want, 1 - Math.exp(-dt * 10));
     const p = this.f.position; p.addScaledVector(this.vel, dt);
     this.env.resolve(p, this.f.radius); this.herd?.resolvePlayer(p, this.f.radius);
     p.y = heightAt(p.x, p.z);
