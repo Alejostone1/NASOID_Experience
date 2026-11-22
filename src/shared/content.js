@@ -71,13 +71,13 @@ export const SCOPE = {
 
 /** Tabla 1 */
 export const METHOD = [
-  ['Paradigma', 'Positivista (empírico-analítico)', 'La pregunta se responde con datos medibles: aciertos, errores, porcentajes y tiempos.'],
-  ['Enfoque', 'Cuantitativo', 'Datos numéricos o categorías definidas de antemano, analizados con estadística.'],
-  ['Tipo según el propósito', 'Aplicada', 'Usa conocimiento existente para resolver un problema concreto.'],
-  ['Tipo según la fuente', 'Documental y de campo', 'Revisión de estudios y datos tomados directamente en las fincas.'],
-  ['Alcance', 'Correlacional', 'Asociación entre acierto, puntuación y tiempo con las condiciones de captura.'],
-  ['Diseño', 'No experimental, mediciones repetidas en tres sesiones', 'Las condiciones de captura se registran tal como ocurren; no se manipulan.'],
-  ['Población y muestra', 'Todos los bovinos de dos fincas: 7 (A) y 12 (B), 19 en total', 'El número de animales es pequeño y permite trabajar con todos.'],
+  ['Paradigma', 'Positivista (empírico-analítico)', 'Respondemos la pregunta con datos medibles: aciertos, errores, porcentajes y tiempos.'],
+  ['Enfoque', 'Cuantitativo', 'Registramos datos numéricos o categorías definidas de antemano y los analizamos con estadística.'],
+  ['Tipo según el propósito', 'Aplicada', 'Usamos conocimiento existente para resolver un problema concreto.'],
+  ['Tipo según la fuente', 'Documental y de campo', 'Revisamos estudios y tomamos los datos directamente en las fincas.'],
+  ['Alcance', 'Correlacional', 'Buscamos la asociación entre acierto, puntuación y tiempo con las condiciones de captura.'],
+  ['Diseño', 'No experimental, mediciones repetidas en tres sesiones', 'Registramos las condiciones de captura tal como ocurren; no las manipulamos.'],
+  ['Población y muestra', 'Todos los bovinos de dos fincas: 7 (A) y 12 (B), 19 en total', 'Son pocos animales: podemos trabajar con todos.'],
 ];
 /** Tabla 3 */
 export const PHASES = [

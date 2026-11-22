@@ -18,10 +18,10 @@ import { TECNOLOGIA } from './scenes/tecnologia.js';
 import { CIERRE } from './scenes/cierre.js';
 
 const SCENES = [...APERTURA, ...FUNDAMENTOS, ...METODOLOGIA, ...TECNOLOGIA, ...CIERRE];
-const SPK = { D: 'Daniel Felipe Colorado Amaya', J: 'John Alejandro Piedrahita Muñoz', DJ: 'Daniel y John' };
+/** Marca de narración: solo un color por voz (sin nombres) para seguir la línea del relato. */
 const SPK_COLOR = { D: '#8a6a4a', J: '#5f7352', DJ: '#c8922e' };
 /** Sección del V27 → escena (para los botones «Citada en V27» de la biblioteca). */
-const SECTION_SCENE = { '1': 'nasoid', '2': 'problema', '3': 'justificacion', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'alcance', '5': 'metodologia', '5.1': 'paradigmas', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'diseno', '5.5': 'poblacion', '5.6': 'variables', '5.7': 'protocolo', '5.8': 'protocolo', '5.9': 'fases', '5.10': 'analisis', '5.11': 'protocolo', '6': 'estado-arte', '6.1': 'estado-arte', '6.2': 'funcion', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'decisiones', '6.2.4': 'decisiones', '6.2.5': 'decisiones', '6.2.6': 'decisiones', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'cronograma', '7.2': 'cronograma', '7.3': 'cronograma', '8': 'referencias' };
+const SECTION_SCENE = { '1': 'nasoid', '2': 'problema', '3': 'problema', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'objetivos', '5': 'metodologia', '5.1': 'paradigmas', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'metodologia', '5.5': 'poblacion', '5.6': 'variables', '5.7': 'metodologia', '5.8': 'metodologia', '5.9': 'objetivos', '5.10': 'metodologia', '5.11': 'metodologia', '6': 'estado-arte', '6.1': 'estado-arte', '6.2': 'funcion', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'funcion', '6.2.4': 'funcion', '6.2.5': 'funcion', '6.2.6': 'funcion', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'objetivos', '7.2': 'objetivos', '7.3': 'objetivos', '8': 'referencias' };
 
 let idx = 0, stage = null, typed = '';
 const mounted = new Set();
@@ -32,7 +32,7 @@ function build() {
   $$('#segs i').forEach(el => el.onclick = () => go(+el.dataset.i));
   const blocks = []; SCENES.forEach((s, i) => { let b = blocks.find(x => x.name === s.block); if (!b) blocks.push(b = { name: s.block, items: [] }); b.items.push([s, i]); });
   $('#index').innerHTML = `<div class="idx-in"><div class="spread"><div><div class="eyebrow">Índice · ${SCENES.length} escenas</div><h2>Recorrido de la sustentación</h2></div><button class="btn ghost" data-close>Cerrar <kbd>M</kbd></button></div>
-    <div class="idx-blocks">${blocks.map(b => `<div class="idx-b"><h4>${b.name}</h4>${b.items.map(([s, i]) => `<button data-go="${i}"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${s.title}</span><span class="w" style="color:${SPK_COLOR[s.spk]}">${s.spk === 'DJ' ? 'D + J' : s.spk}</span></button>`).join('')}</div>`).join('')}</div></div>`;
+    <div class="idx-blocks">${blocks.map(b => `<div class="idx-b"><h4>${b.name}</h4>${b.items.map(([s, i]) => `<button data-go="${i}"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${s.title}</span><span class="w" style="--c:${SPK_COLOR[s.spk]}"></span></button>`).join('')}</div>`).join('')}</div></div>`;
   $('#index [data-close]').onclick = () => toggle('#index', false);
   $$('#index [data-go]').forEach(b => b.onclick = () => { toggle('#index', false); go(+b.dataset.go); });
   document.addEventListener('click', e => { const c = e.target.closest('.cite'); if (c) { e.preventDefault(); openBiblio(c.dataset.ref); } });
@@ -47,27 +47,36 @@ function go(i) {
   if (!mounted.has(s.id)) { mounted.add(s.id); s.mount?.(next); }
   gsap.fromTo(next, { opacity: 0, x: 24 * dir }, { opacity: 1, x: 0, duration: 0.55, delay: 0.1 });
   gsap.fromTo($$('[data-a]', next), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, delay: 0.2, ease: 'power2.out' });
-  setTimeout(() => s.enter?.(next), 250);
+  setTimeout(() => s.enter?.(next), 250); reveal(next);
   if (stage) stage.shot(s.shot || { rel: [4.6, 1.1, 4.4], look: 'body', lookOff: [0, -0.2, 0], shift: 0.34, graze: true });
   document.body.classList.toggle('wide', !!(s.wide || !s.shot)); document.body.classList.toggle('hide3d', !!s.hide3d);
   $$('#segs i').forEach((el, k) => { el.classList.toggle('on', k === i); el.classList.toggle('done', k < i); });
   $('#count').textContent = `${String(i + 1).padStart(2, '0')} / ${SCENES.length}`;
-  $('#speaker').textContent = SPK[s.spk]; $('#speaker').style.setProperty('--c', SPK_COLOR[s.spk]);
+  const sp = $('#speaker'); sp.style.setProperty('--c', SPK_COLOR[s.spk]); sp.classList.remove('beat'); void sp.offsetWidth; sp.classList.add('beat');
   $('#block').textContent = s.block;
   renderNotes();
   history.replaceState(null, '', '#' + s.id);
 }
+/** Animación común: el título entra palabra por palabra y el énfasis se subraya. */
+function reveal(root) {
+  $$('h1, h2', root).forEach(h => {
+    if (!h.dataset.split) { h.dataset.split = 1; const walk = n => [...n.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w) return; if (/^\s+$/.test(w)) f.append(w); else { const sp = document.createElement('span'); sp.className = 'wd'; sp.textContent = w; f.append(sp); } }); c.replaceWith(f); } else if (c.nodeType === 1 && c.tagName !== 'BUTTON') walk(c); }); walk(h); }
+    gsap.fromTo($$('.wd', h), { opacity: 0, y: '0.45em', rotateX: -60 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.6, stagger: 0.045, delay: 0.25, ease: 'power3.out' });
+  });
+  $$('h2 em, h1 em', root).forEach(e => { e.classList.remove('swept'); setTimeout(() => e.classList.add('swept'), 900); });
+}
 function renderNotes() {
   const s = SCENES[idx], n = s.notes || {}, nx = SCENES[idx + 1];
-  $('#notes').innerHTML = `<div class="spread"><span class="eyebrow" style="color:${SPK_COLOR[s.spk]}">● ${SPK[s.spk]}</span><button class="link" data-x>cerrar (N)</button></div>
+  $('#notes').innerHTML = `<div class="spread"><span class="spk-dot" style="--c:${SPK_COLOR[s.spk]}"></span><button class="link" data-x>cerrar (N)</button></div>
     <h4>${s.title}</h4>${n.idea ? `<p class="idea">${n.idea}</p>` : ''}${(n.guion || []).map(g => `<p>${g}</p>`).join('')}
-    ${nx ? `<p class="next">Siguiente: ${nx.title}${nx.spk !== s.spk ? ` · <b style="color:${SPK_COLOR[nx.spk]}">${SPK[nx.spk]}</b>` : ''}</p>` : ''}`;
+    ${nx ? `<p class="next">Siguiente: ${nx.title}${nx.spk !== s.spk ? ` <span class="spk-dot" style="--c:${SPK_COLOR[nx.spk]}"></span>` : ''}</p>` : ''}`;
   $('#notes [data-x]').onclick = () => toggle('#notes', false);
 }
 
 addEventListener('keydown', e => {
-  if (e.target.closest('input, textarea, select')) return;
   const k = e.key;
+  if (k === 'Escape' && isBiblioOpen()) return closeBiblio();
+  if (e.target.closest('input, textarea, select')) return;
   if (k === 'Escape') { if (isBiblioOpen()) return closeBiblio(); toggle('#index', false); toggle('#notes', false); return; }
   if (['ArrowRight', 'PageDown', ' '].includes(k)) { e.preventDefault(); go(idx + 1); }
   else if (['ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); go(idx - 1); }

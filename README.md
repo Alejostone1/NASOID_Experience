@@ -6,7 +6,7 @@ Tiene dos partes:
 
 | Ruta | Qué es |
 |---|---|
-| `/` | **Presentación de sustentación**: 27 escenas animadas y clicables en 5 bloques (Apertura, Fundamentos, Metodología, Tecnología, Cierre) con fondo claro y un bovino 3D. Incluye árbol del problema, línea de tiempo del estado del arte, la metodología explicada (Tabla 1 con el porqué de cada decisión), las decisiones técnicas con su alternativa descartada y una biblioteca de 71 referencias con enlaces reales. Teclas: ← → avanzar · `M` índice · `R` referencias · `N` notas del expositor · `F` pantalla completa · `S` simulador. |
+| `/` | **Presentación de sustentación**: 19 escenas animadas y clicables en 5 bloques (Apertura, Fundamentos, Metodología, Tecnología, Cierre) con fondo claro y un bovino 3D. Incluye árbol del problema, línea de tiempo del estado del arte, la metodología explicada (Tabla 1 con el porqué de cada decisión), las decisiones técnicas con su alternativa descartada y una biblioteca de 71 referencias con enlaces reales. Teclas: ← → avanzar · `M` índice · `R` referencias · `N` notas del expositor · `F` pantalla completa · `S` simulador. |
 | `/experience/` | **NASOID RANCH — Biometric Experience**: finca 3D tipo videojuego. Caminas con un operario, te acercas a un bovino, fotografías su hocico y ves cómo NASOID lo identifica. |
 
 La versión académica (`NASOID_Sustentacion`) no se modificó.

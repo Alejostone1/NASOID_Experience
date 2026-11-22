@@ -4,7 +4,7 @@ Segunda versión independiente de NASOID. No comparte archivos con `NASOID_Suste
 
 ```
 NASOID_Experience/
-├── index.html                      presentación de sustentación (27 escenas, 5 bloques)
+├── index.html                      presentación de sustentación (19 escenas, 5 bloques)
 ├── experience/index.html           NASOID RANCH (ruta /experience)
 ├── public/models/resnet50/         ResNet50 en formato TensorFlow.js (float16, 47 MB)
 ├── src/shared/                     tema claro, fuentes, datos de V27, generador con semilla

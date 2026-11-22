@@ -46,7 +46,7 @@ function render(focus) {
   root.querySelector('[data-close]').onclick = closeBiblio;
   const q = root.querySelector('[data-q]');
   q.oninput = () => { state.q = q.value; clearTimeout(q._t); q._t = setTimeout(() => { render(); const n = $('#biblio [data-q]'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 200); };
-  q.onkeydown = e => e.stopPropagation();
+  q.onkeydown = e => { if (e.key === 'Escape') closeBiblio(); e.stopPropagation(); };
   $$('[data-cat]', root).forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
   $$('[data-sec]', root).forEach(b => b.onclick = () => { closeBiblio(); onGoSection?.(b.dataset.sec); });
   if (focus) { const el = $('#ref-' + focus, root); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); } }

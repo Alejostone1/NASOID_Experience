@@ -1,4 +1,4 @@
-/* Bloque 2 · Fundamentos (John) — el hocico como huella, estado del arte y Y = f(X₁…X₆). */
+/* Bloque 2 · Fundamentos — el hocico como huella, estado del arte y Y = f(X₁…X₆). */
 import gsap from 'gsap';
 import { TIMELINE, CORPUS, XVARS } from '../../shared/content.js';
 import { C, $, $$, REF } from '../core.js';
@@ -7,8 +7,8 @@ const B = 'Fundamentos';
 const PROPS = [
   ['Universalidad', 'Todos los bovinos tienen plano naso-labial.', 'Respaldada por la literatura.', 'ok'],
   ['Distintividad', 'El dibujo cambia de un animal a otro: Petersen no encontró dos iguales en más de 350 bovinos.', 'Respaldada por la literatura.', 'ok'],
-  ['Permanencia', 'El patrón se mantiene con el tiempo; Petersen vio que el hocico crecía pero el dibujo no cambiaba.', 'No se evalúa: unas semanas no bastan. Se apoya en los estudios históricos.', 'warn'],
-  ['Colectabilidad', 'Se puede capturar con facilidad, con una foto.', 'La que más puede fallar en campo (barro, humedad, movimiento): por eso esas condiciones se registran como variables.', 'tie'],
+  ['Permanencia', 'El patrón se mantiene con el tiempo; Petersen vio que el hocico crecía pero el dibujo no cambiaba.', 'No la evaluamos: unas semanas no bastan; nos apoyamos en los estudios históricos.', 'warn'],
+  ['Colectabilidad', 'Se puede capturar con facilidad, con una foto.', 'La que más puede fallar en campo (barro, humedad, movimiento): por eso registramos esas condiciones como variables.', 'tie'],
 ];
 const EXTRA = [ // hitos del marco teórico que no están en la cronología base
   { y: 2010, t: 'Pan y Yang', d: 'Aprendizaje por transferencia: aprovechar lo aprendido en una tarea para otra.', ref: 'r45', k: 'tec' },
@@ -16,17 +16,22 @@ const EXTRA = [ // hitos del marco teórico que no están en la cronología base
   { y: 2021, t: 'ISO/IEC 19795-1', d: 'Medidas de error biométrico: falsa coincidencia y falso rechazo.', ref: 'r22', k: 'tec' },
 ];
 const TL = [...TIMELINE, ...EXTRA].sort((a, b) => a.y - b.y || (a.k === 'naso' ? -1 : 1));
+/** Primer porcentaje de la exactitud reportada → contador animado y barra (sin texto nuevo). */
+const NUM = /\d+(?:,\d+)?/;
+const accVal = t => { const m = t.match(NUM); return m ? Math.min(100, parseFloat(m[0].replace(',', '.'))) : 0; };
+const accCount = t => t.replace(NUM, m => `<span class="cnt" data-v="${m.replace(',', '.')}" data-d="${(m.split(',')[1] || '').length}">${m}</span>`);
 const DISCARDED = ['Monitoreo aéreo con drones: no capturan la dermis naso-labial.', 'Aretes de radiofrecuencia (RFID): método físico sujeto a pérdida.', 'Reconocimiento facial exclusivo, sin discriminar el hocico.'];
 
 export const FUNDAMENTOS = [
   {
     id: 'propuesta', block: B, title: 'El hocico como huella', spk: 'J', shot: { look: 'muzzle', rel: [0.18, 0.03, 0.62], shift: 0.22, headUp: true, ring: true },
     html: () => `<div class="col">
-      <div class="eyebrow" data-a>05 · Nuestra propuesta</div>
+      <div class="eyebrow" data-a>04 · Nuestra propuesta</div>
       <h2 data-a>El hocico funciona como una <em>huella dactilar</em>.</h2>
       <p class="lead" data-a>El plano naso-labial es la piel sin pelo entre los orificios nasales y el labio superior. Sus «perlas» y surcos forman un patrón propio de cada animal. ${C('r02', 'r33')}</p>
-      <div class="eyebrow" data-a style="margin-top:6px">Un rasgo biométrico debe cumplir cuatro propiedades · clic para ver ${C('r23')}</div>
+      <div class="eyebrow" data-a style="margin-top:6px">Revisamos las cuatro propiedades de un rasgo biométrico · clic para ver ${C('r23')}</div>
       <div class="props interactive" data-a>${PROPS.map(([t, d, s, tone], i) => `<button class="prop ${tone}" data-i="${i}"><b>${t}</b><span class="d">${d}</span><span class="s">${s}</span></button>`).join('')}</div></div>`,
+    enter(root) { gsap.fromTo($$('.prop', root), { opacity: 0, rotateY: -30, x: -20 }, { opacity: 1, rotateY: 0, x: 0, stagger: 0.13, duration: 0.6, delay: 0.4, ease: 'power3.out' }); },
     mount(root) { $$('.prop', root).forEach(p => p.onclick = () => { const on = p.classList.contains('open'); $$('.prop', root).forEach(x => x.classList.remove('open')); if (!on) p.classList.add('open'); }); },
     notes: { idea: 'El hocico cumple las propiedades de un rasgo biométrico; la permanencia no se evalúa aquí.', guion: ['Petersen, en 1922, tomó huellas nasales con tinta a más de 350 bovinos y no encontró dos iguales.', 'Universalidad y distintividad están respaldadas; la permanencia no se puede probar en semanas; la colectabilidad es la que más falla en campo y por eso registramos barro, luz y movimiento.'] },
   },
@@ -35,7 +40,7 @@ export const FUNDAMENTOS = [
     html: () => {
       const X = i => 3 + i / (TL.length - 1) * 94; // espaciado uniforme en orden cronológico (no proporcional al tiempo)
       return `<div class="sa">
-      <div class="sa-head" data-a><div><div class="eyebrow">06 · Estado del arte · un siglo de huellas nasales</div><h2>De la tinta de Petersen (1922) a los <em>vectores</em> de una red preentrenada.</h2></div>
+      <div class="sa-head" data-a><div><div class="eyebrow">05 · Estado del arte · un siglo de huellas nasales</div><h2>De la tinta de Petersen (1922) a los <em>vectores</em> de una red preentrenada.</h2></div>
         <div class="seg-toggle interactive"><button class="on" data-v="tl">Línea de tiempo</button><button data-v="corpus">Corpus 2020–2026</button></div></div>
       <div class="sa-view" data-view="tl">
         <div class="tl interactive" data-a><div class="tl-axis"><i></i></div>
@@ -47,35 +52,50 @@ export const FUNDAMENTOS = [
       </div>
       <div class="sa-view hidden" data-view="corpus">
         <div class="corpus-filter interactive"><button class="on" data-f="all">Todos · ${CORPUS.length}</button><button data-f="corpus">Corpus directo · ${CORPUS.filter(c => c.role === 'corpus').length}</button><button data-f="parcial">Sirven parcialmente · ${CORPUS.filter(c => c.role !== 'corpus').length}</button><button data-f="desc">Descartados</button></div>
-        <div class="corpus-grid">${CORPUS.map(c => `<article class="cc ${c.role}" data-role="${c.role}"><div class="cc-top"><b>${c.a}</b><span>${c.y}</span></div><div class="cc-acc">${c.accTxt}</div><p class="cc-how">${c.n ? `${c.n} ${c.unit} · ` : ''}${c.how}</p><p class="cc-note">${c.note}</p>${C(c.id)}</article>`).join('')}
+        <div class="corpus-grid">${CORPUS.map(c => `<article class="cc ${c.role}" data-role="${c.role}"><div class="cc-top"><b>${c.a}</b><span>${c.y}</span></div><div class="cc-acc">${accCount(c.accTxt)}</div><div class="cc-bar"><i style="--v:${accVal(c.accTxt)}"></i></div><p class="cc-how">${c.n ? `${c.n} ${c.unit} · ` : ''}${c.how}</p><p class="cc-note">${c.note}</p>${C(c.id)}</article>`).join('')}
           <article class="cc desc" data-role="desc"><div class="cc-top"><b>Literatura descartada</b></div><ul>${DISCARDED.map(d => `<li>${d}</li>`).join('')}</ul>${C('r58')}</article></div>
-        <p class="sub">Las exactitudes <b>no son comparables entre sí</b>: cambian la especie, el número de imágenes por animal y si la red se entrena. La mayoría entrena o ajusta la red; NASOID prueba el camino más sencillo: una red preentrenada usada tal como viene. ${C('r64', 'r36', 'r41')}</p>
+        <p class="sub">Las exactitudes <b>no son comparables entre sí</b>: cambian la especie, el número de imágenes por animal y si la red se entrena. La mayoría entrena o ajusta la red; nosotros probamos el camino más sencillo: una red preentrenada usada tal como viene. ${C('r64', 'r36', 'r41')}</p>
       </div></div>`;
     },
     mount(root) {
       const show = i => { const t = TL[i]; $('#tl-card').innerHTML = `<div class="eyebrow">${t.y} · ${t.k === 'naso' ? 'Biometría naso-labial' : 'Técnica que usa el prototipo'}</div><h3>${t.t}</h3><p>${t.d}</p>${C(t.ref)}`; $$('.tl-dot', root).forEach(d => d.classList.toggle('on', +d.dataset.i === i)); gsap.fromTo('#tl-card', { opacity: 0.3, y: 6 }, { opacity: 1, y: 0, duration: 0.35 }); };
       $$('.tl-dot', root).forEach(d => d.onclick = () => show(+d.dataset.i)); show(0);
+      const count = cards => cards.forEach(c => {
+        const n = $('.cnt', c), bar = $('.cc-bar i', c);
+        if (n) { const v = +n.dataset.v, d = +n.dataset.d, o = { v: 0 }; gsap.to(o, { v, duration: 1.3, ease: 'power2.out', onUpdate: () => { n.textContent = o.v.toFixed(d).replace('.', ','); } }); }
+        if (bar) gsap.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: 'power3.out', delay: 0.1 });
+      });
+      const filter = f => {
+        const all = $$('.cc', root), keep = all.filter(c => f === 'all' || c.dataset.role === f);
+        gsap.killTweensOf(all);
+        all.forEach(c => { c.style.display = keep.includes(c) ? '' : 'none'; });
+        gsap.fromTo(keep, { opacity: 0, y: 24, rotateX: -35, scale: 0.94 }, { opacity: 1, y: 0, rotateX: 0, scale: 1, stagger: 0.06, duration: 0.55, ease: 'back.out(1.4)', clearProps: 'transform' });
+        count(keep);
+      };
       $$('.seg-toggle button', root).forEach(b => b.onclick = () => {
         $$('.seg-toggle button', root).forEach(x => x.classList.toggle('on', x === b));
         $$('.sa-view', root).forEach(v => v.classList.toggle('hidden', v.dataset.view !== b.dataset.v));
-        if (b.dataset.v === 'corpus') gsap.fromTo($$('.cc', root), { opacity: 0, y: 14 }, { opacity: 1, y: 0, stagger: 0.04, duration: 0.4 });
+        if (b.dataset.v === 'corpus') filter($('.corpus-filter button.on', root).dataset.f);
+        else this.enter(root);
       });
-      $$('.corpus-filter button', root).forEach(b => b.onclick = () => { $$('.corpus-filter button', root).forEach(x => x.classList.toggle('on', x === b)); const f = b.dataset.f; $$('.cc', root).forEach(c => c.classList.toggle('dim', f !== 'all' && (f === 'parcial' ? c.dataset.role !== 'parcial' : c.dataset.role !== f))); });
+      $$('.corpus-filter button', root).forEach(b => b.onclick = () => { $$('.corpus-filter button', root).forEach(x => x.classList.toggle('on', x === b)); filter(b.dataset.f); });
     },
     enter(root) {
       gsap.fromTo($('.tl-axis i', root), { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 50%', duration: 1.6, ease: 'power2.inOut' });
       gsap.fromTo($$('.tl-dot', root), { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, stagger: 0.09, duration: 0.45, delay: 0.3, ease: 'back.out(2)' });
+      gsap.fromTo($$('.tl-era', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, stagger: 0.5, delay: 0.5, ease: 'power2.out' });
+      $$('.tl-dot', root).forEach((d, i) => setTimeout(() => { d.classList.remove('ping'); void d.offsetWidth; d.classList.add('ping'); }, 1700 + i * 110));
     },
     notes: { idea: 'Línea centenaria; los estudios recientes entrenan redes; NASOID usa una red preentrenada sin entrenar.', guion: ['Petersen (1922) tomó huellas con tinta; Hirsch (1952) las clasificó; Barry (2007) pasó a la imagen digital.', 'Las técnicas que usamos también tienen historia: vecino más próximo (1967), similitud coseno (1975), ImageNet (2009), ResNet (2016).', 'Desde 2020 domina el aprendizaje profundo: Shojaeipour usó ResNet50 con cinco imágenes por animal; Lee fotografió con celular a 30 cm; Oliveira usó vectores, coseno y vecino más próximo con 30 vacas (92,7 %).', 'En «Corpus» se ve cómo clasificamos cada estudio: corpus directo, sirve parcialmente o descartado.'] },
   },
   {
     id: 'funcion', block: B, title: 'Y = f(X₁ … X₆)', spk: 'J', wide: true, hide3d: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>07 · El sistema como una función · ecuación (1)</div>
+      <div class="eyebrow" data-a>06 · El sistema como una función · ecuación (1)</div>
       <h2 data-a>Seis etapas <em>X</em> producen una salida <em>Y</em>.</h2>
       <div class="fx interactive" data-a>${XVARS.map((x, i) => `<button class="fx-n" data-i="${i}"><b>${x.x}</b><span>${x.t}</span></button><i class="fx-a"></i>`).join('')}<div class="fx-y"><b>Y</b><span>(ĉ, s, d)</span></div><span class="fx-dot"></span></div>
       <div class="fx-detail panel" id="fx-detail" data-a></div>
-      <p class="sub" data-a><b>Y</b> es la variable dependiente: el bovino candidato <b>ĉ</b>, su puntuación de semejanza <b>s</b> y la decisión <b>d</b> («identificado» o «no concluyente»). <b>X₁ a X₆</b> son las variables independientes: las etapas del procesamiento, en el orden en que ocurren.</p></div>`,
+      <p class="sub" data-a><b>Y</b> es la variable dependiente: el bovino candidato <b>ĉ</b>, su puntuación de semejanza <b>s</b> y la decisión <b>d</b> («identificado» o «no concluyente»). <b>X₁ a X₆</b> son las variables independientes: las etapas del procesamiento que diseñamos, en el orden en que ocurren.</p></div>`,
     mount(root) {
       const show = i => { const x = XVARS[i]; $('#fx-detail').innerHTML = `<div class="eyebrow">${x.x} · sección ${x.sec} del V27</div><h3>${x.t}</h3><p>${x.d}</p>${C(...x.refs)}`; $$('.fx-n', root).forEach((n, k) => n.classList.toggle('on', k === i)); };
       $$('.fx-n', root).forEach(n => n.onclick = () => show(+n.dataset.i)); show(0);
