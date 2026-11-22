@@ -2,16 +2,17 @@ import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
 import fs from 'node:fs';
 
-/** En el computador sirve los PDF de la carpeta ReferenciasV21 (no se publican en la web). */
+/** En el computador sirve los PDF de la carpeta de referencias (no se publican en la web).
+ *  Busca ../ReferenciasV21, ../../ReferenciasV21 o ../Referencias (carpeta junto al proyecto). */
 function localReferences() {
-  const dir = ['../ReferenciasV21', '../../ReferenciasV21'].map(p => resolve(import.meta.dirname, p)).find(p => fs.existsSync(p));
+  const dir = ['../ReferenciasV21', '../../ReferenciasV21', '../Referencias'].map(p => resolve(import.meta.dirname, p)).find(p => fs.existsSync(p));
   const mw = (req, res, next) => {
     if (!dir) return next();
     const file = resolve(dir, decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, ''));
     if (!file.startsWith(dir) || !fs.existsSync(file)) return next();
     res.setHeader('Content-Type', 'application/pdf'); fs.createReadStream(file).pipe(res);
   };
-  return { name: 'nasoid-local-references', configureServer(s) { s.middlewares.use('/ReferenciasV21', mw); }, configurePreviewServer(s) { s.middlewares.use('/ReferenciasV21', mw); } };
+  return { name: 'local-references', configureServer(s) { s.middlewares.use('/ReferenciasV21', mw); }, configurePreviewServer(s) { s.middlewares.use('/ReferenciasV21', mw); } };
 }
 
 export default defineConfig({
