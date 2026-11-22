@@ -76,7 +76,7 @@ export function identify(u, records, cal) {
 
 export const STATES = {
   identificado: { title: 'Identificado', tone: 'ok', text: 'La foto coincide con un bovino registrado: su puntuación supera el umbral y no hay empate.' },
-  'no-identificado': { title: 'No identificado', tone: 'warn', text: 'No se encontró un bovino que cumpla las condiciones de identificación: ninguna puntuación alcanza el umbral θ.', v27: 'En V27 este caso se registra como «no concluyente» por umbral.' },
-  'no-concluyente': { title: 'No concluyente', tone: 'tie', text: 'Dos registros empatan en la puntuación más alta: el sistema no tiene evidencia suficiente para asignar una identidad con seguridad.', v27: 'En V27: «no concluyente» por empate (resolución 0,001).' },
+  'no-identificado': { title: 'No identificado', tone: 'warn', text: 'No se encontró un bovino que cumpla las condiciones de identificación: ninguna puntuación alcanza el umbral θ.', v27: 'En nuestro documento este caso se registra como «no concluyente» por umbral.' },
+  'no-concluyente': { title: 'No concluyente', tone: 'tie', text: 'Dos registros empatan en la puntuación más alta: el sistema no tiene evidencia suficiente para asignar una identidad con seguridad.', v27: 'En nuestro documento: «no concluyente» por empate (resolución 0,001).' },
   vacio: { title: 'Sin registros', tone: 'warn', text: 'No hay bovinos registrados con fotos de referencia para comparar.' },
 };

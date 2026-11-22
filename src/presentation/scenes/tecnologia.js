@@ -92,7 +92,7 @@ export const TECNOLOGIA = [
         <div class="p3d-lanes"><span style="--a:0;--b:1">Cliente · celular</span><span style="--a:1;--b:6">Servidor · sin GPU</span><span style="--a:6;--b:7">Datos</span></div>
         <div class="p3d-screen">${STATIONS.map((st, i) => `<div class="slot" data-i="${i}" style="--x:${st.x};--tx:${st.x < 0.1 ? -18 : st.x > 0.9 ? -82 : -50}%"><span class="vz">${st.viz}</span></div>`).join('')}</div>
         <div class="board">
-          <svg class="track" viewBox="0 0 1000 120" preserveAspectRatio="none"><path id="trk" d="M40 60 C 160 10, 240 110, 360 60 S 560 10, 680 60 S 860 110, 960 60"/><path class="trk-on" pathLength="1" d="M40 60 C 160 10, 240 110, 360 60 S 560 10, 680 60 S 860 110, 960 60"/></svg>
+          <svg class="track" viewBox="0 0 1000 120" preserveAspectRatio="none"><path id="trk" d="M30 102 C 150 92, 230 112, 340 102 S 540 92, 660 102 S 860 112, 975 102"/><path class="trk-on" pathLength="1" d="M30 102 C 150 92, 230 112, 340 102 S 540 92, 660 102 S 860 112, 975 102"/></svg>
           ${STATIONS.map((st, i) => `<button class="st" data-i="${i}" style="--x:${st.x}"><span class="plinth"><span class="top"><b>${st.t}</b></span><span class="front"></span></span></button>`).join('')}
           <span class="token"><canvas width="48" height="48"></canvas></span>
         </div>
@@ -151,7 +151,7 @@ export const TECNOLOGIA = [
       <h2 data-a>Ahora, <em>pruébalo</em> tú.</h2>
       <p class="lead" data-a>Construimos una finca 3D para mostrarlo: acércate a un bovino, fotografía su hocico y observa cómo el sistema lo compara con los animales registrados.</p>
       <div class="decide" data-a><span class="s ok">Identificado</span><span class="s warn">No identificado</span><span class="s tie">No concluyente</span></div>
-      <p class="sub" data-a>El simulador ejecuta de verdad el recorte, ResNet50 (pesos de ImageNet, sin entrenamiento), la similitud coseno, el vecino más próximo y el umbral calibrado con la regla del V27. Los animales son modelos 3D: es un <b>modo práctica</b>, no un resultado de la investigación.</p>
+      <p class="sub" data-a>El simulador ejecuta de verdad el recorte, ResNet50 (pesos de ImageNet, sin entrenamiento), la similitud coseno, el vecino más próximo y el umbral calibrado con nuestra regla de decisión. Los animales son modelos 3D: es un <b>modo práctica</b>, no un resultado de la investigación.</p>
       <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a></div></div>`,
     enter(root) { gsap.fromTo($$('.decide .s', root), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, stagger: 0.25, duration: 0.5, delay: 0.6, ease: 'back.out(2.2)' }); gsap.fromTo($('.btn.amber', root), { boxShadow: '0 0 0 0 rgba(200,146,46,.6)' }, { boxShadow: '0 0 0 18px rgba(200,146,46,0)', duration: 1.4, repeat: 2, delay: 1.4 }); },
     notes: { idea: 'Pasar a la demostración en vivo.', guion: ['En el simulador se camina por una finca, se fotografía el hocico de un bovino y se ve cómo el sistema lo analiza y decide.'] },

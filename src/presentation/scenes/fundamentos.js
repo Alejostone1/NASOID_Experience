@@ -118,7 +118,7 @@ export const FUNDAMENTOS = [
       <div class="fx-detail panel" id="fx-detail" data-a></div>
       <p class="sub" data-a><b>Y</b> es la variable dependiente: el bovino candidato <b>ĉ</b>, su puntuación de semejanza <b>s</b> y la decisión <b>d</b> («identificado» o «no concluyente»). <b>X₁ a X₆</b> son las variables independientes: las etapas del procesamiento que diseñamos, en el orden en que ocurren.</p></div>`,
     mount(root) {
-      const show = i => { const x = XVARS[i]; $('#fx-detail').innerHTML = `<div class="eyebrow">${x.x} · sección ${x.sec} del V27</div><h3>${x.t}</h3><p>${x.d}</p>${C(...x.refs)}`; $$('.fx-n', root).forEach((n, k) => n.classList.toggle('on', k === i)); };
+      const show = i => { const x = XVARS[i]; $('#fx-detail').innerHTML = `<div class="eyebrow">${x.x} · sección ${x.sec}</div><h3>${x.t}</h3><p>${x.d}</p>${C(...x.refs)}`; $$('.fx-n', root).forEach((n, k) => n.classList.toggle('on', k === i)); };
       $$('.fx-n', root).forEach(n => n.onclick = () => show(+n.dataset.i)); show(0);
     },
     enter(root) {

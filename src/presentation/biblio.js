@@ -24,7 +24,7 @@ function card(r) {
     <p class="apa">${esc(r.apa).replace(/(https?:\/\/\S+)/g, '<span class="url">$1</span>')}</p>
     <div class="ref-links">${r.url ? `<a href="${r.url}" target="_blank" rel="noopener">${LINK[r.kind] || 'Abrir ↗'}</a>` : ''}${pdf}</div>
     ${f.aporte ? `<p class="aporte"><span>Aporte al proyecto</span>${esc(f.aporte)}</p>` : ''}
-    <div class="secs"><span>Citada en V27</span>${r.sections.map(s => `<button data-sec="${s.num}" title="${esc(s.title)}">${s.num}</button>`).join('')}</div>
+    <div class="secs"><span>Citada en las secciones</span>${r.sections.map(s => `<button data-sec="${s.num}" title="${esc(s.title)}">${s.num}</button>`).join('')}</div>
     ${f.abstract ? `<details><summary>Ficha de la matriz de antecedentes</summary><dl><dt>Resumen</dt><dd>${esc(f.abstract)}</dd>${f.palabras ? `<dt>Palabras clave</dt><dd>${esc(f.palabras)}</dd>` : ''}${f.vi?.length ? `<dt>Var. independientes</dt><dd>${f.vi.map(esc).join(' · ')}</dd>` : ''}${f.vd ? `<dt>Var. dependiente</dt><dd>${esc(f.vd)}</dd>` : ''}</dl></details>` : ''}
   </article>`;
 }
@@ -37,12 +37,12 @@ function render(focus) {
   const cats = Object.entries(CATS).map(([k, v]) => [k, v, REFS.filter(r => r.pdf?.cat === k).length]).filter(x => x[2]);
   root.innerHTML = `<div class="bib-head">
       <div><div class="eyebrow">Capítulo 8 · Referencias bibliográficas · APA 7</div><h2>Biblioteca de referencias</h2>
-      <p class="sub">${REFS.length} fuentes del documento V27. Cada enlace abre la fuente real (DOI, arXiv o página oficial).</p></div>
+      <p class="sub">${REFS.length} fuentes del documento. Cada enlace abre la fuente real (DOI, arXiv o página oficial).</p></div>
       <button class="btn ghost" data-close>Cerrar <kbd>R</kbd></button></div>
     <div class="bib-tools"><input type="search" placeholder="Buscar autor, título o tema…" value="${esc(state.q)}" data-q />
       <div class="chips"><button class="chip-f ${!state.cat ? 'on' : ''}" data-cat="">Todas · ${REFS.length}</button>${cats.map(([k, v, n]) => `<button class="chip-f ${state.cat === k ? 'on' : ''}" data-cat="${k}">${v} · ${n}</button>`).join('')}</div></div>
     <div class="bib-list">${items.map(card).join('') || '<p class="sub">Sin resultados.</p>'}</div>
-    <div class="bib-foot">${items.length} de ${REFS.length} · Las fichas combinan la referencia del V27 con la matriz de antecedentes.</div>`;
+    <div class="bib-foot">${items.length} de ${REFS.length} · Las fichas combinan la referencia del documento con la matriz de antecedentes.</div>`;
   root.querySelector('[data-close]').onclick = closeBiblio;
   const q = root.querySelector('[data-q]');
   q.oninput = () => { state.q = q.value; clearTimeout(q._t); q._t = setTimeout(() => { render(); const n = $('#biblio [data-q]'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 200); };

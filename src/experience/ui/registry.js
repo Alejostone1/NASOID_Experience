@@ -58,7 +58,7 @@ async function renderFicha(root, r) {
         ${r.breed ? `<div><small>Pelaje (modelo 3D)</small><span style="font-size:13px">${esc(r.breed)}</span></div>` : ''}
         <div><small>Última identificación</small><span style="font-size:13px">${r.lastSeen ? fdate(r.lastSeen) : '—'}</span></div>
       </div>
-      <div class="sec-title">Fotografías biométricas de referencia · ${r.refs.length} <span style="text-transform:none;letter-spacing:0">(V27 usa 5 por animal)</span></div>
+      <div class="sec-title">Fotografías biométricas de referencia · ${r.refs.length} <span style="text-transform:none;letter-spacing:0">(el protocolo usa 5 por animal)</span></div>
       <div class="refs">${refs.map(x => `<div><img src="${x.url}" alt="" title="${fdate(x.createdAt)}" /><button data-delref="${x.id}" title="Eliminar referencia">×</button></div>`).join('') || '<span class="small">Aún no tiene fotos.</span>'}</div>
       <div class="row" style="margin-top:10px">
         ${r.sceneCow != null ? '<button class="btn" data-capref>Fotografiar en la finca</button>' : ''}
@@ -94,7 +94,7 @@ export async function registerForm(suggestedName = '') {
   return new Promise(res => {
     const d = $('#dialog');
     d.innerHTML = `<div class="sheet narrow"><div class="eyebrow">Nuevo registro</div><h2>Registrar bovino</h2>
-      <p class="note" style="font-size:14px">Después tomarás sus fotos de referencia del hocico. Con una basta para empezar; se recomiendan tres desde ángulos un poco distintos (V27 usa cinco).</p>
+      <p class="note" style="font-size:14px">Después tomarás sus fotos de referencia del hocico. Con una basta para empezar; se recomiendan tres desde ángulos un poco distintos (el protocolo usa cinco).</p>
       <form data-f><label class="field">Código único<input name="code" value="${code}" required maxlength="16" /></label>
       <label class="field">Nombre (opcional)<input name="name" value="${esc(suggestedName)}" maxlength="40" placeholder="Ej.: Canela" /></label>
       <div class="row" style="justify-content:flex-end;margin-top:12px"><button type="button" class="btn" data-no>Cancelar</button><button class="btn primary">Continuar a las fotos</button></div></form></div>`;

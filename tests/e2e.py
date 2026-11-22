@@ -56,7 +56,7 @@ def presentation(b):
     pg.fill('#biblio [data-q]', 'ResNet'); pg.wait_for_timeout(2000); k = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); check('pres.biblioteca_busqueda', 0 < k < 71, k)
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
     check('pres.biblioteca_escape', not pg.is_visible('#biblio .bib-tools'))
-    pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('tabla1'))"); pg.wait_for_timeout(2000); pg.click('.t1-r >> nth=0'); pg.wait_for_timeout(600)
+    pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('tabla1'))"); pg.wait_for_timeout(2000); pg.click('.t2-r >> nth=0'); pg.wait_for_timeout(600)
     check('pres.tabla1_porque', 'Interpretativo' in pg.inner_text('.t1-x >> nth=0'))
     check('pres.narrador_sin_nombre', pg.inner_text('#speaker').strip() == '' and 'Daniel' not in pg.inner_text('#notes') and 'John' not in pg.inner_text('#notes'))
     pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('estado-arte'))"); pg.wait_for_timeout(1500); pg.click('.seg-toggle [data-v=corpus]'); pg.wait_for_timeout(800)

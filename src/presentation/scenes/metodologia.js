@@ -9,18 +9,6 @@ import { METHOD, VARIABLES } from '../../shared/content.js';
 import { C, $, $$, fmt } from '../core.js';
 
 const B = 'Metodología';
-/** Íconos de trazo para cada escalón de la metodología. */
-const LICON = [
-  '<circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>',
-  '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
-  '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
-  '<circle cx="6" cy="17" r="3"/><circle cx="18" cy="7" r="3"/><path d="M8.5 15l7-6"/>',
-  '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15h.01M12 15h.01M16 15h.01"/>',
-  '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M15 15.5c2.6-.4 4.8 1 5.5 4"/>',
-  '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
-  '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/>',
-  '<path d="M18 4H6l6 8-6 8h12"/>',
-];
 const LADDER = [
   ['Paradigma', '¿Desde qué visión del conocimiento investigamos?', 'El conjunto de supuestos sobre qué cuenta como evidencia y qué métodos son válidos.', 'Positivista', 'Nuestra pregunta se responde con hechos medibles: si el sistema acertó, con qué puntuación y en cuánto tiempo. El resultado no depende de nuestra opinión.'],
   ['Enfoque', '¿Con qué tipo de datos respondemos?', 'Números y estadística (cuantitativo), significados y relatos (cualitativo) o ambos (mixto).', 'Cuantitativo', '«En qué medida» pide un número: registramos todo en cifras o en categorías fijadas antes de ir al campo y lo analizamos con estadística.'],
@@ -42,24 +30,34 @@ const ALT = [
   [['Muestreo probabilístico', 'con solo 19 animales no tiene sentido sacar una parte: trabajamos con todos.']],
 ];
 
+/** Opciones generales de cada elemento (textos de metodología) y la que elegimos. */
+const PICK = [
+  { opts: ['Positivista', 'Interpretativo', 'Crítico'], c: 0 },
+  { opts: ['Cuantitativo', 'Cualitativo', 'Mixto'], c: 0 },
+  { opts: ['Básica', 'Aplicada'], c: 1 },
+  { opts: ['Documental', 'De campo', 'Ambas'], c: 2 },
+  { opts: ['Exploratorio', 'Descriptivo', 'Correlacional', 'Explicativo'], c: 2 },
+  { opts: ['Experimental', 'No experimental'], c: 1 },
+  { opts: ['Muestra', 'Población completa'], c: 1 },
+];
 export const METODOLOGIA = [
   {
     id: 'metodologia', block: B, title: '¿Qué es la metodología?', spk: 'D', wide: true, hide3d: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>07 · Metodología de la investigación · capítulo 5 del V27</div>
+      <div class="eyebrow" data-a>07 · Metodología de la investigación · capítulo 5</div>
       <h2 data-a>La metodología es el <em>plan</em> para responder la pregunta con evidencia.</h2>
       <p class="lead" data-a>Antes de tomar una sola foto decidimos, en orden, desde dónde miramos el problema, qué datos recogemos, con quiénes, con qué instrumentos y cómo los analizamos. Cada escalón responde una pregunta. ${C('r20', 'r54')}</p>
-      <div class="ladder interactive" data-a><span class="ladder-pin"></span>${LADDER.map(([t, q], i) => `<button class="step" data-i="${i}" style="--i:${i}"><span class="s-ic"><svg viewBox="0 0 24 24">${LICON[i]}</svg></span><span class="n">${i + 1}</span><b>${t}</b><span class="q">${q}</span></button>`).join('')}</div>
+      <div class="ladder interactive" data-a><span class="ladder-pin"></span>${LADDER.map(([t, q], i) => `<button class="step" data-i="${i}" style="--i:${i}"><span class="n">${i + 1}</span><b>${t}</b><span class="q">${q}</span></button>`).join('')}</div>
       <div class="ladder-out panel" id="ladder-out" data-a></div></div>`,
     mount(root) {
       const pin = $('.ladder-pin', root);
       const show = (i, quick) => {
         const [t, q, d, ours, why] = LADDER[i], st = $$('.step', root)[i], L = $('.ladder', root);
-        $('#ladder-out').innerHTML = `<div class="lo"><div class="lo-badge"><svg viewBox="0 0 24 24">${LICON[i]}</svg><b>${i + 1}</b></div><div><div class="eyebrow">${i + 1} · ${t}</div><h3>${q}</h3><p>${d}</p></div><div class="ours"><small>En nuestro proyecto</small><b>${ours}</b><p class="why">${why}</p></div></div>`;
+        $('#ladder-out').innerHTML = `<div class="lo"><div class="lo-badge"><b>${i + 1}</b></div><div><div class="eyebrow">${i + 1} · ${t}</div><h3>${q}</h3><p>${d}</p></div><div class="ours"><small>En nuestro proyecto</small><b>${ours}</b><p class="why">${why}</p></div></div>`;
         $$('.step', root).forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); });
         gsap.to(pin, { x: st.offsetLeft + st.offsetWidth / 2 - 9, y: st.offsetTop - L.clientTop - 12, duration: quick === true ? 0 : 0.5, ease: 'back.out(1.8)' });
         if (!quick || quick === 'tour') gsap.to(pin, { scale: quick === 'tour' ? 0.85 : 1, duration: 0.2 });
-        if (!quick) { gsap.fromTo('#ladder-out .lo > div', { opacity: 0, y: 12 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.4 }); gsap.fromTo('#ladder-out .lo-badge', { scale: 0.5, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.2)' }); gsap.fromTo('#ladder-out .lo-badge path, #ladder-out .lo-badge circle, #ladder-out .lo-badge rect', { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.9, delay: 0.15 }); gsap.fromTo('#ladder-out .why', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, delay: 0.25, ease: 'power2.out' }); }
+        if (!quick) { gsap.fromTo('#ladder-out .lo > div', { opacity: 0, y: 12 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.4 }); gsap.fromTo('#ladder-out .lo-badge', { scale: 0.5, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2.2)' }); gsap.fromTo('#ladder-out .why', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, delay: 0.25, ease: 'power2.out' }); }
         this._i = i;
       };
       this._show = show; requestAnimationFrame(() => show(0, true));
@@ -78,14 +76,31 @@ export const METODOLOGIA = [
     html: () => `<div class="col wide">
       <div class="eyebrow" data-a>Tabla 1 · Clasificación metodológica del proyecto · clic en cada fila</div>
       <h2 data-a>Siete decisiones que tomamos y la <em>razón</em> de cada una.</h2>
-      <div class="t1 interactive" data-a>
-        <div class="t1-h"><span>Elemento</span><span>Decisión</span><span>Razón principal (V27)</span></div>
-        ${METHOD.map(([e, d, r], i) => `<button class="t1-r" data-i="${i}"><span class="e">${e}</span><span class="d">${d}</span><span class="r">${r}</span><span class="plus">+</span></button>
+      <div class="t2 interactive" data-a>
+        <div class="t2-h"><span>Elemento</span><span>Opciones posibles</span><span>Nuestra decisión y su razón</span></div>
+        ${METHOD.map(([e, d, r], i) => `<button class="t2-r" data-i="${i}">
+          <span class="e"><i>${i + 1}</i>${e}</span>
+          <span class="opts">${PICK[i].opts.map((o, k) => `<span class="o${k === PICK[i].c ? ' win' : ''}">${o}</span>`).join('')}<span class="hl"></span></span>
+          <span class="rz"><b>${d}</b><span>${r}</span></span><span class="plus">+</span></button>
           <div class="t1-x" data-x="${i}">${ALT[i] ? `<div class="eyebrow">Otras opciones posibles y por qué no las elegimos</div>${ALT[i].map(([a, w]) => `<p><b>${a}:</b> ${w}</p>`).join('')}` : ''}</div>`).join('')}
       </div>
-      <p class="sub" data-a>Fuente de la tabla: V27. Las «otras opciones» son las categorías generales de los textos de metodología ${C('r20', 'r54')}</p></div>`,
-    mount(root) { $$('.t1-r', root).forEach(r => r.onclick = () => { const x = $(`[data-x="${r.dataset.i}"]`, root), open = r.classList.toggle('open'); gsap.to(x, { height: open ? 'auto' : 0, opacity: open ? 1 : 0, duration: 0.35 }); }); },
-    enter(root) { gsap.fromTo($$('.t1-r', root), { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.08, duration: 0.45, delay: 0.2 }); },
+      <p class="sub" data-a>Las «otras opciones» son las categorías generales de los textos de metodología ${C('r20', 'r54')}</p></div>`,
+    mount(root) { $$('.t2-r', root).forEach(r => r.onclick = () => { const x = $(`[data-x="${r.dataset.i}"]`, root), open = r.classList.toggle('open'); gsap.to(x, { height: open ? 'auto' : 0, opacity: open ? 1 : 0, duration: 0.35 }); }); },
+    enter(root) {
+      const rows = $$('.t2-r', root);
+      gsap.fromTo(rows, { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.09, duration: 0.45, delay: 0.15 });
+      rows.forEach((row, i) => {
+        const hl = $('.hl', row), opts = $$('.o', row), win = $('.o.win', row), rz = $('.rz', row), base = $('.opts', row).getBoundingClientRect();
+        opts.forEach(o => o.classList.remove('on')); row.classList.remove('picked');
+        const box = o => { const b = o.getBoundingClientRect(); return { x: b.left - base.left, y: b.top - base.top, width: b.width, height: b.height }; };
+        const tl = gsap.timeline({ delay: 0.5 + i * 0.22 });
+        tl.set(hl, { ...box(opts[0]), opacity: 1 });
+        opts.forEach((o, k) => { if (k) tl.to(hl, { ...box(o), duration: 0.22, ease: 'power1.inOut' }); });   // recorre todas las opciones…
+        tl.to(hl, { ...box(win), duration: 0.45, ease: 'back.out(2.2)' })                                    // …y se queda en la elegida
+          .call(() => { win.classList.add('on'); row.classList.add('picked'); })
+          .fromTo(rz, { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.4 }, '<');
+      });
+    },
     notes: { idea: 'La Tabla 1 resume el capítulo: decisión y razón. Al abrir cada fila mostramos qué otras opciones existían.', guion: ['Paradigma positivista porque la pregunta se responde con datos medibles. Enfoque cuantitativo porque todo se registra en números o categorías definidas.', 'Investigación aplicada, documental y de campo. Alcance correlacional: queremos saber si el acierto se asocia con las condiciones de captura.', 'Diseño no experimental con tres sesiones: no manipulamos la luz ni el barro. Y trabajamos con los 19 bovinos porque son pocos.'] },
   },
   {
