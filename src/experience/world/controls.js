@@ -82,7 +82,10 @@ export class CameraRig {
     const k = 1 - Math.exp(-dt * (this.override ? this.speed : 6));
     const wantPos = this.override ? this.override.pos : follow, wantLook = this.override ? this.override.look : this.focus;
     if (!this.started) { this.cur.copy(wantPos); this.curLook.copy(wantLook); this.started = true; }
-    this.cur.lerp(wantPos, k); this.curLook.lerp(wantLook, k);
+    if (this.override) { // arco: la cámara sube mientras viaja para no atravesar al bovino ni al operario
+      const d = this.cur.distanceTo(wantPos), arc = wantPos.clone(); arc.y += Math.min(1.6, d * 0.35); this.cur.lerp(arc, k);
+    } else this.cur.lerp(wantPos, k);
+    this.curLook.lerp(wantLook, k);
     this.cam.position.copy(this.cur); this.cam.lookAt(this.curLook);
   }
   snap() { if (this.override) { this.cur.copy(this.override.pos); this.curLook.copy(this.override.look); } }

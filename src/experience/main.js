@@ -42,6 +42,7 @@ renderer.shadowMap.enabled = Q.shadows; renderer.shadowMap.type = THREE.PCFSoftS
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.05, 1200);
 const photoCam = new PhotoCamera(); photoCam.fit(innerWidth, innerHeight);
+const seedCam = new PhotoCamera(); // cámara propia de la galería de práctica: nunca toca la cámara que usa el jugador
 const timer = new THREE.Timer();
 
 const G = {
@@ -99,7 +100,7 @@ async function backgroundPrep() {
 }
 
 /** Versión de la galería de práctica: cambia cuando cambian el modelado o la luz de la finca. */
-const GALLERY_V = 2;
+const GALLERY_V = 3;
 const DEMO = [
   { k: 0, code: 'BOV-001', name: 'Lucero' }, { k: 1, code: 'BOV-002', name: 'Canela' }, { k: 2, code: 'BOV-003', name: 'Mariposa' },
   { k: 3, code: 'BOV-004', name: 'Tormenta' }, { k: 4, code: 'BOV-005', name: 'Paloma' }, { k: 5, code: 'BOV-006', name: 'Azucena' },
@@ -111,17 +112,19 @@ function shoot(cow, p, blur = 0) {
   const saved = { st: cow.state, hp: cow.headPitch, np: cow.neckPitch, hy: cow.headYaw, hpt: cow.headPitchTarget, npt: cow.neckPitchTarget, hyt: cow.headYawTarget, sp: cow.speed, ph: cow.phase };
   G.herd.pose(cow); cow.headYawTarget = THREE.MathUtils.degToRad(p.head || 0);
   cow.headPitch = cow.headPitchTarget; cow.neckPitch = cow.neckPitchTarget; cow.headYaw = cow.headYawTarget; cow.speed = 0; cow.update(1e-4);
-  Object.assign(photoCam.params, { dist: p.dist, yaw: p.yaw, pitch: p.pitch, offX: 0, offY: 0 });
-  photoCam.fit(innerWidth, innerHeight); photoCam.aim(cow);
-  G.env.followShadow(cow.position); fullResolution(); photoLight(true);
-  renderer.render(scene, photoCam.cam); photoLight(false);
-  const photo = photoCam.grab(canvas, blur);
-  const box = suggestBox(cow, photo);
+  Object.assign(seedCam.params, { dist: p.dist, yaw: p.yaw, pitch: p.pitch, offX: 0, offY: 0 });
+  seedCam.fit(innerWidth, innerHeight); seedCam.aim(cow);
+  G.env.followShadow(cow.position); fullResolution(); photoLight(true); const fv = G.farmer.root.visible; G.farmer.root.visible = false;
+  renderer.render(scene, seedCam.cam); photoLight(false);
+  const photo = seedCam.grab(canvas, blur);
+  const box = suggestBox(cow, photo, CROP_PAD, seedCam);
+  G.farmer.root.visible = fv;
   Object.assign(cow, { state: saved.st, headPitch: saved.hp, neckPitch: saved.np, headYaw: saved.hy, headPitchTarget: saved.hpt, neckPitchTarget: saved.npt, headYawTarget: saved.hyt, speed: saved.sp, phase: saved.ph });
+  cow.update(1e-4);
   return { photo, box };
 }
-function suggestBox(cow, photo, pad = CROP_PAD) {
-  const pts = photoCam.project(cow.muzzleCorners(), canvas.width, canvas.height).map(p => ({ x: p.x * photo.width, y: p.y * photo.height }));
+function suggestBox(cow, photo, pad = CROP_PAD, cam = photoCam) {
+  const pts = cam.project(cow.muzzleCorners(), canvas.width, canvas.height).map(p => ({ x: p.x * photo.width, y: p.y * photo.height }));
   return squareBox(pts, photo.width, photo.height, pad);
 }
 let CROP_PAD = 0.5; // lado del recuadro = 0,5 × la región proyectada: plano naso-labial entre las fosas nasales (deja fuera frente, cuernos, cielo y pasto)
@@ -137,7 +140,7 @@ async function seedDemo(onStep) {
   for (const d of DEMO) {
     const cow = G.herd.cows[d.k]; if (!cow) continue;
     const rec = await createRecord({ code: d.code, name: d.name, sceneCow: d.k, demo: true, breed: cow.breed.name });
-    for (const s of SHOTS) { const { photo, box } = inChute(cow, () => shoot(cow, s)); await addReference(rec, photo, box, 'render'); onStep(++i, n); await frameYield(); }
+    for (const s of SHOTS) { const { photo, box } = inChute(cow, () => shoot(cow, s)); G.env.followShadow(G.farmer.position); renderView(); /* el cuadro que se presenta es la vista del jugador: sin destellos */ await addReference(rec, photo, box, 'render'); onStep(++i, n); await frameYield(); }
   }
   // registro duplicado a propósito: el mismo animal (BOV-003) registrado otra vez como BOV-007
   const src = STATE.records.find(r => r.code === 'BOV-003');
@@ -158,19 +161,26 @@ async function resetPractice() {
 /* ------------------------------------------------------------------- bucle -- */
 function loop(ts) {
   requestAnimationFrame(loop); timer.update(ts); const dt = Math.min(0.05, timer.getDelta());
+  adaptResolution(dt); // antes de dibujar: si cambia el tamaño del lienzo no queda un cuadro en blanco
   const p = G.farmer.position;
   G.env.update(dt, p);
   G.herd.update(dt, G.mode === 'explore' ? p : null);
   const sp = G.mode === 'explore' ? G.ctrl.update(dt) : G.mode === 'travel' ? G.travelSpeed : (G.ctrl.vel.multiplyScalar(0.8), 0);
-  G.farmer.update(dt, sp, G.mode === 'capture' || G.mode === 'review');
+  G.farmer.update(dt, sp, G.mode === 'capture' || G.mode === 'capture-in' || G.mode === 'review');
+  G.farmer.root.visible = G.mode !== 'capture';
   if (G.mode === 'menu') menuCamera();
   if (G.mode === 'observe') { G.observeA += dt * 0.35; observeCamera(); }
-  G.rig.update(dt, p);
-  if (G.mode === 'capture') { photoCam.aim(G.cow); updateCameraHud(dt); photoLight(true); renderer.render(scene, photoCam.cam); photoLight(false); }
-  else renderer.render(scene, camera);
+  if (G.mode === 'capture-in') captureIn(dt); else G.rig.update(dt, p);
+  if (G.mode === 'capture') { photoCam.aim(G.cow); updateCameraHud(dt); }
+  renderView();
   if (G.mode === 'explore') updatePrompt();
   if ((G.frame = (G.frame || 0) + 1) % 3 === 0 && G.mode !== 'menu') drawMinimap();
-  adaptResolution(dt);
+}
+/** Dibuja lo que el jugador debe ver en este momento (vista del juego o visor del celular). */
+function renderView() {
+  if (G.mode === 'capture') { const fv = G.farmer.root.visible; G.farmer.root.visible = false; photoLight(true); renderer.render(scene, photoCam.cam); photoLight(false); G.farmer.root.visible = fv; }
+  else if (G.mode === 'capture-in') { photoLight(G.camAnim.e > 0.55); renderer.render(scene, camera); photoLight(false); }
+  else renderer.render(scene, camera);
 }
 /** Resolución adaptativa: si el equipo no alcanza ~40 fps al explorar, baja la densidad de píxeles; si sobra, la sube. */
 const PERF = { acc: 0, n: 0, dpr: Q.dpr };
@@ -323,6 +333,19 @@ async function toggleChute(cow) {
 }
 
 /* ---------------------------------------------------------------- cámara -- */
+/** Transición hacia la cámara del celular: la vista baja por encima del hombro del operario hasta quedar a 30 cm del hocico. */
+function captureIn(dt) {
+  const A = G.camAnim; A.t = Math.min(1, (performance.now() - A.t0) / (A.dur * 1000)); /* en tiempo real: dura lo mismo en cualquier equipo */ const t = A.t, e = A.e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  photoCam.aim(G.cow);
+  // curva: primero detrás del hombro, luego al frente del hocico
+  const mid = A.p0.clone().lerp(photoCam.cam.position, 0.5); mid.y += 0.35;
+  const a = A.p0.clone().lerp(mid, e), b = mid.clone().lerp(photoCam.cam.position, e); camera.position.lerpVectors(a, b, e);
+  camera.quaternion.slerpQuaternions(A.q0, photoCam.cam.quaternion, Math.min(1, e * 1.15));
+  camera.fov = THREE.MathUtils.lerp(A.f0, photoCam.cam.fov, e); camera.updateProjectionMatrix();
+  G.farmer.root.visible = camera.position.distanceTo(G.farmer.position.clone().setY(G.farmer.position.y + 1.4)) > 0.8 && e < 0.6;
+  $('#camera-ui').style.opacity = Math.max(0, (e - 0.55) / 0.45);
+  if (t >= 1) { camera.fov = A.f0; camera.updateProjectionMatrix(); G.mode = 'capture'; A.done?.(); }
+}
 const CAM = { lastChange: 0, focus: 1, checks: [] };
 function enterCapture(purpose, rec = null) {
   if (!G.cow) return;
@@ -332,9 +355,10 @@ function enterCapture(purpose, rec = null) {
   Object.assign(photoCam.params, { dist: 0.3, yaw: 0, pitch: 0, offX: 0, offY: 0 });
   $('#cam-r-dist').value = 30; $('#cam-r-yaw').value = 0; $('#cam-r-pitch').value = 0; $('#cam-r-head').value = 0;
   G.cow.headYawTarget = 0; photoCam.fit(innerWidth, innerHeight);
-  CAM.focus = 0.2; CAM.lastChange = performance.now();
-  G.mode = 'capture'; layoutViewfinder(); show('#camera-ui'); G.input.enabled = false; document.body.classList.add('cam');
-  gsap.fromTo('#camera-ui', { opacity: 0 }, { opacity: 1, duration: 0.35 });
+  CAM.focus = 0.2; CAM.lastChange = performance.now(); $('#cam-focus').textContent = 'AF …'; $('#cam-checks').innerHTML = ''; $('#cam-shutter').classList.remove('ready');
+  layoutViewfinder(); $('#camera-ui').style.opacity = 0; show('#camera-ui'); G.input.enabled = false; document.body.classList.add('cam');
+  if (G.skipCamAnim) { G.mode = 'capture'; $('#camera-ui').style.opacity = 1; }
+  else { photoCam.aim(G.cow); G.camAnim = { t: 0, t0: performance.now(), e: 0, dur: 1.1, p0: camera.position.clone(), q0: camera.quaternion.clone(), f0: camera.fov, done: () => { $('#camera-ui').style.opacity = 1; CAM.lastChange = performance.now(); } }; G.mode = 'capture-in'; }
   if (purpose === 'reference' && rec) toast(`Referencia ${rec.refs.length + 1} de ${rec.code}: ubica el hocico y captura.`);
 }
 function exitCapture(toInteract = true) {
@@ -376,8 +400,9 @@ function updateCameraHud(dt) {
 let shooting = false;
 async function shutter() {
   if (shooting || G.mode !== 'capture') return; shooting = true;
+  gsap.fromTo('#cam-frame', { scale: 0.965 }, { scale: 1, duration: 0.35, ease: 'back.out(2)' });
   const blur = (1 - CAM.focus) * 6;
-  photoCam.aim(G.cow); photoLight(true); renderer.render(scene, photoCam.cam); photoLight(false);
+  photoCam.aim(G.cow); photoLight(true); G.farmer.root.visible = false; renderer.render(scene, photoCam.cam); photoLight(false);
   const photo = photoCam.grab(canvas, blur), box = suggestBox(G.cow, photo);
   shutterSound(); gsap.fromTo('#cam-flash', { opacity: 0.9 }, { opacity: 0, duration: 0.45 });
   progress('shot');

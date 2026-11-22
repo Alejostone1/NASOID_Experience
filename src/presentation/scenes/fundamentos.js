@@ -10,6 +10,14 @@ const PROPS = [
   ['Permanencia', 'El patrón se mantiene con el tiempo; Petersen vio que el hocico crecía pero el dibujo no cambiaba.', 'No la evaluamos: unas semanas no bastan; nos apoyamos en los estudios históricos.', 'warn'],
   ['Colectabilidad', 'Se puede capturar con facilidad, con una foto.', 'La que más puede fallar en campo (barro, humedad, movimiento): por eso registramos esas condiciones como variables.', 'tie'],
 ];
+/** Íconos de trazo (se dibujan al entrar): grupo de hocicos, huellas distintas, reloj de arena y cámara. */
+const PICON = [
+  '<circle cx="7" cy="14" r="3.4"/><circle cx="17" cy="14" r="3.4"/><circle cx="12" cy="7" r="3.4"/><path d="M5.6 14.4h.01M8.4 14.4h.01M15.6 14.4h.01M18.4 14.4h.01M10.6 7.4h.01M13.4 7.4h.01"/>',
+  '<path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M7 13c0-2.8 2.2-5 5-5s5 2.2 5 5v2"/><path d="M10 14c0-1.1.9-2 2-2s2 .9 2 2v4"/><path d="M7 16v2M17 18v2"/>',
+  '<path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/>',
+  '<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.6"/>',
+];
+const PSTAT = ['Respaldada', 'Respaldada', 'Fuera del estudio', 'Se registra'];
 const EXTRA = [ // hitos del marco teórico que no están en la cronología base
   { y: 2010, t: 'Pan y Yang', d: 'Aprendizaje por transferencia: aprovechar lo aprendido en una tarea para otra.', ref: 'r45', k: 'tec' },
   { y: 2014, t: 'Razavian et al.', d: 'El vector de una red preentrenada sirve para describir imágenes de tareas muy distintas: base para no entrenar.', ref: 'r55', k: 'tec' },
@@ -30,9 +38,22 @@ export const FUNDAMENTOS = [
       <h2 data-a>El hocico funciona como una <em>huella dactilar</em>.</h2>
       <p class="lead" data-a>El plano naso-labial es la piel sin pelo entre los orificios nasales y el labio superior. Sus «perlas» y surcos forman un patrón propio de cada animal. ${C('r02', 'r33')}</p>
       <div class="eyebrow" data-a style="margin-top:6px">Revisamos las cuatro propiedades de un rasgo biométrico · clic para ver ${C('r23')}</div>
-      <div class="props interactive" data-a>${PROPS.map(([t, d, s, tone], i) => `<button class="prop ${tone}" data-i="${i}"><b>${t}</b><span class="d">${d}</span><span class="s">${s}</span></button>`).join('')}</div></div>`,
-    enter(root) { gsap.fromTo($$('.prop', root), { opacity: 0, rotateY: -30, x: -20 }, { opacity: 1, rotateY: 0, x: 0, stagger: 0.13, duration: 0.6, delay: 0.4, ease: 'power3.out' }); },
-    mount(root) { $$('.prop', root).forEach(p => p.onclick = () => { const on = p.classList.contains('open'); $$('.prop', root).forEach(x => x.classList.remove('open')); if (!on) p.classList.add('open'); }); },
+      <div class="props interactive" data-a>${PROPS.map(([t, d, s, tone], i) => `<button class="prop ${tone}" data-i="${i}"><span class="p-ic"><svg viewBox="0 0 24 24">${PICON[i]}</svg></span><span class="p-tx"><span class="p-top"><b>${t}</b><em class="p-st">${PSTAT[i]}</em></span><span class="d">${d}</span><span class="s">${s}</span></span><span class="p-glow"></span></button>`).join('')}</div></div>`,
+    enter(root) {
+      const cards = $$('.prop', root);
+      gsap.fromTo(cards, { opacity: 0, y: 26, rotateX: -25, scale: 0.94 }, { opacity: 1, y: 0, rotateX: 0, scale: 1, stagger: 0.14, duration: 0.7, delay: 0.35, ease: 'back.out(1.5)', clearProps: 'transform' });
+      $$('.p-ic path, .p-ic circle, .p-ic rect', root).forEach((el, i) => { const L = el.getTotalLength ? el.getTotalLength() : 60; gsap.fromTo(el, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.1, delay: 0.6 + (i % 6) * 0.08 + Math.floor(i / 6) * 0.1, ease: 'power2.out' }); });
+      gsap.fromTo($$('.p-st', root), { opacity: 0, x: 10 }, { opacity: 1, x: 0, stagger: 0.14, duration: 0.5, delay: 1.2 });
+      // recorrido: cada tarjeta brilla una vez, en orden
+      cards.forEach((c, i) => setTimeout(() => { c.classList.remove('lit'); void c.offsetWidth; c.classList.add('lit'); }, 1700 + i * 420));
+    },
+    leave(root) { $$('.prop', root).forEach(c => c.classList.remove('lit')); },
+    mount(root) {
+      $$('.prop', root).forEach(p => {
+        p.onclick = () => { const on = p.classList.contains('open'); $$('.prop', root).forEach(x => x.classList.remove('open')); if (!on) { p.classList.add('open'); gsap.fromTo($('.s', p), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.35 }); } };
+        p.onpointermove = e => { const r = p.getBoundingClientRect(); p.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); p.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); };
+      });
+    },
     notes: { idea: 'El hocico cumple las propiedades de un rasgo biométrico; la permanencia no se evalúa aquí.', guion: ['Petersen, en 1922, tomó huellas nasales con tinta a más de 350 bovinos y no encontró dos iguales.', 'Universalidad y distintividad están respaldadas; la permanencia no se puede probar en semanas; la colectabilidad es la que más falla en campo y por eso registramos barro, luz y movimiento.'] },
   },
   {

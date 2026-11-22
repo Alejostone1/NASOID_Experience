@@ -7,6 +7,7 @@
 import '../shared/theme.css';
 import './presentation.css';
 import gsap from 'gsap';
+gsap.ticker.lagSmoothing(0); // las animaciones terminan a tiempo aunque el equipo dibuje pocos cuadros por segundo
 import { loadFonts } from '../shared/fonts.js';
 import { Stage3D } from './stage3d.js';
 import { $, $$, ICON } from './core.js';

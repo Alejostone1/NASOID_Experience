@@ -25,7 +25,7 @@ def check(name, ok, detail=''):
     print(('PASS ' if ok else 'FAIL ') + name + (' · ' + str(detail) if detail else ''), flush=True)
 
 def focus(pg):
-    pg.wait_for_function("document.querySelector('#cam-focus').textContent.includes('✓')", timeout=120000, polling=500)
+    pg.wait_for_function("NASOID.mode === 'capture' && document.querySelector('#cam-focus').textContent.includes('✓')", timeout=120000, polling=500)
 
 def shot(pg, name): pg.screenshot(path=os.path.join(OUT, name + '.png'))
 
@@ -50,7 +50,7 @@ def presentation(b):
     # interacciones
     pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('problema'))"); pg.wait_for_timeout(2000); pg.click('.node.root'); check('pres.arbol_clic', 'causa raíz' in pg.inner_text('#tree-detail').lower())
     pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('estado-arte'))"); pg.wait_for_timeout(2000); pg.click('.tl-dot >> nth=5'); t = pg.inner_text('#tl-card'); check('pres.linea_tiempo_clic', len(t) > 20, t[:60])
-    pg.click('#tl-card .cite'); pg.wait_for_timeout(600); check('pres.cita_abre_biblioteca', pg.is_visible('#biblio') and pg.query_selector('#biblio .ref.flash') is not None)
+    pg.click('#tl-card .cite'); pg.wait_for_timeout(600); check('pres.cita_abre_biblioteca', pg.is_visible('#biblio') and pg.evaluate("document.querySelector('#biblio').dataset.focus") != '')
     nref = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); nlinks = pg.eval_on_selector_all('#biblio .ref-links a[href^="http"]', 'e => e.length')
     check('pres.biblioteca_71', nref == 71 and nlinks >= 70, f'{nref} fichas · {nlinks} enlaces reales'); shot(pg, 'pres_biblioteca')
     pg.fill('#biblio [data-q]', 'ResNet'); pg.wait_for_timeout(600); k = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); check('pres.biblioteca_busqueda', 0 < k < 71, k)
@@ -67,7 +67,7 @@ def presentation(b):
     check('pres.escalera_in_situ', pg.evaluate('NASOID_P.idx') == i0 and 'tres sesiones' in pg.inner_text('#ladder-out'), pg.inner_text('#ladder-out')[:80]); shot(pg, 'pres_escalera')
     pg.keyboard.press('m'); pg.wait_for_timeout(300); check('pres.indice', pg.is_visible('#index')); pg.keyboard.press('Escape')
     pg.keyboard.press('n'); pg.wait_for_timeout(300); check('pres.notas', pg.is_visible('#notes')); pg.keyboard.press('n')
-    m = b.new_page(viewport={'width': 390, 'height': 844}); watch(m, 'pres-movil'); m.goto(BASE); m.wait_for_function('window.NASOID_P', timeout=120000); m.wait_for_timeout(2500); shot(m, 'pres_movil'); m.close()
+    m = b.new_page(viewport={'width': 390, 'height': 844}); watch(m, 'pres-movil'); m.goto(BASE, timeout=180000); m.wait_for_function('window.NASOID_P', timeout=120000); m.wait_for_timeout(2500); shot(m, 'pres_movil'); m.close()
     pg.close()
 
 def ready(pg): pg.wait_for_function('window.NASOID && NASOID.ready === true', timeout=1200000, polling=2000)

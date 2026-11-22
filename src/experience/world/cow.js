@@ -145,9 +145,9 @@ function furTexture() {
 export function buildShared(quality = { level: 'alto' }) {
   if (SHARED) return SHARED;
   const t0 = performance.now();
-  const hiStep = quality.level === 'bajo' ? 0.011 : 0.0072;
+  const hiStep = quality.level === 'bajo' ? 0.011 : quality.level === 'alto' ? 0.0058 : 0.0072; // cabeza más fina en calidad alta: silueta sin facetas
   const headHi = splitMuzzle(surfaceNets(headSDF, [-0.24, -0.3, -0.56], [0.24, 0.23, 0.33], hiStep));
-  const headLo = splitMuzzle(surfaceNets(headSDF, [-0.24, -0.3, -0.56], [0.24, 0.23, 0.33], 0.02));
+  const headLo = splitMuzzle(surfaceNets(headSDF, [-0.24, -0.3, -0.56], [0.24, 0.23, 0.33], 0.015));
   const bodyStep = quality.level === 'bajo' ? 0.03 : 0.019; // malla más fina: silueta suave, sin facetas
   const body = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 0), [-0.5, 0.42, -1.15], [0.5, 1.5, 1.2], bodyStep));
   const bodyHump = plainGeometry(surfaceNets((x, y, z) => bodySDF(x, y, z, 1), [-0.5, 0.42, -1.15], [0.5, 1.62, 1.2], bodyStep));

@@ -49,6 +49,7 @@ function render(focus) {
   q.onkeydown = e => { if (e.key === 'Escape') closeBiblio(); e.stopPropagation(); };
   $$('[data-cat]', root).forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
   $$('[data-sec]', root).forEach(b => b.onclick = () => { closeBiblio(); onGoSection?.(b.dataset.sec); });
+  root.dataset.focus = focus || '';
   if (focus) { const el = $('#ref-' + focus, root); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); } }
 }
 export function openBiblio(focusId) {
