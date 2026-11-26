@@ -32,7 +32,7 @@ export const APERTURA = [
   {
     id: 'contexto', block: B, title: 'La ganadería en cifras', spk: 'D', shot: { rel: [3.6, 0.8, 4.2], look: 'body', lookOff: [0, -0.2, 0], shift: 0.4, graze: true }, wide: true,
     html: () => `<div class="col wide ctx-col">
-      <div class="eyebrow" data-a>Contexto · Colombia, 2024</div>
+      <div class="eyebrow" data-a>2 · Planteamiento del problema · Colombia, 2024</div>
       <h2 data-a>Un hato de <em>29,5 millones</em> de animales que debe poder identificarse uno por uno.</h2>
       <div class="ctx" data-a>
         <div class="bars">${[['PIB nacional', CONTEXT.pibNacional], ['PIB agropecuario', CONTEXT.pibAgro], ['PIB pecuario', CONTEXT.pibPecuario]].map(([l, v]) => `<div class="bar-row"><span>${l}</span><div class="bar"><i data-w="${v}"></i></div><b class="mono">${fmt(v, v < 10 ? 1 : 0)} %</b></div>`).join('')}
@@ -41,14 +41,14 @@ export const APERTURA = [
           <div><b class="num">1,3 M</b><span>animales en faena clandestina en 2024 ${C('r11')}</span></div>
           <div><b class="num">29,5 M</b><span>bovinos en el inventario nacional ${C('r11')}</span></div></div>
       </div>
-      <p class="sub" data-a>Existen sistemas oficiales (SINIGAN, Ley 914 de 2004 y Ley 1659 de 2013), pero muchas fincas no tienen una plataforma propia para apoyar y verificar la identificación. Las cifras de abigeato solo recogen casos denunciados y no dependen únicamente de fallas de identificación. ${C('r06', 'r07')}</p></div>`,
+      <p class="sub" data-a>Hay sistemas oficiales (SINIGAN), pero muchas fincas no tienen una plataforma propia. ${C('r06', 'r07')}</p></div>`,
     enter(root) { $$('.bar i', root).forEach(b => gsap.fromTo(b, { width: 0 }, { width: b.dataset.w + '%', duration: 1.4, ease: 'power3.out' })); $$('[data-to]', root).forEach(el => counter(el, +el.dataset.to)); },
     notes: { idea: 'La ganadería pesa en la economía y el robo de ganado es real.', guion: ['Según Fedegán, en 2024 la ganadería bovina aportó el 1,4 % del PIB nacional, el 20 % del agropecuario y el 46 % del pecuario, con 29,5 millones de animales.', 'Entre 2010 y 2023 se denunciaron 33.650 casos de abigeato.', 'Hay sistemas oficiales, pero muchas fincas no tienen una plataforma propia para verificar quién es cada animal.'] },
   },
   {
     id: 'problema', block: B, title: 'Árbol del problema', spk: 'D', wide: true, shot: { rel: [-4.6, 1.2, 4.6], look: 'body', lookOff: [0, -0.2, 0], shift: 0.34, graze: true },
     html: () => `<div class="tree-wrap">
-      <div class="tree-head" data-a><div class="eyebrow">01 · El problema · haz clic en cada parte del árbol</div><h2>¿Por qué es difícil saber <em>quién es</em> cada animal?</h2></div>
+      <div class="tree-head" data-a><div class="eyebrow">2 · Árbol del problema · clic en cada parte</div><h2>Planteamiento del <em>problema</em></h2></div>
       <div class="tree interactive" data-a>
         <svg class="tree-lines"></svg>
         <div class="t-row effects">${PROBLEM.effects.map((e, i) => `<button class="node eff" data-k="e${i}"><small>Efecto</small>${e.t}</button>`).join('')}</div>
@@ -82,7 +82,7 @@ export const APERTURA = [
   {
     id: 'pregunta', block: B, title: 'Pregunta de investigación', spk: 'D', shot: { look: 'muzzle', rel: [0.9, 0.12, 1.4], lookOff: [0, -0.05, -0.5], shift: 0.24, headUp: true },
     html: () => `<div class="col">
-      <div class="eyebrow" data-a>02 · La pregunta que guía todo · pasa el cursor por las palabras resaltadas</div>
+      <div class="eyebrow" data-a>2 · Pregunta de investigación · toca las palabras resaltadas</div>
       <p class="question-big interactive" data-a>¿<span class="kw" data-tip="«En qué medida» pide un número: por eso elegimos un enfoque cuantitativo y medimos la tasa de acierto.">En qué medida</span> un <span class="kw" data-tip="Construimos un prototipo: una primera versión funcional, no un producto comercial.">prototipo</span> basado en identificación naso-labial y en inteligencia artificial puede <span class="kw" data-tip="Identificar es «uno a muchos»: averiguar de quién es la foto entre todos los registrados (Y = ĉ, s, d).">identificar individualmente</span> a bovinos <span class="kw" data-tip="Solo los que registramos antes con fotos de referencia (sesión S1). Si un animal no está registrado, el sistema debe responder «no concluyente».">previamente registrados</span>, bajo <span class="kw" data-tip="Fotografiamos con el celular a unos 30 cm, de frente, sin flash, en manga o brete: ese es nuestro protocolo de captura.">condiciones controladas de captura</span>?</p>
       <div class="kw-out panel" id="kw-out" data-a><span class="sub">Cada parte de la pregunta explica una decisión que tomamos.</span></div></div>`,
     enter(root) { const kws = $$('.kw', root); kws.forEach((k, i) => gsap.fromTo(k, { backgroundSize: '0% 100%' }, { backgroundSize: '100% 100%', duration: 0.5, delay: 0.9 + i * 0.35, ease: 'power2.out' })); },
@@ -92,7 +92,7 @@ export const APERTURA = [
   {
     id: 'objetivos', block: B, title: 'Objetivos', spk: 'D', shot: { rel: [4.6, 1.1, 4.4], look: 'body', lookOff: [0, -0.2, 0], shift: 0.32, graze: true }, wide: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>03 · ¿Qué vamos a desarrollar? · haz clic en cada objetivo</div>
+      <div class="eyebrow" data-a>4.1 y 4.2 · Objetivos · clic en cada objetivo</div>
       <h2 data-a>${GENERAL_OBJECTIVE.replace('prototipo', '<em>prototipo</em>')}</h2>
       <ol class="steps5 interactive" data-a>${OBJECTIVES.map((o, i) => `<li><button data-i="${i}"><i>${i + 1}</i><b>${o.v}</b><span>${o.t.split(',')[0]}…</span></button></li>`).join('')}</ol>
       <div class="obj-detail panel" id="obj-detail" data-a></div></div>`,

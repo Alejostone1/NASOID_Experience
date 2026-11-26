@@ -34,10 +34,10 @@ export const FUNDAMENTOS = [
   {
     id: 'propuesta', block: B, title: 'El hocico como huella', spk: 'J', shot: { look: 'muzzle', rel: [0.18, 0.03, 0.62], shift: 0.22, headUp: true, ring: true },
     html: () => `<div class="col">
-      <div class="eyebrow" data-a>04 · Nuestra propuesta</div>
+      <div class="eyebrow" data-a>6.2.2 · Marco teórico · biometría naso-labial</div>
       <h2 data-a>El hocico funciona como una <em>huella dactilar</em>.</h2>
-      <p class="lead" data-a>El plano naso-labial es la piel sin pelo entre los orificios nasales y el labio superior. Sus «perlas» y surcos forman un patrón propio de cada animal. ${C('r02', 'r33')}</p>
-      <div class="eyebrow" data-a style="margin-top:6px">Revisamos las cuatro propiedades de un rasgo biométrico · clic para ver ${C('r23')}</div>
+      <p class="lead" data-a>Sus «perlas» y surcos forman un patrón propio de cada animal. ${C('r02', 'r33')}</p>
+      <div class="eyebrow" data-a style="margin-top:6px">Cuatro propiedades de un rasgo biométrico · clic para ver ${C('r23')}</div>
       <div class="props interactive" data-a>${PROPS.map(([t, d, s, tone], i) => `<button class="prop ${tone}" data-i="${i}"><span class="p-ic"><svg viewBox="0 0 24 24">${PICON[i]}</svg></span><span class="p-tx"><span class="p-top"><b>${t}</b><em class="p-st">${PSTAT[i]}</em></span><span class="d">${d}</span><span class="s">${s}</span></span><span class="p-glow"></span></button>`).join('')}</div></div>`,
     enter(root) {
       const cards = $$('.prop', root);
@@ -61,7 +61,7 @@ export const FUNDAMENTOS = [
     html: () => {
       const X = i => 3 + i / (TL.length - 1) * 94; // espaciado uniforme en orden cronológico (no proporcional al tiempo)
       return `<div class="sa">
-      <div class="sa-head" data-a><div><div class="eyebrow">05 · Estado del arte · un siglo de huellas nasales</div><h2>De la tinta de Petersen (1922) a los <em>vectores</em> de una red preentrenada.</h2></div>
+      <div class="sa-head" data-a><div><div class="eyebrow">6.1 · Estado del arte · un siglo de huellas nasales</div><h2>De la tinta de Petersen (1922) a los <em>vectores</em> de una red preentrenada.</h2></div>
         <div class="seg-toggle interactive"><button class="on" data-v="tl">Línea de tiempo</button><button data-v="corpus">Corpus 2020–2026</button></div></div>
       <div class="sa-view" data-view="tl">
         <div class="tl interactive" data-a><div class="tl-axis"><i></i></div>
@@ -112,11 +112,10 @@ export const FUNDAMENTOS = [
   {
     id: 'funcion', block: B, title: 'Y = f(X₁ … X₆)', spk: 'J', wide: true, hide3d: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>06 · El sistema como una función · ecuación (1)</div>
+      <div class="eyebrow" data-a>6 · Marco de referencia · el sistema como una función</div>
       <h2 data-a>Seis etapas <em>X</em> producen una salida <em>Y</em>.</h2>
       <div class="fx interactive" data-a>${XVARS.map((x, i) => `<button class="fx-n" data-i="${i}"><b>${x.x}</b><span>${x.t}</span></button><i class="fx-a"></i>`).join('')}<div class="fx-y"><b>Y</b><span>(ĉ, s, d)</span></div><span class="fx-dot"></span></div>
-      <div class="fx-detail panel" id="fx-detail" data-a></div>
-      <p class="sub" data-a><b>Y</b> es la variable dependiente: el bovino candidato <b>ĉ</b>, su puntuación de semejanza <b>s</b> y la decisión <b>d</b> («identificado» o «no concluyente»). <b>X₁ a X₆</b> son las variables independientes: las etapas del procesamiento que diseñamos, en el orden en que ocurren.</p></div>`,
+      <div class="fx-detail panel" id="fx-detail" data-a></div></div>`,
     mount(root) {
       const show = i => { const x = XVARS[i]; $('#fx-detail').innerHTML = `<div class="eyebrow">${x.x} · sección ${x.sec}</div><h3>${x.t}</h3><p>${x.d}</p>${C(...x.refs)}`; $$('.fx-n', root).forEach((n, k) => n.classList.toggle('on', k === i)); };
       $$('.fx-n', root).forEach(n => n.onclick = () => show(+n.dataset.i)); show(0);
@@ -125,6 +124,6 @@ export const FUNDAMENTOS = [
       const dot = $('.fx-dot', root), nodes = $$('.fx-n, .fx-y', root), base = $('.fx', root).getBoundingClientRect();
       const tl = gsap.timeline({ repeat: 2 }); nodes.forEach(n => { const r = n.getBoundingClientRect(); tl.to(dot, { x: r.left - base.left + r.width / 2, y: r.top - base.top + r.height / 2, duration: 0.35, ease: 'power1.inOut', onStart: () => n.classList.add('pulse'), onComplete: () => setTimeout(() => n.classList.remove('pulse'), 250) }); });
     },
-    notes: { idea: 'La función ordena el estado del arte, el marco teórico y las variables.', guion: ['X₁ es la foto con el celular; X₂ el preprocesamiento; X₃ el recorte del hocico; X₄ ResNet50; X₅ la comparación con coseno, vecino más próximo y umbral; X₆ la base de datos y la trazabilidad.', 'Y es lo que se mide en campo: si acertó, con qué puntuación y en cuánto tiempo.'] },
+    notes: { idea: 'La función ordena el estado del arte, el marco teórico y las variables.', guion: ['Y es la variable dependiente: el bovino candidato ĉ, su puntuación de semejanza s y la decisión d (identificado o no concluyente). X₁ a X₆ son las variables independientes: las etapas del procesamiento, en el orden en que ocurren.', 'X₁ es la foto con el celular; X₂ el preprocesamiento; X₃ el recorte del hocico; X₄ ResNet50; X₅ la comparación con coseno, vecino más próximo y umbral; X₆ la base de datos y la trazabilidad.', 'Y es lo que se mide en campo: si acertó, con qué puntuación y en cuánto tiempo.'] },
   },
 ];

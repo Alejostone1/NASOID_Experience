@@ -220,3 +220,27 @@ body.interacting #mission, body.interacting #minimap { display: none; }
 #minimap { cursor: pointer; pointer-events: auto; transition: transform .2s; } #minimap:hover { transform: scale(1.04); }
 .hbtn.go { background: var(--forest); color: var(--paper); border-color: var(--forest); } .hbtn.go kbd { background: rgba(255,255,255,.15); color: var(--paper); border-color: transparent; }
 @media (max-width: 700px) { .hbtn.go span { display: none; } }
+
+/* ===================== RESPONSIVIDAD del simulador (celular y horizontal) ===================== */
+.hud-brand { white-space: nowrap; }
+@media (max-width: 820px), (max-height: 520px) {
+  #menu { padding: 24px 18px; place-items: start; overflow-y: auto; background: linear-gradient(180deg, rgba(246,242,232,.95), rgba(246,242,232,.86)); }
+  .menu-card { width: 100%; max-width: 560px; } .menu-card h1 { font-size: clamp(34px, 9vw, 48px); margin: 8px 0 10px; } .lead { font-size: 16px; }
+  .menu-actions { margin: 16px 0 14px; }
+  .hud-top { top: 10px; left: 10px; right: 10px; gap: 8px; }
+  .hud-brand { font-size: 15px; padding: 6px 10px 6px 8px; gap: 8px; } .hud-buttons { gap: 6px; }
+  .hbtn { height: 38px; min-width: 38px; padding: 0 10px; justify-content: center; } .hbtn span, .hbtn kbd { display: none; }
+  .mission { top: 62px; bottom: auto; left: 10px; width: 220px; padding: 10px 12px; font-size: 12.5px; }
+  .mission ol li:not(.now) { display: none; } .mission .challenges { display: none; }
+  .prompt { left: 12px; right: 12px; bottom: 112px; transform: none; justify-content: center; text-align: center; white-space: normal; font-size: 14px; padding: 10px 14px; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+  #minimap { right: 10px; bottom: 12px; width: 104px; height: 84px; }
+  .joystick { left: 18px; bottom: 120px; width: 110px; height: 110px; } .joystick .knob { left: 30px; top: 30px; }
+  .touch-act { right: 18px; bottom: 120px; width: 68px; height: 68px; }
+}
+@media (max-width: 480px) { .hud-brand { font-size: 0; gap: 6px; } .hud-brand .chip { font-size: 10.5px; margin-left: 0; } #btn-full { display: none; } }
+@media (max-height: 520px) and (orientation: landscape) {
+  .mission { width: 200px; } .prompt { left: 140px; right: 140px; bottom: 14px; }
+  .joystick { bottom: 16px; left: 16px; width: 96px; height: 96px; } .joystick .knob { left: 23px; top: 23px; }
+  .touch-act { right: 128px; bottom: 18px; width: 60px; height: 60px; }
+}

@@ -33,10 +33,22 @@ def watch(pg, tag):
     pg.on('pageerror', lambda e: REPORT['errors'].append(f'{tag} PAGEERR {e}'))
     pg.on('console', lambda m: REPORT['errors'].append(f'{tag} {m.text}') if m.type == 'error' else None)
 
+def responsive(b):
+    for w, h, tag in ((390, 844, 'celular'), (844, 390, 'horizontal'), (768, 1024, 'tablet')):
+        pg = b.new_page(viewport={'width': w, 'height': h}, is_mobile=w < 800, has_touch=True); watch(pg, 'resp')
+        pg.goto(BASE); pg.wait_for_function('window.NASOID_P', timeout=120000); bad = []
+        for i, sid in enumerate(pg.evaluate('NASOID_P.ids')):
+            pg.evaluate(f'NASOID_P.go({i})'); pg.wait_for_timeout(2600)
+            o = pg.evaluate("() => { const s = document.querySelector('.slide.on'); return [document.documentElement.scrollWidth, s.scrollWidth - s.clientWidth]; }")
+            if o[0] > w or o[1] > 2: bad.append((sid, o))
+        check(f'resp.{tag}_sin_desborde', not bad, bad or f'{w}x{h}'); pg.close()
+
 def presentation(b):
     pg = b.new_page(viewport={'width': 1440, 'height': 810}); watch(pg, 'pres')
     pg.goto(BASE); pg.wait_for_function('window.NASOID_P', timeout=120000)
-    n = pg.evaluate('NASOID_P.count'); check('pres.escenas', n == 19, n)
+    n = pg.evaluate('NASOID_P.count'); check('pres.escenas', n == 21, n)
+    ids = pg.evaluate('NASOID_P.ids'); want = ['portada', 'contexto', 'problema', 'pregunta', 'justificacion', 'objetivos', 'alcance', 'metodologia']
+    check('pres.orden_documento', ids[:8] == want and 'poblacion' not in ids and ids.index('metodologia') < ids.index('estado-arte') < ids.index('administrativos'), ids)
     links = pg.eval_on_selector_all('a.btn.amber', 'els => els.map(e => e.getAttribute("href"))')
     check('pres.boton_simulador', len(links) >= 3 and all('experience' in l for l in links), links)
     for i in range(n):
@@ -44,7 +56,7 @@ def presentation(b):
         pg.wait_for_timeout(2200); shot(pg, f'pres_{i + 1:02d}')
     check('pres.navegacion_teclado', pg.evaluate('NASOID_P.idx') == n - 1)
     txt = pg.eval_on_selector('#slides', 'e => e.textContent')
-    check('pres.cifras_v27', all(x in txt for x in ['19', 'Finca A · 7', 'Finca B · 12']))
+    check('pres.cifras_documento', all(x in txt for x in ['Entrega y sustentación', 'Fuera del alcance', '$1.398.400', 'Alta confiabilidad']))
     check('pres.tabla1_metodologia', all(x in txt for x in ['Positivista', 'Cuantitativo', 'Aplicada', 'Correlacional', 'No experimental']))
     pg.keyboard.press('Home'); pg.wait_for_timeout(500); check('pres.home', pg.evaluate('NASOID_P.idx') == 0)
     # interacciones
@@ -163,7 +175,7 @@ def game(b):
 with sync_playwright() as p:
     b = p.chromium.launch(args=ARGS)
     t0 = time.time()
-    if ONLY in ('all', 'pres'): presentation(b)
+    if ONLY in ('all', 'pres'): presentation(b); responsive(b)
     if ONLY in ('all', 'game'): game(b)
     b.close()
 REPORT['seconds'] = round(time.time() - t0)

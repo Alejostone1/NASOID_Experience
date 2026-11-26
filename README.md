@@ -46,14 +46,14 @@ Este repositorio reúne dos experiencias web que comparten el mismo modelo 3D de
 
 | | Ruta | Para qué sirve |
 |---|---|---|
-| 🎬 | [`/`](https://nasoid-experience.vercel.app/) | **Presentación de sustentación**: 19 escenas animadas y clicables, con un bovino 3D de fondo, una biblioteca de 71 referencias con enlaces reales y notas del expositor. |
+| 🎬 | [`/`](https://nasoid-experience.vercel.app/) | **Presentación de sustentación**: 21 escenas animadas y clicables, en el orden del documento y adaptadas al celular, con un bovino 3D de fondo, una biblioteca de 71 referencias con enlaces reales y notas del expositor. |
 | 🐄 | [`/experience/`](https://nasoid-experience.vercel.app/experience/) | **Simulador**: una finca 3D donde caminas con un operario, llevas un bovino al brete, fotografías su hocico y ves cómo el sistema lo identifica con ResNet50. Todo corre en el navegador. |
 
 ---
 
 ## La presentación
 
-Cinco bloques: **Apertura · Fundamentos · Metodología · Tecnología · Cierre**. Cada escena tiene animaciones de entrada, elementos clicables y citas que abren su fuente.
+Sigue el orden de los capítulos del documento: **Planteamiento del problema · Justificación · Objetivos y alcance · Metodología · Marco de referencia · Aspectos administrativos**, y cierra con la demostración y las referencias. Cada escena tiene animaciones de entrada, elementos clicables y citas que abren su fuente, con poco texto en pantalla: la explicación completa está en las notas del expositor (`N`).
 
 <table>
 <tr>
@@ -61,7 +61,7 @@ Cinco bloques: **Apertura · Fundamentos · Metodología · Tecnología · Cierr
 <td width="50%"><img src="docs/screens/pres-problema.jpg" alt="Árbol del problema"><br><b>Árbol del problema.</b> Raíz, problema central y efectos; cada nodo se abre al hacer clic.</td>
 </tr>
 <tr>
-<td><img src="docs/screens/pres-propuesta.jpg" alt="Propuesta"><br><b>Nuestra propuesta.</b> Las cuatro propiedades del rasgo biométrico, con el hocico resaltado en 3D.</td>
+<td><img src="docs/screens/pres-justificacion.jpg" alt="Justificación"><br><b>Justificación.</b> Cada efecto del árbol con su respuesta, todas hacia el objetivo de alta confiabilidad.</td>
 <td><img src="docs/screens/pres-estado-arte.jpg" alt="Línea de tiempo"><br><b>Estado del arte.</b> Línea de tiempo de 1922 a 2026, navegable punto por punto.</td>
 </tr>
 <tr>
@@ -70,13 +70,21 @@ Cinco bloques: **Apertura · Fundamentos · Metodología · Tecnología · Cierr
 </tr>
 <tr>
 <td><img src="docs/screens/pres-tabla1.jpg" alt="Tabla 1"><br><b>Tabla 1.</b> Cada fila recorre las opciones posibles y se detiene en la que elegimos, con su razón.</td>
-<td><img src="docs/screens/pres-poblacion.jpg" alt="Población"><br><b>Población.</b> Los 19 bovinos de las dos fincas, que llegan caminando a sus corrales.</td>
+<td><img src="docs/screens/pres-alcance.jpg" alt="Alcance"><br><b>Alcance.</b> Los cinco módulos del prototipo y lo que queda fuera, tachado al entrar.</td>
 </tr>
 <tr>
 <td><img src="docs/screens/pres-funciona.jpg" alt="Cómo funciona"><br><b>¿Cómo funciona?</b> Registro, foto, análisis, comparación y decisión, cada paso con su animación.</td>
+<td><img src="docs/screens/pres-administrativos.jpg" alt="Aspectos administrativos"><br><b>Aspectos administrativos.</b> Equipo, costos de la Tabla 13 y cronograma de la Tabla 14 animado.</td>
+</tr>
+<tr>
+<td><img src="docs/screens/pres-propuesta.jpg" alt="Marco teórico"><br><b>Marco teórico.</b> Las cuatro propiedades del rasgo biométrico, con el hocico resaltado en 3D.</td>
 <td><img src="docs/screens/pres-biblioteca.jpg" alt="Biblioteca"><br><b>Biblioteca.</b> 71 referencias en APA 7, con búsqueda, filtros y enlaces DOI o arXiv.</td>
 </tr>
 </table>
+
+**En el celular.** Todas las escenas se reacomodan en una sola columna, sin desbordes, también en horizontal y en tableta:
+
+<p align="center"><img src="docs/screens/pres-movil.jpg" alt="Presentación en el celular" width="760"></p>
 
 ### La arquitectura, en movimiento
 
@@ -180,14 +188,14 @@ flowchart LR
 ## Cómo está construido
 
 ```text
-├── index.html                 presentación (19 escenas)
+├── index.html                 presentación (21 escenas)
 ├── experience/index.html      simulador
 ├── src/
 │   ├── presentation/
 │   │   ├── main.js            motor de escenas, índice, notas, teclado
 │   │   ├── stage3d.js         fondo 3D: bovino, pasto, flores, polen, mariposas y nubes
 │   │   ├── biblio.js          biblioteca de 71 referencias
-│   │   └── scenes/            apertura · fundamentos · metodología · tecnología · cierre
+│   │   └── scenes/            apertura · documento (justificación, alcance, administrativos) · metodología · fundamentos · tecnología · cierre
 │   ├── experience/
 │   │   ├── world/             finca, bovinos, operario, cámara del celular, manada
 │   │   ├── biometric/         recorte, ResNet50, motor de decisión, IndexedDB
@@ -231,7 +239,7 @@ El simulador necesita un servidor, no funciona abriendo el HTML con doble clic, 
 
 ```bash
 npm start                                         # en una terminal
-python3 tests/e2e.py http://localhost:4174/ pres  # presentación: 18 comprobaciones
+python3 tests/e2e.py http://localhost:4174/ pres  # presentación: 22 comprobaciones (incluye celular, horizontal y tableta)
 python3 tests/e2e.py http://localhost:4174/ game  # simulador: 19 comprobaciones
 ```
 

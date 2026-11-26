@@ -29,6 +29,7 @@ const PRESETS = {
   bajo: { level: 'bajo', dpr: 1, shadows: false, shadowSize: 512, grass: 6000, trees: 16, cows: 9 },
 };
 const params = new URLSearchParams(location.search);
+const TOUCH = matchMedia('(pointer: coarse)').matches;
 const qKey = params.get('q') || localStorage.getItem('nasoid-quality') || (matchMedia('(pointer: coarse)').matches ? 'medio' : 'alto');
 const Q = PRESETS[qKey] || PRESETS.alto;
 $('#sel-quality').value = Q.level;
@@ -255,7 +256,7 @@ function updatePrompt() {
   }
   const dz = Math.hypot(p.x - LAYOUT.capture.x, p.z - LAYOUT.capture.z);
   if (dz < 2.5) return setPrompt('Zona de captura · elige «Llevar al brete» al interactuar con un bovino', true);
-  if (!G.progress.met) return setPrompt('<kbd>Q</kbd> ir al bovino más cercano · o camina con <kbd>W A S D</kbd>', true);
+  if (!G.progress.met) return setPrompt(TOUCH ? 'Toca → para ir al bovino más cercano · o camina con el joystick' : '<kbd>Q</kbd> ir al bovino más cercano · o camina con <kbd>W A S D</kbd>', true);
   setPrompt('');
 }
 
@@ -309,7 +310,7 @@ function openInteract(cow, silent) {
   el.querySelector('[data-act=photo]').onclick = () => enterCapture('identify');
   el.querySelector('[data-act=register]').onclick = () => startRegister(cow);
   el.querySelector('[data-act=chute]').onclick = () => toggleChute(cow);
-  el.querySelector('[data-act=observe]').onclick = () => { hide(el); G.mode = 'observe'; G.observeA = Math.atan2(camPos.z - m.z, camPos.x - m.x); setPrompt('Observando · <kbd>Esc</kbd> para volver', true, 'obs'); };
+  el.querySelector('[data-act=observe]').onclick = () => { hide(el); G.mode = 'observe'; G.observeA = Math.atan2(camPos.z - m.z, camPos.x - m.x); setPrompt(TOUCH ? 'Observando al bovino' : 'Observando · <kbd>Esc</kbd> para volver', true, 'obs'); };
 }
 function closeInteract() {
   hide('#interact'); document.body.classList.remove('interacting'); if (G.cow && !G.cow.inChute) G.herd.release(G.cow); else if (G.cow) G.cow.state = 'chute';

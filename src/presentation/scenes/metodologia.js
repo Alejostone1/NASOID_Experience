@@ -44,9 +44,9 @@ export const METODOLOGIA = [
   {
     id: 'metodologia', block: B, title: '¿Qué es la metodología?', spk: 'D', wide: true, hide3d: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>07 · Metodología de la investigación · capítulo 5</div>
+      <div class="eyebrow" data-a>5 · Metodología de la investigación</div>
       <h2 data-a>La metodología es el <em>plan</em> para responder la pregunta con evidencia.</h2>
-      <p class="lead" data-a>Antes de tomar una sola foto decidimos, en orden, desde dónde miramos el problema, qué datos recogemos, con quiénes, con qué instrumentos y cómo los analizamos. Cada escalón responde una pregunta. ${C('r20', 'r54')}</p>
+      <p class="lead" data-a>Cada escalón responde una pregunta. ${C('r20', 'r54')}</p>
       <div class="ladder interactive" data-a><span class="ladder-pin"></span>${LADDER.map(([t, q], i) => `<button class="step" data-i="${i}" style="--i:${i}"><span class="n">${i + 1}</span><b>${t}</b><span class="q">${q}</span></button>`).join('')}</div>
       <div class="ladder-out panel" id="ladder-out" data-a></div></div>`,
     mount(root) {
@@ -74,7 +74,7 @@ export const METODOLOGIA = [
   {
     id: 'tabla1', block: B, title: 'Tabla 1 · Clasificación metodológica', spk: 'D', wide: true, hide3d: true,
     html: () => `<div class="col wide">
-      <div class="eyebrow" data-a>Tabla 1 · Clasificación metodológica del proyecto · clic en cada fila</div>
+      <div class="eyebrow" data-a>5 · Tabla 1 · Clasificación metodológica · clic en cada fila</div>
       <h2 data-a>Siete decisiones que tomamos y la <em>razón</em> de cada una.</h2>
       <div class="t2 interactive" data-a>
         <div class="t2-h"><span>Elemento</span><span>Opciones posibles</span><span>Nuestra decisión y su razón</span></div>
@@ -108,7 +108,7 @@ export const METODOLOGIA = [
     html: () => `<div class="col wide">
       <div class="eyebrow" data-a>5.1 · Paradigma · clic en cada tarjeta</div>
       <h2 data-a>¿Qué cuenta como <em>evidencia</em>?</h2>
-      <p class="lead" data-a>Un paradigma es el conjunto de supuestos que orienta una investigación: qué se entiende por conocimiento, qué cuenta como evidencia y qué métodos son válidos. ${C('r54')}</p>
+      <p class="lead" data-a>El paradigma define qué cuenta como conocimiento válido. ${C('r54')}</p>
       <div class="paras interactive" data-a>
         <button class="para chosen"><span class="badge">Lo adoptamos</span><b>Positivista</b><small>empírico-analítico</small><span class="pd">Estudia los hechos de forma objetiva: observación, medición y análisis estadístico.</span><span class="pw">Conocemos el desempeño del prototipo midiendo cuántas fotos identifica bien y en qué condiciones. El resultado no depende de nuestra opinión.</span></button>
         <button class="para"><b>Interpretativo</b><small>comprensivo</small><span class="pd">Busca comprender significados y experiencias desde el punto de vista de las personas.</span><span class="pw">No lo adoptamos: nuestra pregunta no indaga percepciones, sino aciertos y tiempos medibles.</span></button>
@@ -124,14 +124,13 @@ export const METODOLOGIA = [
       <div class="eyebrow" data-a>5.2 y 5.3 · Enfoque, tipo y alcance</div>
       <h2 data-a>Cuantitativo, aplicado y <em>correlacional</em>.</h2>
       <div class="eta" data-a>
-        <div class="eta-c"><small>Enfoque</small><b>Cuantitativo</b><p>Recogemos datos numéricos con instrumentos estructurados, con un plan definido antes de entrar al campo, y los analizamos con estadística.</p></div>
-        <div class="eta-c"><small>Tipo según el propósito</small><b>Aplicada</b><p>Usamos conocimiento existente (biometría naso-labial e IA) para resolver un problema concreto; no buscamos producir teoría nueva.</p></div>
-        <div class="eta-c"><small>Tipo según la fuente</small><b>Documental y de campo</b><p>Combinamos estudios, normas y cifras del sector con las fotografías y condiciones que registramos en las fincas.</p></div>
+        <div class="eta-c"><small>Enfoque</small><b>Cuantitativo</b><p>Datos numéricos analizados con estadística.</p></div>
+        <div class="eta-c"><small>Tipo según el propósito</small><b>Aplicada</b><p>Conocimiento existente para un problema concreto.</p></div>
+        <div class="eta-c"><small>Tipo según la fuente</small><b>Documental y de campo</b><p>Estudios previos y fotos tomadas en las fincas.</p></div>
       </div>
       <div class="eyebrow" data-a style="margin-top:6px">Alcance · ¿hasta dónde llegan las conclusiones? · clic en cada nivel</div>
       <div class="scale interactive" data-a>${[['Exploratorio', 'Examina un tema poco estudiado.', false], ['Descriptivo', 'Describe cómo es o cómo se manifiesta algo: por ejemplo, la tasa de acierto.', false], ['Correlacional', 'Buscamos la asociación entre variables: ¿el acierto, la puntuación y el tiempo se asocian con la luz, el estado del hocico, la franja horaria o la señal? Ejemplo: ¿se acierta menos con el hocico sucio que con el hocico limpio?', true], ['Explicativo', 'Prueba causas. No lo alcanzamos: no controlamos las condiciones de forma experimental, así que no tomaremos una asociación como prueba de causa.', false]].map(([t, d, on], i) => `<button class="lvl ${on ? 'ours' : ''}" data-i="${i}" data-d="${d}"><span>${t}</span></button>`).join('')}<div class="lvl-pin"></div></div>
-      <div class="scale-out panel" id="scale-out" data-a></div>
-      <p class="sub" data-a>Como la muestra es pequeña, trataremos las asociaciones como hallazgos exploratorios del estudio. ${C('r20')}</p></div>`,
+      <div class="scale-out panel" id="scale-out" data-a></div></div>`,
     mount(root) { const show = b => { $('#scale-out').innerHTML = `<b>${b.textContent}</b>${b.classList.contains('ours') ? ' <span class="chip">nuestro alcance</span>' : ''}<p>${b.dataset.d}</p>`; $$('.lvl', root).forEach(x => x.classList.toggle('on', x === b)); }; $$('.lvl', root).forEach(b => b.onclick = () => show(b)); show($('.lvl.ours', root)); },
     enter(root) { const pin = $('.lvl-pin', root), t = $('.lvl.ours', root), s = $('.scale', root); gsap.fromTo(pin, { left: 0 }, { left: t.offsetLeft + t.offsetWidth / 2 - s.clientLeft, duration: 1.4, ease: 'power3.inOut', delay: 0.3 }); },
     notes: { idea: 'Cuantitativo porque todo se mide; correlacional porque buscamos asociaciones, no causas.', guion: ['Es aplicada porque usamos conocimiento existente para un problema concreto, y documental y de campo porque combinamos estudios con fotos tomadas en las fincas.', 'El alcance es correlacional: además de calcular qué tan acertado es el prototipo, veremos si el acierto se asocia con las condiciones de captura.', 'No llega a explicativo porque no controlamos esas condiciones.'] },
@@ -159,8 +158,7 @@ export const METODOLOGIA = [
       <div class="vars interactive" data-a>
         <div class="vars-tabs">${VARIABLES.map((g, i) => `<button data-i="${i}" class="${i ? 'x' : 'y'}">${g.g}</button>`).join('')}</div>
         <div class="vars-body" id="vars-body"></div>
-      </div>
-      <p class="sub" data-a>Con el análisis correlacional buscamos la asociación entre las independientes (X) y las dependientes (Y). Los antecedentes muestran que estas condiciones influyen: la luz del día y el movimiento son retos de campo, y Lee et al. fijaron 30 cm para reducir la variación. ${C('r34', 'r36')}</p></div>`,
+      </div></div>`,
     mount(root) {
       const show = i => { const g = VARIABLES[i]; $('#vars-body').innerHTML = g.items.map(([v, t, f]) => `<div class="var"><b>${v}</b><span class="t">${t}</span><span class="f">${f}</span></div>`).join(''); gsap.fromTo($$('#vars-body .var'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.06, duration: 0.3 }); $$('.vars-tabs button', root).forEach((b, k) => b.classList.toggle('on', k === i)); };
       $$('.vars-tabs button', root).forEach(b => b.onclick = () => show(+b.dataset.i)); show(0);
