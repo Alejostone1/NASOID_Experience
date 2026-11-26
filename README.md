@@ -58,10 +58,10 @@ Sigue el orden de los capítulos del documento: **Planteamiento del problema · 
 <table>
 <tr>
 <td width="50%"><img src="docs/screens/pres-contexto.jpg" alt="Contexto"><br><b>Contexto.</b> Cifras del sector ganadero con barras y contadores animados.</td>
-<td width="50%"><img src="docs/screens/pres-problema.jpg" alt="Árbol del problema"><br><b>Árbol del problema.</b> Raíz, problema central y efectos; cada nodo se abre al hacer clic.</td>
+<td width="50%"><img src="docs/screens/pres-planteamiento.jpg" alt="Planteamiento del problema"><br><b>Planteamiento del problema.</b> El problema central con una identidad que se pierde; en la siguiente escena, sus cuatro efectos.</td>
 </tr>
 <tr>
-<td><img src="docs/screens/pres-justificacion.jpg" alt="Justificación"><br><b>Justificación.</b> Cada efecto del árbol con su respuesta, todas hacia el objetivo de alta confiabilidad.</td>
+<td><img src="docs/screens/pres-justificacion.jpg" alt="Justificación"><br><b>Justificación.</b> Cada tarjeta gira del efecto a su respuesta y la línea llega al objetivo de alta confiabilidad.</td>
 <td><img src="docs/screens/pres-estado-arte.jpg" alt="Línea de tiempo"><br><b>Estado del arte.</b> Línea de tiempo de 1922 a 2026, navegable punto por punto.</td>
 </tr>
 <tr>
@@ -70,7 +70,7 @@ Sigue el orden de los capítulos del documento: **Planteamiento del problema · 
 </tr>
 <tr>
 <td><img src="docs/screens/pres-tabla1.jpg" alt="Tabla 1"><br><b>Tabla 1.</b> Cada fila recorre las opciones posibles y se detiene en la que elegimos, con su razón.</td>
-<td><img src="docs/screens/pres-alcance.jpg" alt="Alcance"><br><b>Alcance.</b> Los cinco módulos del prototipo y lo que queda fuera, tachado al entrar.</td>
+<td><img src="docs/screens/pres-alcance.jpg" alt="Alcance"><br><b>Alcance.</b> Un celular muestra cada uno de los cinco módulos; al lado, lo que no incluye.</td>
 </tr>
 <tr>
 <td><img src="docs/screens/pres-funciona.jpg" alt="Cómo funciona"><br><b>¿Cómo funciona?</b> Registro, foto, análisis, comparación y decisión, cada paso con su animación.</td>

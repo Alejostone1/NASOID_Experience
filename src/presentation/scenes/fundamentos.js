@@ -18,12 +18,10 @@ const PICON = [
   '<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.6"/>',
 ];
 const PSTAT = ['Respaldada', 'Respaldada', 'Fuera del estudio', 'Se registra'];
-const EXTRA = [ // hitos del marco teórico que no están en la cronología base
-  { y: 2010, t: 'Pan y Yang', d: 'Aprendizaje por transferencia: aprovechar lo aprendido en una tarea para otra.', ref: 'r45', k: 'tec' },
-  { y: 2014, t: 'Razavian et al.', d: 'El vector de una red preentrenada sirve para describir imágenes de tareas muy distintas: base para no entrenar.', ref: 'r55', k: 'tec' },
-  { y: 2021, t: 'ISO/IEC 19795-1', d: 'Medidas de error biométrico: falsa coincidencia y falso rechazo.', ref: 'r22', k: 'tec' },
-];
-const TL = [...TIMELINE, ...EXTRA].sort((a, b) => a.y - b.y || (a.k === 'naso' ? -1 : 1));
+/** Estado del arte: solo antecedentes de la biometría naso-labial (las técnicas van en el marco teórico).
+ *  Hasta 2019, hitos históricos; desde 2020, los estudios del corpus (Tabla 8). */
+const TL = [...TIMELINE.filter(t => t.k === 'naso' && t.y < 2020).map(t => ({ ...t, k: 'naso' })),
+  ...CORPUS.map(c => ({ y: c.y, t: c.a, d: `${c.how}${c.n ? ` · ${c.n} ${c.unit}` : ''} (${c.accTxt}).`, ref: c.id, k: 'tec' }))].sort((a, b) => a.y - b.y);
 /** Primer porcentaje de la exactitud reportada → contador animado y barra (sin texto nuevo). */
 const NUM = /\d+(?:,\d+)?/;
 const accVal = t => { const m = t.match(NUM); return m ? Math.min(100, parseFloat(m[0].replace(',', '.'))) : 0; };
@@ -65,10 +63,10 @@ export const FUNDAMENTOS = [
         <div class="seg-toggle interactive"><button class="on" data-v="tl">Línea de tiempo</button><button data-v="corpus">Corpus 2020–2026</button></div></div>
       <div class="sa-view" data-view="tl">
         <div class="tl interactive" data-a><div class="tl-axis"><i></i></div>
-          <span class="tl-era" style="left:${X(0)}%;width:${X(TL.findIndex(t => t.y >= 2020)) - X(0)}%">Fundamentos: de la tinta a las redes profundas</span>
+          <span class="tl-era" style="left:${X(0)}%;width:${X(TL.findIndex(t => t.y >= 2020)) - X(0)}%">De la tinta a la imagen digital</span>
           <span class="tl-era late" style="left:${X(TL.findIndex(t => t.y >= 2020))}%;width:${100 - X(TL.findIndex(t => t.y >= 2020)) - 2}%">Aprendizaje profundo aplicado al hocico (2020–2026)</span>
           ${TL.map((t, i) => `<button class="tl-dot ${t.k} ${i % 2 ? 'up' : 'down'}" style="left:${X(i)}%" data-i="${i}"><i></i><span>${t.y}<br><b>${t.t}</b></span></button>`).join('')}</div>
-        <div class="tl-legend" data-a><span class="lg naso">Biometría naso-labial</span><span class="lg tec">Técnica que usa el prototipo</span><span class="sub">Orden cronológico (espaciado uniforme). Clic en un punto para ver el detalle y su fuente.</span></div>
+        <div class="tl-legend" data-a><span class="lg naso">Antecedentes históricos</span><span class="lg tec">Corpus 2020–2026 (Tabla 8)</span><span class="sub">Orden cronológico (espaciado uniforme). Clic en un punto para ver el detalle y su fuente.</span></div>
         <div class="tl-card panel" id="tl-card" data-a></div>
       </div>
       <div class="sa-view hidden" data-view="corpus">
@@ -79,7 +77,7 @@ export const FUNDAMENTOS = [
       </div></div>`;
     },
     mount(root) {
-      const show = i => { const t = TL[i]; $('#tl-card').innerHTML = `<div class="eyebrow">${t.y} · ${t.k === 'naso' ? 'Biometría naso-labial' : 'Técnica que usa el prototipo'}</div><h3>${t.t}</h3><p>${t.d}</p>${C(t.ref)}`; $$('.tl-dot', root).forEach(d => d.classList.toggle('on', +d.dataset.i === i)); gsap.fromTo('#tl-card', { opacity: 0.3, y: 6 }, { opacity: 1, y: 0, duration: 0.35 }); };
+      const show = i => { const t = TL[i]; $('#tl-card').innerHTML = `<div class="eyebrow">${t.y} · ${t.k === 'naso' ? 'Antecedente histórico' : 'Corpus 2020–2026'}</div><h3>${t.t}</h3><p>${t.d}</p>${C(t.ref)}`; $$('.tl-dot', root).forEach(d => d.classList.toggle('on', +d.dataset.i === i)); gsap.fromTo('#tl-card', { opacity: 0.3, y: 6 }, { opacity: 1, y: 0, duration: 0.35 }); };
       $$('.tl-dot', root).forEach(d => d.onclick = () => show(+d.dataset.i)); show(0);
       const count = cards => cards.forEach(c => {
         const n = $('.cnt', c), bar = $('.cc-bar i', c);
@@ -107,7 +105,7 @@ export const FUNDAMENTOS = [
       gsap.fromTo($$('.tl-era', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, stagger: 0.5, delay: 0.5, ease: 'power2.out' });
       $$('.tl-dot', root).forEach((d, i) => setTimeout(() => { d.classList.remove('ping'); void d.offsetWidth; d.classList.add('ping'); }, 1700 + i * 110));
     },
-    notes: { idea: 'Línea centenaria; los estudios recientes entrenan redes; nosotros usamos una red preentrenada sin entrenar.', guion: ['Petersen (1922) tomó huellas con tinta; Hirsch (1952) las clasificó; Barry (2007) pasó a la imagen digital.', 'Las técnicas que usamos también tienen historia: vecino más próximo (1967), similitud coseno (1975), ImageNet (2009), ResNet (2016).', 'Desde 2020 domina el aprendizaje profundo: Shojaeipour usó ResNet50 con cinco imágenes por animal; Lee fotografió con celular a 30 cm; Oliveira usó vectores, coseno y vecino más próximo con 30 vacas (92,7 %).', 'En «Corpus» se ve cómo clasificamos cada estudio: corpus directo, sirve parcialmente o descartado.'] },
+    notes: { idea: 'Línea centenaria; los estudios recientes entrenan redes; nosotros usamos una red preentrenada sin entrenar.', guion: ['Petersen (1922) tomó huellas con tinta; Hirsch (1952) las clasificó; Barry (2007) pasó a la imagen digital.', 'Desde 2020 domina el aprendizaje profundo: Shojaeipour usó ResNet50 con cinco imágenes por animal; Lee fotografió con celular a 30 cm; Oliveira usó vectores, coseno y vecino más próximo con 30 vacas (92,7 %).', 'En «Corpus» se ve cómo clasificamos cada estudio: corpus directo, sirve parcialmente o descartado.'] },
   },
   {
     id: 'funcion', block: B, title: 'Y = f(X₁ … X₆)', spk: 'J', wide: true, hide3d: true,

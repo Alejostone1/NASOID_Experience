@@ -19,15 +19,15 @@ export const APERTURA = [
     id: 'portada', block: B, title: 'Portada', spk: 'DJ', shot: { rel: [2.3, 0.35, 3.4], look: 'body', lookOff: [0, 0.1, 0.4], shift: 0.24 },
     html: () => `<div class="col">
       <div class="eyebrow" data-a>${PROJECT.university} · ${PROJECT.year}</div>
-      <h1 class="giant title-doc" data-a>Identificación biométrica <em>naso-labial</em> en bovinos</h1>
-      <p class="lead" data-a>Un prototipo apoyado en inteligencia artificial para reconocer a cada animal por su hocico.</p>
+      <h1 class="giant title-doc long" data-a><em>Desarrollo</em> de un prototipo de sistema de identificación naso-labial en bovinos, apoyado en inteligencia artificial</h1>
+      <p class="lead" data-a>Reconocer a cada animal por su hocico, con una foto del celular.</p>
       <div class="authors" data-a><div><b>Daniel Felipe Colorado Amaya</b></div><div><b>John Alejandro Piedrahita Muñoz</b></div>
         <div class="small">${PROJECT.program} · ${PROJECT.faculty}</div>
         <div class="small">Fundamentos de Investigación · Asesor: <b>Prof. Alexander Quintero</b></div></div>
       <div class="row" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a><button class="btn ghost" onclick="NASOID_P.go(1)">Comenzar →</button></div>
       <p class="hint" data-a>← → para avanzar · <kbd>M</kbd> índice · <kbd>R</kbd> referencias · <kbd>N</kbd> notas</p></div>`,
-    enter(root) { gsap.fromTo($('.giant', root), { letterSpacing: '0.35em', opacity: 0, filter: 'blur(8px)' }, { letterSpacing: '0em', opacity: 1, filter: 'blur(0px)', duration: 1.4, ease: 'power3.out' }); },
-    notes: { idea: 'Presentarnos, presentar el proyecto y decir qué vamos a mostrar.', guion: ['Buenos días. Somos estudiantes de Ingeniería de Sistemas y Telecomunicaciones de la Universidad Católica de Pereira.', 'Nuestro proyecto es un prototipo para reconocer a cada bovino por la huella de su hocico, con una foto del celular e inteligencia artificial.', 'Vamos a recorrer el problema, lo que dice la literatura, cómo lo vamos a investigar —la metodología— y la tecnología, y al final lo verán funcionar en un simulador.'] },
+    enter(root) { gsap.fromTo($('.giant', root), { letterSpacing: '0.08em', opacity: 0, filter: 'blur(8px)' }, { letterSpacing: '0em', opacity: 1, filter: 'blur(0px)', duration: 1.4, ease: 'power3.out' }); },
+    notes: { idea: 'Presentarnos, presentar el proyecto y decir qué vamos a mostrar.', guion: ['Buenos días. Somos estudiantes de Ingeniería de Sistemas y Telecomunicaciones de la Universidad Católica de Pereira.', 'Nuestro proyecto es un prototipo para reconocer a cada bovino por la huella de su hocico, con una foto del celular e inteligencia artificial.', 'Seguimos el orden del documento: planteamiento del problema, justificación, objetivos y alcance, metodología, marco de referencia y aspectos administrativos; al final lo verán funcionar en un simulador.'] },
   },
   {
     id: 'contexto', block: B, title: 'La ganadería en cifras', spk: 'D', shot: { rel: [3.6, 0.8, 4.2], look: 'body', lookOff: [0, -0.2, 0], shift: 0.4, graze: true }, wide: true,
@@ -93,14 +93,14 @@ export const APERTURA = [
     id: 'objetivos', block: B, title: 'Objetivos', spk: 'D', shot: { rel: [4.6, 1.1, 4.4], look: 'body', lookOff: [0, -0.2, 0], shift: 0.32, graze: true }, wide: true,
     html: () => `<div class="col wide">
       <div class="eyebrow" data-a>4.1 y 4.2 · Objetivos · clic en cada objetivo</div>
-      <h2 data-a>${GENERAL_OBJECTIVE.replace('prototipo', '<em>prototipo</em>')}</h2>
+      <div class="og" data-a><small>Objetivo general</small><h2>${GENERAL_OBJECTIVE.replace('Desarrollar', '<em>Desarrollar</em>')}</h2><p class="og-t"><span>Título</span><b>Desarrollo</b> de un prototipo de sistema de identificación naso-labial en bovinos, apoyado en inteligencia artificial</p></div>
       <ol class="steps5 interactive" data-a>${OBJECTIVES.map((o, i) => `<li><button data-i="${i}"><i>${i + 1}</i><b>${o.v}</b><span>${o.t.split(',')[0]}…</span></button></li>`).join('')}</ol>
       <div class="obj-detail panel" id="obj-detail" data-a></div></div>`,
     mount(root) {
       const show = i => { const o = OBJECTIVES[i]; $('#obj-detail').innerHTML = `<div class="od"><div><div class="eyebrow">Objetivo específico ${i + 1}</div><p><b>${o.v}</b> ${o.t}</p></div><div><small>Fase</small><b>${o.fase}</b><small>Actividades</small><span>${ACTIVITIES[i]}</span><small>Resultado</small><b>${o.res}</b></div></div>`; $$('.steps5 button', root).forEach((b, k) => b.classList.toggle('on', k === i)); };
       $$('.steps5 button', root).forEach(b => b.onclick = () => show(+b.dataset.i)); show(0);
     },
-    enter(root) { gsap.fromTo($$('.steps5 li', root), { opacity: 0, y: 30, rotateX: -40 }, { opacity: 1, y: 0, rotateX: 0, stagger: 0.12, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)' }); gsap.fromTo($$('.steps5 i', root), { scale: 0 }, { scale: 1, stagger: 0.12, duration: 0.5, delay: 0.5, ease: 'back.out(3)' }); },
-    notes: { idea: 'Un objetivo general y cinco específicos, uno por fase del proyecto (Tabla 7).', guion: ['Definir requerimientos, diseñar la arquitectura, codificar los módulos, hacer pruebas de sistema y de aceptación, y documentar.', 'Cada objetivo corresponde a una fase del modelo en cascada y deja un producto verificable. Elegimos cascada porque el alcance es pequeño y está definido; al cierre de cada fase revisamos antes de seguir.'] },
+    enter(root) { gsap.fromTo($('.og-t', root), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, delay: 1.2 }); gsap.fromTo($('.og-t b', root), { backgroundSize: '0% 100%' }, { backgroundSize: '100% 100%', duration: 0.7, delay: 1.7 }); gsap.fromTo($$('.steps5 li', root), { opacity: 0, y: 30, rotateX: -40 }, { opacity: 1, y: 0, rotateX: 0, stagger: 0.12, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)' }); gsap.fromTo($$('.steps5 i', root), { scale: 0 }, { scale: 1, stagger: 0.12, duration: 0.5, delay: 0.5, ease: 'back.out(3)' }); },
+    notes: { idea: 'Un objetivo general y cinco específicos, uno por fase del proyecto (Tabla 7).', guion: ['El objetivo general empieza con el verbo «desarrollar», coherente con el título del trabajo: «Desarrollo de un prototipo de sistema de identificación naso-labial en bovinos, apoyado en inteligencia artificial».', 'Definir requerimientos, diseñar la arquitectura, codificar los módulos, hacer pruebas de sistema y de aceptación, y documentar.', 'Cada objetivo corresponde a una fase del modelo en cascada y deja un producto verificable. Elegimos cascada porque el alcance es pequeño y está definido; al cierre de cada fase revisamos antes de seguir.'] },
   },
 ];

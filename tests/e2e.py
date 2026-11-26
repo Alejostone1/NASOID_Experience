@@ -47,8 +47,8 @@ def presentation(b):
     pg = b.new_page(viewport={'width': 1440, 'height': 810}); watch(pg, 'pres')
     pg.goto(BASE); pg.wait_for_function('window.NASOID_P', timeout=120000)
     n = pg.evaluate('NASOID_P.count'); check('pres.escenas', n == 21, n)
-    ids = pg.evaluate('NASOID_P.ids'); want = ['portada', 'contexto', 'problema', 'pregunta', 'justificacion', 'objetivos', 'alcance', 'metodologia']
-    check('pres.orden_documento', ids[:8] == want and 'poblacion' not in ids and ids.index('metodologia') < ids.index('estado-arte') < ids.index('administrativos'), ids)
+    ids = pg.evaluate('NASOID_P.ids'); want = ['portada', 'contexto', 'planteamiento', 'efectos', 'pregunta', 'justificacion', 'objetivos', 'alcance', 'enfoque', 'metodologia']
+    check('pres.orden_documento', ids[:10] == want and 'poblacion' not in ids and 'paradigmas' not in ids and ids.index('metodologia') < ids.index('estado-arte') < ids.index('administrativos'), ids)
     links = pg.eval_on_selector_all('a.btn.amber', 'els => els.map(e => e.getAttribute("href"))')
     check('pres.boton_simulador', len(links) >= 3 and all('experience' in l for l in links), links)
     for i in range(n):
@@ -56,11 +56,11 @@ def presentation(b):
         pg.wait_for_timeout(2200); shot(pg, f'pres_{i + 1:02d}')
     check('pres.navegacion_teclado', pg.evaluate('NASOID_P.idx') == n - 1)
     txt = pg.eval_on_selector('#slides', 'e => e.textContent')
-    check('pres.cifras_documento', all(x in txt for x in ['Entrega y sustentación', 'Fuera del alcance', '$1.398.400', 'Alta confiabilidad']))
+    check('pres.cifras_documento', all(x in txt for x in ['Entrega y sustentación', 'No incluye', '$1.398.400', 'Alta confiabilidad']))
     check('pres.tabla1_metodologia', all(x in txt for x in ['Positivista', 'Cuantitativo', 'Aplicada', 'Correlacional', 'No experimental']))
     pg.keyboard.press('Home'); pg.wait_for_timeout(500); check('pres.home', pg.evaluate('NASOID_P.idx') == 0)
     # interacciones
-    pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('problema'))"); pg.wait_for_timeout(2000); pg.click('.node.root'); check('pres.arbol_clic', 'causa raíz' in pg.inner_text('#tree-detail').lower())
+    pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('efectos'))"); pg.wait_for_timeout(3000); pg.click('.ef-i >> nth=2'); pg.wait_for_timeout(500); check('pres.efectos_clic', 'trazabilidad' in pg.inner_text('#ef-why').lower(), pg.inner_text('#ef-why')[:60])
     pg.evaluate("NASOID_P.go(NASOID_P.ids.indexOf('estado-arte'))"); pg.wait_for_timeout(2000); pg.click('.tl-dot >> nth=5'); t = pg.inner_text('#tl-card'); check('pres.linea_tiempo_clic', len(t) > 20, t[:60])
     pg.click('#tl-card .cite'); pg.wait_for_timeout(600); check('pres.cita_abre_biblioteca', pg.is_visible('#biblio') and pg.evaluate("document.querySelector('#biblio').dataset.focus") != '')
     nref = pg.eval_on_selector_all('#biblio .ref', 'e => e.length'); nlinks = pg.eval_on_selector_all('#biblio .ref-links a[href^="http"]', 'e => e.length')

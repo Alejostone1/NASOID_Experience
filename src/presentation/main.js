@@ -24,10 +24,10 @@ import { DOCUMENTO } from './scenes/documento.js';
 const ALL = Object.fromEntries([...APERTURA, ...FUNDAMENTOS, ...METODOLOGIA, ...TECNOLOGIA, ...CIERRE, ...Object.values(DOCUMENTO)].map(s => [s.id, s]));
 const ORDER = [
   ['Inicio', ['portada']],
-  ['2 · Planteamiento del problema', ['contexto', 'problema', 'pregunta']],
+  ['2 · Planteamiento del problema', ['contexto', 'planteamiento', 'efectos', 'pregunta']],
   ['3 · Justificación', ['justificacion']],
   ['4 · Objetivos y alcance', ['objetivos', 'alcance']],
-  ['5 · Metodología', ['metodologia', 'tabla1', 'paradigmas', 'enfoque', 'variables']],
+  ['5 · Metodología', ['enfoque', 'metodologia', 'tabla1', 'variables']],
   ['6 · Marco de referencia', ['estado-arte', 'funcion', 'propuesta', 'funciona', 'arquitectura']],
   ['7 · Aspectos administrativos', ['administrativos']],
   ['Cierre', ['experiencia', 'cierre', 'referencias']],
@@ -36,7 +36,7 @@ const SCENES = ORDER.flatMap(([block, ids]) => ids.map(id => ({ ...ALL[id], bloc
 /** Marca de narración: solo un color por voz (sin nombres) para seguir la línea del relato. */
 const SPK_COLOR = { D: '#8a6a4a', J: '#5f7352', DJ: '#c8922e' };
 /** Sección del documento → escena (para los botones de sección de la biblioteca). */
-const SECTION_SCENE = { '1': 'portada', '2': 'problema', '3': 'justificacion', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'alcance', '5': 'metodologia', '5.1': 'paradigmas', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'metodologia', '5.5': 'tabla1', '5.6': 'variables', '5.7': 'metodologia', '5.8': 'metodologia', '5.9': 'objetivos', '5.10': 'metodologia', '5.11': 'metodologia', '6': 'funcion', '6.1': 'estado-arte', '6.2': 'propuesta', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'funciona', '6.2.4': 'funciona', '6.2.5': 'funciona', '6.2.6': 'funciona', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'administrativos', '7.1': 'administrativos', '7.2': 'administrativos', '7.3': 'administrativos', '8': 'referencias' };
+const SECTION_SCENE = { '1': 'portada', '2': 'planteamiento', '3': 'justificacion', '4': 'objetivos', '4.1': 'objetivos', '4.2': 'objetivos', '4.3': 'alcance', '5': 'metodologia', '5.1': 'metodologia', '5.2': 'enfoque', '5.3': 'enfoque', '5.4': 'metodologia', '5.5': 'tabla1', '5.6': 'variables', '5.7': 'metodologia', '5.8': 'metodologia', '5.9': 'objetivos', '5.10': 'metodologia', '5.11': 'metodologia', '6': 'funcion', '6.1': 'estado-arte', '6.2': 'propuesta', '6.2.1': 'contexto', '6.2.2': 'propuesta', '6.2.3': 'funciona', '6.2.4': 'funciona', '6.2.5': 'funciona', '6.2.6': 'funciona', '6.2.7': 'arquitectura', '6.2.8': 'arquitectura', '7': 'administrativos', '7.1': 'administrativos', '7.2': 'administrativos', '7.3': 'administrativos', '8': 'referencias' };
 
 let idx = 0, stage = null, typed = '';
 const mounted = new Set();
