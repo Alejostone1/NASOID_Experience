@@ -15,7 +15,6 @@ const EFF_WHY = [
 ];
 const RES_SHORT = ['Identificación no invasiva por el hocico', 'Aplicación web que centraliza el registro', 'Ficha e historial de cada animal', 'Registros con foto, más verificables'];
 const MOD_SHORT = ['Registro', 'Identificación', 'Trazabilidad', 'Estadísticas', 'Dashboard'];
-const OUT_SHORT = ['Muchos animales a la vez', 'Drones o cámaras fijas', 'Integración con SINIGAN', 'Reemplazar lo oficial', 'App de tienda', 'Entrenar la red', 'Detector automático', 'Uso sin internet'];
 /** Tabla 13 (V30) agrupada · valores en pesos colombianos */
 const COST_GROUPS = [
   ['Conectividad', 1398400], ['Equipos de cómputo y captura', 1357732], ['Capacitación y bibliografía', 1337025],
@@ -46,34 +45,29 @@ const SCREENS = [
 
 export const DOCUMENTO = {
   planteamiento: {
-    id: 'planteamiento', title: 'Planteamiento del problema', spk: 'D', wide: true, shot: { rel: [-4.2, 1.1, 4.6], look: 'body', lookOff: [0, -0.2, 0], shift: 0.36, graze: true },
-    html: () => `<div class="col wide pl-col">
+    id: 'planteamiento', title: 'Planteamiento del problema', spk: 'D', shot: { look: 'muzzle', rel: [-0.95, 0.16, 1.5], lookOff: [0, -0.05, -0.5], shift: 0.26, headUp: true },
+    html: () => `<div class="col pl2">
       <div class="eyebrow" data-a>2 · Planteamiento del problema</div>
       <h2 data-a>Planteamiento del <em>problema</em></h2>
-      <div class="pl" data-a>
-        <div class="pl-vis" aria-hidden="true"><svg viewBox="0 0 220 190">
-          <path class="pl-cow" d="M60 70c-14-4-30-2-38 8 10 4 22 6 34 4M160 70c14-4 30-2 38 8-10 4-22 6-34 4M62 58c10-24 86-24 96 0 8 22 8 54-2 78-6 14-20 26-46 26s-40-12-46-26c-10-24-10-56-2-78z"/>
-          <ellipse class="pl-muz" cx="110" cy="140" rx="32" ry="20"/><circle class="pl-n" cx="98" cy="140" r="4"/><circle class="pl-n" cx="122" cy="140" r="4"/><circle class="pl-eye" cx="88" cy="92" r="4"/><circle class="pl-eye" cx="132" cy="92" r="4"/>
-          <g class="pl-tag"><path d="M190 80l12 4v20l-12 4z"/><text x="194" y="97">012</text></g>
-          <g class="pl-q"><circle cx="110" cy="34" r="20"/><text x="110" y="42">?</text></g></svg>
-          <div class="pl-id"><span>Identidad asignada</span><b class="pl-code">BOV-012</b></div></div>
-        <div class="pl-card"><small>Problema central</small><b class="pl-core">Baja confiabilidad en la identificación de ganado bovino</b>
-          <p>No es fácil comprobar con seguridad que un animal corresponde realmente a la identidad que se le asignó.</p>
-          <div class="pl-facts"><span><b>29,5 M</b> bovinos en Colombia</span><span><b>Sin</b> plataforma propia en muchas fincas</span></div>${C('r11', 'r06', 'r07')}</div>
+      <div class="pl2-card" data-a>
+        <small>Problema central</small>
+        <b class="pl-core">Baja confiabilidad en la identificación de ganado bovino</b>
+        <p>No es fácil comprobar con seguridad que un animal corresponde realmente a la identidad que se le asignó.</p>
+        <div class="pl2-id"><div class="pl2-mz"><canvas width="180" height="180"></canvas><i class="pl2-scan"></i><i class="pl2-ring"></i></div>
+          <div class="pl2-who"><span>Identidad asignada</span><b class="pl-code">BOV-012</b><em class="pl2-st">Verificando…</em></div></div>
+        <div class="pl-facts"><span><b>29,5 M</b> bovinos en Colombia</span><span><b>Sin</b> plataforma propia en muchas fincas</span></div>${C('r11', 'r06', 'r07')}
       </div></div>`,
+    mount(root) { const cv = $('.pl2-mz canvas', root); cv.getContext('2d').drawImage(generateMuzzle(12, 'pigmentado', 'limpio', 220).color, 0, 0, cv.width, cv.height); },
     enter(root) {
-      const paths = $$('.pl-vis path, .pl-vis ellipse, .pl-vis circle', root);
-      paths.forEach(p => { const L = p.getTotalLength ? p.getTotalLength() : 100; gsap.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.4, delay: 0.3, ease: 'power2.out' }); });
-      const tag = $('.pl-tag', root), q = $('.pl-q', root), code = $('.pl-code', root);
-      gsap.set(tag, { rotation: 0, y: 0, opacity: 1, transformOrigin: '190px 80px' }); gsap.set(q, { scale: 0, transformOrigin: '110px 34px' }); code.textContent = 'BOV-012'; code.classList.remove('lost');
-      this._tl?.kill(); const tl = this._tl = gsap.timeline({ delay: 1.4 });
-      tl.to(tag, { rotation: 14, duration: 0.25, yoyo: true, repeat: 3, ease: 'sine.inOut' })
-        .to(tag, { y: 120, rotation: 70, opacity: 0, duration: 0.9, ease: 'power2.in' })
-        .to({ v: 0 }, { v: 1, duration: 0.8, ease: 'none', onUpdate: () => { code.textContent = 'BOV-' + String(Math.floor(Math.random() * 900 + 100)); }, onComplete: () => { code.textContent = 'BOV-¿?'; code.classList.add('lost'); } })
-        .to(q, { scale: 1, duration: 0.6, ease: 'back.out(3)' }, '+=0.7');
-      gsap.fromTo($('.pl-card', root), { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.7, delay: 0.5 });
-      gsap.fromTo($('.pl-core', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, delay: 0.9, ease: 'power2.inOut' });
-      gsap.fromTo($$('.pl-facts span', root), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.15, duration: 0.45, delay: 2.2 });
+      const code = $('.pl-code', root), st = $('.pl2-st', root), mz = $('.pl2-mz', root);
+      code.textContent = 'BOV-012'; code.classList.remove('lost'); st.textContent = 'Verificando…'; st.classList.remove('bad'); mz.classList.remove('bad');
+      this._tl?.kill(); const tl = this._tl = gsap.timeline({ delay: 0.5 });
+      tl.fromTo('.pl2-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+        .fromTo($('.pl-core', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.1, ease: 'power2.inOut' }, '-=0.3')
+        .fromTo(mz, { opacity: 0, scale: 0.7, rotate: -8 }, { opacity: 1, scale: 1, rotate: 0, duration: 0.7, ease: 'back.out(1.8)' }, '-=0.5')
+        .fromTo($('.pl2-scan', root), { top: '6%' }, { top: '90%', duration: 0.7, repeat: 3, yoyo: true, ease: 'sine.inOut' })
+        .to({ v: 0 }, { v: 1, duration: 0.9, ease: 'none', onUpdate: () => { code.textContent = 'BOV-' + String(Math.floor(Math.random() * 900 + 100)); }, onComplete: () => { code.textContent = 'BOV-¿?'; code.classList.add('lost'); st.textContent = 'No se puede comprobar'; st.classList.add('bad'); mz.classList.add('bad'); } }, '-=1.2')
+        .fromTo($$('.pl-facts span', root), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.15, duration: 0.45 });
     },
     notes: { idea: 'El problema central: baja confiabilidad para comprobar que un animal es quien se dice que es.', guion: ['En Colombia hay 29,5 millones de bovinos y la ganadería aporta el 46 % del PIB pecuario; identificar a cada animal es clave para el control sanitario, la comercialización y la prevención del abigeato.', 'Existen sistemas oficiales como SINIGAN, pero muchas fincas no tienen una plataforma tecnológica propia para apoyar y verificar la identificación: dependen de planillas, aretes que se pierden y registros en papel que se pueden alterar.', 'Eso produce el problema central: la baja confiabilidad en la identificación, es decir, la dificultad para comprobar con seguridad que un animal corresponde a la identidad que se le asignó.'] },
   },
@@ -175,11 +169,10 @@ export const DOCUMENTO = {
     html: () => `<div class="col wide ap-col">
       <div class="eyebrow" data-a>4.3 · Alcance · clic en cada módulo</div>
       <h2 data-a>Un prototipo web, en el <em>celular</em>.</h2>
-      <div class="al-tags" data-a><span>Prototipo académico</span><span>Se abre en el navegador</span><span>10 a 20 bovinos</span></div>
       <div class="ap interactive" data-a>
-        <div class="ap-mods">${SCOPE.modules.map((m, i) => `<button class="ap-m" data-i="${i}"><i>${i + 1}</i><span><b>${MOD_SHORT[i]}</b><small>${m.t}</small></span><u></u></button>`).join('')}</div>
+        <div class="ap-mods">${SCOPE.modules.map((m, i) => `<button class="ap-m" data-i="${i}"><i>${i + 1}</i><span><b>${MOD_SHORT[i]}</b></span><u></u></button>`).join('')}</div>
         <div class="ap-phone"><div class="ap-notch"></div><div class="ap-scr">${SCREENS.map((h, i) => `<div class="ap-s" data-i="${i}">${h}</div>`).join('')}</div></div>
-        <div class="ap-out"><div class="al-h"><i class="no"></i>No incluye</div><div class="ap-chips">${OUT_SHORT.map(o => `<span>${o}</span>`).join('')}</div></div>
+        <div class="ap-say"><small class="ap-k">Módulo 1 de 5</small><b class="ap-t"></b><p class="ap-d"></p><div class="ap-dots">${SCOPE.modules.map(() => '<i></i>').join('')}</div><p class="ap-note">Prototipo académico: complementa, no reemplaza, los sistemas oficiales.</p></div>
       </div></div>`,
     mount(root) {
       const cv = $('.sc-id canvas', root); if (cv) cv.getContext('2d').drawImage(generateMuzzle(5, 'pigmentado', 'limpio', 160).color, 0, 0, cv.width, cv.height);
@@ -192,6 +185,12 @@ export const DOCUMENTO = {
         gsap.fromTo($$('.sc-row, .sc-ev, .sc-t, .sc-bars i, .sc-res, .sc-fab', s), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.35, delay: 0.15 });
         if (i === 3) gsap.fromTo($$('.sc-bars i', s), { scaleY: 0 }, { scaleY: 1, transformOrigin: '50% 100%', stagger: 0.08, duration: 0.5, delay: 0.2, ease: 'back.out(1.6)' });
         if (i === 1) { gsap.fromTo($('.sc-scan', s), { top: '8%' }, { top: '88%', duration: 0.9, repeat: 1, yoyo: true, ease: 'sine.inOut' }); gsap.fromTo($('.sc-res', s), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, delay: 1.7, ease: 'back.out(2)' }); }
+        const say = $('.ap-say', root), m = SCOPE.modules[i];
+        $('.ap-k', say).textContent = `Módulo ${i + 1} de 5`; $('.ap-t', say).textContent = m.t;
+        $('.ap-d', say).innerHTML = m.d.split(' ').map(w => `<span>${w}</span>`).join(' ');
+        $$('.ap-dots i', say).forEach((d, k) => d.classList.toggle('on', k === i));
+        gsap.fromTo([$('.ap-k', say), $('.ap-t', say)], { opacity: 0, y: 14 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.45, ease: 'power3.out' });
+        gsap.fromTo($$('.ap-d span', say), { opacity: 0, y: 8, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.035, duration: 0.35, delay: 0.2 });
         const bar = $$('.ap-m u', root)[i]; gsap.killTweensOf($$('.ap-m u', root)); gsap.set($$('.ap-m u', root), { scaleX: 0 });
         if (this._autoOn) gsap.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 3, ease: 'none', transformOrigin: '0 50%' });
       };
@@ -200,12 +199,9 @@ export const DOCUMENTO = {
     },
     enter(root) {
       clearInterval(this._auto); this._autoOn = true;
-      gsap.fromTo($$('.al-tags span', root), { opacity: 0, y: -10 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.4, delay: 0.3 });
+      gsap.fromTo($('.ap-say', root), { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, delay: 0.6 });
       gsap.fromTo($('.ap-phone', root), { opacity: 0, y: 40, rotate: -6 }, { opacity: 1, y: 0, rotate: 0, duration: 0.9, delay: 0.3, ease: 'back.out(1.4)' });
       gsap.fromTo($$('.ap-m', root), { opacity: 0, x: -24 }, { opacity: 1, x: 0, stagger: 0.1, duration: 0.45, delay: 0.5, ease: 'power2.out' });
-      gsap.fromTo($$('.ap-chips span', root), { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, stagger: 0.07, duration: 0.4, delay: 1.1, ease: 'back.out(2.5)' });
-      setTimeout(() => $$('.ap-chips span', root).forEach((c, i) => setTimeout(() => c.classList.add('x'), i * 90)), 1700);
-      $$('.ap-chips span', root).forEach(c => c.classList.remove('x'));
       this._show(0); let k = 0;
       this._auto = setInterval(() => { if (!root.classList.contains('on') || !this._autoOn) return clearInterval(this._auto); k = (k + 1) % 5; this._show(k); }, 3000);
     },
@@ -215,26 +211,33 @@ export const DOCUMENTO = {
 
   administrativos: {
     id: 'administrativos', title: 'Aspectos administrativos', spk: 'DJ', wide: true, hide3d: true,
-    html: () => `<div class="col wide ad-col">
+    html: () => `<div class="col wide ad2-col">
       <div class="eyebrow" data-a>7 · Aspectos administrativos</div>
-      <h2 data-a>Dos estudiantes, un asesor y <em>ocho meses</em> de trabajo.</h2>
-      <div class="ad" data-a>
-        <div class="ad-left">
-          <div class="ad-team">${TEAM.map(([ini, n, r, k]) => `<div class="ad-p ${k}"><span class="ad-av">${ini}</span><div><b>${n}</b><span>${r}</span></div></div>`).join('')}</div>
-          <div class="ad-cost panel"><div class="ad-tot"><small>Costo total estimado · Tabla 13</small><b class="ad-num" data-to="${COST_TOTAL}">$0</b><span>Incluye ${peso(COST_IMP)} de imprevistos (5 %) · sin mano de obra</span></div>
-            <div class="ad-bars">${COST_GROUPS.map(([g, v]) => `<div class="ad-bar"><span>${g}</span><div><i style="--w:${(v / COST_GROUPS[0][1] * 100).toFixed(1)}%"></i></div><b>${v ? peso(v) : '$0'}</b></div>`).join('')}</div></div>
-        </div>
-        <div class="ad-gantt panel"><div class="eyebrow">Cronograma por meses · Tabla 14</div>
-          <div class="gt"><div class="gt-h"><span></span><div class="gt-m">${Array.from({ length: 8 }, (_, m) => `<span><b>Mes </b>${m + 1}</span>`).join('')}</div></div>
-            ${GANTT14.map(([t, q], r) => `<div class="gt-r${r === GANTT14.length - 1 ? ' last' : ''}"><span class="gt-t">${t}</span><div class="gt-track">${Array.from({ length: 16 }, (_, k) => `<i class="${q.includes(k) ? 'on' : ''}" style="--k:${k}"></i>`).join('')}</div></div>`).join('')}</div></div>
+      <h2 data-a>Equipo, costos y <em>ocho meses</em> de trabajo.</h2>
+      <div class="ad2" data-a>
+        <section class="ad2-c ad2-team"><header><small>7.1 · Personal</small></header>
+          ${TEAM.map(([ini, n, r, k]) => `<div class="ad2-p ${k}"><span class="ad-av">${ini}</span><div><b>${n.replace('Prof. ', '').split(' ').slice(0, 2).join(' ')}</b><span>${r}</span></div></div>`).join('')}</section>
+        <section class="ad2-c ad2-cost"><header><small>7.2 · Costos</small></header>
+          <div class="ad2-donut"><svg viewBox="0 0 120 120">${COST_GROUPS.filter(g => g[1]).map((g, i) => `<circle class="seg s${i}" cx="60" cy="60" r="46" pathLength="100"/>`).join('')}</svg>
+            <div class="ad2-tot"><b class="ad-num" data-to="${COST_TOTAL}">$0</b><span>total estimado</span></div></div>
+          <ul class="ad2-leg">${COST_GROUPS.filter(g => g[1]).slice(0, 4).map(([g], i) => `<li><i class="s${i}"></i>${g}</li>`).join('')}<li class="more">+ materiales y transporte</li></ul></section>
+        <section class="ad2-c ad2-time"><header><small>7.3 · Cronograma · 8 meses</small></header>
+          <div class="ad2-gt">${GANTT14.map(([t, q], r) => `<div class="ad2-r${r === GANTT14.length - 1 ? ' last' : ''}"><span>${t.replace(' · ', ' ')}</span><div class="ad2-tr"><i style="--a:${q[0]};--b:${q[q.length - 1] + 1}"></i></div></div>`).join('')}
+            <div class="ad2-m">${Array.from({ length: 8 }, (_, m) => `<span>${m + 1}</span>`).join('')}</div><i class="ad2-now"></i></div></section>
       </div></div>`,
     enter(root) {
-      gsap.fromTo($$('.ad-p', root), { opacity: 0, y: 16 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.5, delay: 0.3 });
-      gsap.fromTo($$('.ad-av', root), { scale: 0 }, { scale: 1, stagger: 0.12, duration: 0.5, delay: 0.4, ease: 'back.out(3)' });
-      const n = $('.ad-num', root), o = { v: 0 }; gsap.to(o, { v: +n.dataset.to, duration: 2, delay: 0.6, ease: 'power2.out', onUpdate: () => { n.textContent = peso(Math.round(o.v)); } });
-      gsap.fromTo($$('.ad-bar i', root), { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 50%', stagger: 0.1, duration: 0.9, delay: 0.8, ease: 'power3.out' });
-      $$('.gt-r', root).forEach((r, i) => gsap.fromTo($$('i.on', r), { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, transformOrigin: '0 50%', stagger: 0.05, duration: 0.35, delay: 0.9 + i * 0.28, ease: 'power2.out' }));
+      const cards = $$('.ad2-c', root);
+      gsap.fromTo(cards, { opacity: 0, y: 50, rotateX: -30 }, { opacity: 1, y: 0, rotateX: 0, stagger: 0.18, duration: 0.8, delay: 0.25, ease: 'back.out(1.4)', clearProps: 'transform' });
+      gsap.fromTo($$('.ad2-p', root), { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.15, duration: 0.5, delay: 0.7 });
+      gsap.fromTo($$('.ad2-p .ad-av', root), { scale: 0 }, { scale: 1, stagger: 0.15, duration: 0.5, delay: 0.75, ease: 'back.out(3)' });
+      // dona: cada grupo ocupa su parte del total
+      const vals = COST_GROUPS.filter(g => g[1]).map(g => g[1]), sum = vals.reduce((a, b) => a + b, 0); let acc = 0;
+      $$('.ad2-donut .seg', root).forEach((c, i) => { const len = vals[i] / sum * 100 - 0.8; c.style.strokeDashoffset = -acc; acc += vals[i] / sum * 100; gsap.fromTo(c, { strokeDasharray: `0 100` }, { strokeDasharray: `${len} ${100 - len}`, duration: 0.7, delay: 0.9 + i * 0.18, ease: 'power2.out' }); });
+      const n = $('.ad-num', root), o = { v: 0 }; gsap.to(o, { v: +n.dataset.to, duration: 2, delay: 0.9, ease: 'power2.out', onUpdate: () => { n.textContent = peso(Math.round(o.v)); } });
+      gsap.fromTo($$('.ad2-leg li', root), { opacity: 0, x: 10 }, { opacity: 1, x: 0, stagger: 0.1, duration: 0.4, delay: 1.6 });
+      gsap.fromTo($$('.ad2-tr i', root), { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 50%', stagger: 0.22, duration: 0.6, delay: 1.1, ease: 'power3.out' });
+      const tw = $('.ad2-tr', root).offsetWidth; gsap.fromTo($('.ad2-now', root), { x: 0, opacity: 1 }, { x: tw, duration: 2.6, delay: 1.1, ease: 'none', onComplete: () => gsap.to($('.ad2-now', root), { opacity: 0, duration: 0.3 }) });
     },
-    notes: { idea: 'Quiénes hacen el proyecto, cuánto cuesta y en cuánto tiempo.', guion: ['Alejandro se encarga del servidor, la base de datos y el módulo biométrico; Daniel, de la interfaz web, el celular y el trabajo de campo. Los dos participan en los cinco objetivos y revisan el trabajo del otro.', 'Nuestro asesor temático es el profesor Alexánder Quintero Quintero, por su formación en instrumentación, redes y servicios telemáticos y gerencia de proyectos.', 'El costo total estimado es de $5.561.788, unos $695.000 al mes: lo que más pesa es la conectividad, el uso de los equipos y la capacitación. El software y la red preentrenada no cuestan.', 'El cronograma tiene ocho meses por quincenas: aprobación de la idea, los cinco objetivos en cascada con un pequeño traslape, y la entrega y sustentación en la última quincena.'] },
+    notes: { idea: 'Quiénes hacen el proyecto, cuánto cuesta y en cuánto tiempo.', guion: ['Alejandro se encarga del servidor, la base de datos y el módulo biométrico; Daniel, de la interfaz web, el celular y el trabajo de campo. Los dos participan en los cinco objetivos y revisan el trabajo del otro.', 'Nuestro asesor temático es el profesor Alexánder Quintero Quintero, por su formación en instrumentación, redes y servicios telemáticos y gerencia de proyectos.', 'El costo total estimado es de $5.561.788, unos $695.000 al mes, con 5 % de imprevistos y sin mano de obra: lo que más pesa es la conectividad, el uso de los equipos y la capacitación. El software y la red preentrenada no cuestan.', 'El cronograma tiene ocho meses por quincenas: aprobación de la idea, los cinco objetivos en cascada con un pequeño traslape, y la entrega y sustentación en la última quincena.'] },
   },
 };

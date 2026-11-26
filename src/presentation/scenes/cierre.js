@@ -17,7 +17,7 @@ export const CIERRE = [
       <div class="question" data-a><span>Nuestra investigación responderá</span>${QUESTION}</div>
       <div class="thanks" data-a><b>Gracias</b><span>Al profesor <b>Alexander Quintero</b>, por su asesoría en Fundamentos de Investigación durante la elaboración del documento.</span></div>
       <div class="row center" data-a><a class="btn amber big" href="${SIM}">EXPLORAR EL SIMULADOR</a><button class="btn" onclick="NASOID_P.go(NASOID_P.count-1)">Referencias</button></div></div>`,
-    enter(root) { gsap.fromTo($('.question', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.6, delay: 0.8, ease: 'power2.inOut' }); gsap.fromTo($('.thanks b', root), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, delay: 1.8, ease: 'elastic.out(1, .5)' }); },
+    enter(root) { gsap.fromTo($('.question', root), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.6, delay: 0.8, ease: 'power2.inOut' }); gsap.fromTo($('.thanks b', root), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, delay: 1.8, ease: 'back.out(1.6)' }); },
     notes: { idea: 'Cerrar con la idea central y agradecer.', guion: ['Proponemos identificar sin marcar: una foto del hocico, inteligencia artificial y un registro confiable.', 'Agradecemos al profesor Alexander Quintero por su acompañamiento. Quedamos atentos a sus preguntas.'] },
   },
   {

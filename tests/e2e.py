@@ -56,7 +56,7 @@ def presentation(b):
         pg.wait_for_timeout(2200); shot(pg, f'pres_{i + 1:02d}')
     check('pres.navegacion_teclado', pg.evaluate('NASOID_P.idx') == n - 1)
     txt = pg.eval_on_selector('#slides', 'e => e.textContent')
-    check('pres.cifras_documento', all(x in txt for x in ['Entrega y sustentación', 'No incluye', '$1.398.400', 'Alta confiabilidad']))
+    check('pres.cifras_documento', all(x in txt for x in ['Entrega y sustentación', 'Identidad asignada', 'Capacitación y bibliografía', 'Alta confiabilidad', 'Problema central']))
     check('pres.tabla1_metodologia', all(x in txt for x in ['Positivista', 'Cuantitativo', 'Aplicada', 'Correlacional', 'No experimental']))
     pg.keyboard.press('Home'); pg.wait_for_timeout(500); check('pres.home', pg.evaluate('NASOID_P.idx') == 0)
     # interacciones

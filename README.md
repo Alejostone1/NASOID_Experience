@@ -58,7 +58,7 @@ Sigue el orden de los capítulos del documento: **Planteamiento del problema · 
 <table>
 <tr>
 <td width="50%"><img src="docs/screens/pres-contexto.jpg" alt="Contexto"><br><b>Contexto.</b> Cifras del sector ganadero con barras y contadores animados.</td>
-<td width="50%"><img src="docs/screens/pres-planteamiento.jpg" alt="Planteamiento del problema"><br><b>Planteamiento del problema.</b> El problema central con una identidad que se pierde; en la siguiente escena, sus cuatro efectos.</td>
+<td width="50%"><img src="docs/screens/pres-planteamiento.jpg" alt="Planteamiento del problema"><br><b>Planteamiento del problema.</b> El problema central junto al bovino 3D: un hocico real cuya identidad no se puede comprobar; en la siguiente escena, sus cuatro efectos.</td>
 </tr>
 <tr>
 <td><img src="docs/screens/pres-justificacion.jpg" alt="Justificación"><br><b>Justificación.</b> Cada tarjeta gira del efecto a su respuesta y la línea llega al objetivo de alta confiabilidad.</td>
@@ -70,11 +70,11 @@ Sigue el orden de los capítulos del documento: **Planteamiento del problema · 
 </tr>
 <tr>
 <td><img src="docs/screens/pres-tabla1.jpg" alt="Tabla 1"><br><b>Tabla 1.</b> Cada fila recorre las opciones posibles y se detiene en la que elegimos, con su razón.</td>
-<td><img src="docs/screens/pres-alcance.jpg" alt="Alcance"><br><b>Alcance.</b> Un celular muestra cada uno de los cinco módulos; al lado, lo que no incluye.</td>
+<td><img src="docs/screens/pres-alcance.jpg" alt="Alcance"><br><b>Alcance.</b> Un celular muestra cada uno de los cinco módulos y al lado se explica el que está activo.</td>
 </tr>
 <tr>
 <td><img src="docs/screens/pres-funciona.jpg" alt="Cómo funciona"><br><b>¿Cómo funciona?</b> Registro, foto, análisis, comparación y decisión, cada paso con su animación.</td>
-<td><img src="docs/screens/pres-administrativos.jpg" alt="Aspectos administrativos"><br><b>Aspectos administrativos.</b> Equipo, costos de la Tabla 13 y cronograma de la Tabla 14 animado.</td>
+<td><img src="docs/screens/pres-administrativos.jpg" alt="Aspectos administrativos"><br><b>Aspectos administrativos.</b> Tres tarjetas animadas: el equipo, la dona de costos de la Tabla 13 y el cronograma de la Tabla 14.</td>
 </tr>
 <tr>
 <td><img src="docs/screens/pres-propuesta.jpg" alt="Marco teórico"><br><b>Marco teórico.</b> Las cuatro propiedades del rasgo biométrico, con el hocico resaltado en 3D.</td>
